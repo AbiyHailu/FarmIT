@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Models;
+using System;
+using System.Text;
+using Microsoft.AspNetCore.SpaServices;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace FarmItAPI
 {
@@ -20,31 +23,82 @@ namespace FarmItAPI
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public IConfiguration Configuration { get; } 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-        }
+            services.AddDbContext<FarmItContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FarmITConnection")));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                    services.AddCors();
+                });
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
+                config.AddPolicy(Policies.User, Policies.UserPolicy());
+            });
+            services.AddControllersWithViews();
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+        }
+         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
+                IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                IdentityModelEventSource.ShowPII = true;
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }

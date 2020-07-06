@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmItAPI", "FarmItAPI\FarmItAPI.csproj", "{FC2ED83F-D819-4F19-9013-F8C04D9979FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "FarmItAPI\API.csproj", "{FC2ED83F-D819-4F19-9013-F8C04D9979FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{609AC47D-7A01-4BBE-8DE5-750A406AC550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{609AC47D-7A01-4BBE-8DE5-750A406AC550}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{129E6D50-5FDE-444D-9B70-3D1A6D8B3D11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "Interface\Interface.csproj", "{129E6D50-5FDE-444D-9B70-3D1A6D8B3D11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{198477E6-5071-487F-857E-9868CFDA3BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{198477E6-5071-487F-857E-9868CFDA3BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{6331467A-5D82-4F78-856D-17E0F7251E7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Context", "Context\Context.csproj", "{F1AAD88A-F35D-4368-B86F-EE034DAB98BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{198477E6-5071-487F-857E-9868CFDA3BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{198477E6-5071-487F-857E-9868CFDA3BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{198477E6-5071-487F-857E-9868CFDA3BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6331467A-5D82-4F78-856D-17E0F7251E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6331467A-5D82-4F78-856D-17E0F7251E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6331467A-5D82-4F78-856D-17E0F7251E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6331467A-5D82-4F78-856D-17E0F7251E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1AAD88A-F35D-4368-B86F-EE034DAB98BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1AAD88A-F35D-4368-B86F-EE034DAB98BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1AAD88A-F35D-4368-B86F-EE034DAB98BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1AAD88A-F35D-4368-B86F-EE034DAB98BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
