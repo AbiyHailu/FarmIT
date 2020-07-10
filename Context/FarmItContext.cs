@@ -1,19 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 
-namespace Context
+namespace Concrete
 {
     public class FarmItContext : DbContext
-    {
+    {   
         public FarmItContext(DbContextOptions options) : base(options)
-        {
-
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<Order>()
-            //    .ToTable("Orders");
-
-           
-        }
+        {  } 
+         
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Plan> Plans { get; set; } 
     }
 }
