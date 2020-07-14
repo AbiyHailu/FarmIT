@@ -1,0 +1,32 @@
+.row-head, .row-footer, .row-body {
+  margin: 0px !important;
+  width: 100%;
+}
+
+.row-head {
+  height: 10vh;
+  background: black;
+  color: white
+}
+
+.row-body {
+  height: 80vh;
+  padding: 0% !important;
+}
+
+.row-footer {
+  height: 11vh;
+  padding: 2% !important;
+  background: black;
+  color: white;
+  font-size: 11px !important;
+}
+
+@media (max-width: 575.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
