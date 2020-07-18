@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\domain\admin\subscription\" />
+    <Folder Include="ClientApp\src\app\admin\subscription\" />
   </ItemGroup>
 
 </Project>

@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './admin.component.html'
 })
 export class AdminComponent {
-  title = 'admin';
+    constructor(
+    ) {
+      console.log("test")
+    }
 }

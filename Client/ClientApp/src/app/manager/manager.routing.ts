@@ -4,8 +4,13 @@ import { ManagerComponent } from './manager.component';
 
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
-}
-];
+  //children: [
+  //  {
+  //   // path: 'dashboard', component: DashboardComponent
+  //  },
+  //]
+//}
+} ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

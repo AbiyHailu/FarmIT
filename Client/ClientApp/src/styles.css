@@ -1,13 +1,13 @@
-html, body { 
+html, body {
   height: 100%;
   width: 100%;
-  padding: 0px;
-  margin: 0%
+  padding: 0% !important;
+  margin: 0% !important;
 }
 .container-fluid {
   height: 100% !important;
   width: 100% !important;
-  padding: 1% !important
+  padding: 0% !important
 }
 
 a {

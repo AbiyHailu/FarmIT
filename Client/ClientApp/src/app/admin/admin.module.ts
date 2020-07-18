@@ -1,21 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router'; 
 import { AdminComponent } from './admin.component';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component.';
+import { AdminRouting } from './admin.routing';
 
 @NgModule({
-  declarations: [ 
+  declarations: [
+    AdminComponent,
+    DashboardComponent
   ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+  imports: [ 
+    RouterModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([ 
-       { path: 'admin', component: AdminComponent }
-    ])
+    AdminRouting
   ],
+  exports: [
+    AdminComponent,
+    DashboardComponent 
+  ],
+
   providers: [],
   bootstrap: [AdminComponent]
 })
