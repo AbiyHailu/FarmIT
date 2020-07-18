@@ -7,14 +7,12 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component'; 
-import { DashboardComponent } from './dashboard/dashboard.component.';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    DashboardComponent
+    HomeComponent 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -22,7 +20,11 @@ import { DashboardComponent } from './dashboard/dashboard.component.';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent }
+      {
+        path: 'domain',
+        //  //canActivate: [AuthGuard],
+        loadChildren: './domain/domain.module#DomainModule'
+       }, 
     ])
   ],
   providers: [],

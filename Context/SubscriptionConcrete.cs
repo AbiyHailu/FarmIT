@@ -1,5 +1,6 @@
 ﻿using Interface;
-using Microsoft.Extensions.Configuration; 
+using Microsoft.Extensions.Configuration;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace Concrete
                 this.configuration = configuration;
 
             }
+
+        public bool DeleteSubscription(int subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<SubscriptionDisplayViewModel> GetPlanMasterList()
         {
             var result = (from subscription in context.Subscriptions
@@ -29,6 +36,12 @@ namespace Concrete
 
              return result; 
         }
+
+        public SubscriptionDisplayViewModel GetSubscriptionbyId(int subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
         //public void InsertPlan(Subscription plan)
         //{
         //    using (SqlConnection con = new SqlConnection(configuration.GetConnectionString("DatabaseConnection")))
@@ -148,7 +161,17 @@ namespace Concrete
             throw new NotImplementedException();
         }
 
-        List<global::ViewModels.SubscriptionDisplayViewModel> ISubscription.GetPlanMasterList()
+        public void InsertPlan(Subscription plan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateSubscription(Subscription subscription)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<global::ViewModels.SubscriptionDisplayViewModel> ISubscription.GetSubscriptionList()
         {
             throw new NotImplementedException();
         }
