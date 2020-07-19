@@ -4,14 +4,16 @@ using Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(FarmItContext))]
-    partial class FarmItContextModelSnapshot : ModelSnapshot
+    [Migration("20200719211037_companycreate1")]
+    partial class companycreate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,23 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companys");
+                });
+
+            modelBuilder.Entity("Models.CompanyPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CompanyID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PlanID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CompanyPlans");
                 });
 
             modelBuilder.Entity("Models.Plan", b =>

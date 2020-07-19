@@ -6,10 +6,6 @@ namespace Models
     { 
         [Key]
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        //other l
-        //lcatin
-        //established Date
-        //etc...
+        public string Name { get; set; }  
     }
 }

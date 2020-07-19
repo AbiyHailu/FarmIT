@@ -9,6 +9,7 @@ namespace Concrete
         {  } 
          
         public DbSet<Subscription> Subscriptions { get; set; }
-        public DbSet<Plan> Plans { get; set; } 
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Company> Companys { get; set; }
     }
 }
