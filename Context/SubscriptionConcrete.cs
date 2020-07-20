@@ -17,27 +17,10 @@ namespace Concrete
                 this.context = context;
                 this.configuration = configuration;
 
-            }
+            } 
+      
 
-        public bool DeleteSubscription(int subscriptionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<SubscriptionDisplayViewModel> GetPlanMasterList()
-        {
-            var result = (from subscription in context.Subscriptions
-                          select new SubscriptionDisplayViewModel
-                          {
-                              SubscriptionDate = subscription.SubscriptionDate,
-                              SubscriptionEndDate = subscription.SubscriptionEndDate
-
-                          }).ToList();
-
-             return result; 
-        }
-
-        public SubscriptionDisplayViewModel GetSubscriptionbyId(int subscriptionId)
+        public SubscriptionViewModel GetSubscriptionbyId(int subscriptionId)
         {
             throw new NotImplementedException();
         }
@@ -63,18 +46,7 @@ namespace Concrete
 
 
 
-        //public List<ActivePlanModel> GetActivePlanMasterList(int? schemeId)
-        //    {
-        //        var result = (from plan in context.PlanMaster
-        //                      where plan.RecStatus == true && plan.SchemeID == schemeId
-        //                      select new ActivePlanModel
-        //                      {
-        //                          PlanName = plan.PlanName,
-        //                          PlanID = plan.PlanID.ToString()
-        //                      }).ToList();
-
-        //        return result;
-        //    }
+       
 
         //    public bool UpdatePlanMaster(PlanMaster planMaster)
         //    {
@@ -160,8 +132,9 @@ namespace Concrete
         {
             throw new NotImplementedException();
         }
+         
 
-        public void InsertPlan(Subscription plan)
+        public void InsertSubscription(Subscription plan)
         {
             throw new NotImplementedException();
         }
@@ -169,11 +142,43 @@ namespace Concrete
         public bool UpdateSubscription(Subscription subscription)
         {
             throw new NotImplementedException();
-        }
+        }  
+        //public List<ActivePlanModel> GetActivePlanMasterList(int? schemeId)
+        //    {
+        //        var result = (from plan in context.PlanMaster
+        //                      where plan.RecStatus == true && plan.SchemeID == schemeId
+        //                      select new ActivePlanModel
+        //                      {
+        //                          PlanName = plan.PlanName,
+        //                          PlanID = plan.PlanID.ToString()
+        //                      }).ToList();
 
-        List<global::ViewModels.SubscriptionDisplayViewModel> ISubscription.GetSubscriptionList()
+        //        return result;
+        //    }
+        List<SubscriptionListViewModel> ISubscription.GetSubscriptionList()
+        {
+            var result = (from subscription in context.Subscriptions
+                          join plan in context.Plans on subscription.PlanId equals plan.Id
+                          join company in context.Companys on subscription.CompanyId equals company.Id
+                          select new SubscriptionListViewModel
+                          {
+                              PlanId= subscription.PlanId,
+                              CompanyId = subscription.CompanyId,
+                              CompanyName= company.Name,
+                              PlanName= plan.PlanName
+
+                          }).ToList();
+
+            return result;
+        }     
+        public bool CheckPlanExits(Guid planName)
         {
             throw new NotImplementedException();
         }
-    }
+
+        public bool DeleteSubscription(int subscriptionId)
+        { 
+            throw new NotImplementedException();
+        }  
+      }  
 } 

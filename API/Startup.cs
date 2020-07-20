@@ -52,6 +52,11 @@ namespace API
                 config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
                 config.AddPolicy(Policies.User, Policies.UserPolicy());
             });
+
+            services.AddTransient<ISubscription, SubscriptionConcrete>();
+            services.AddTransient<IPlan, PlanConcrete>();
+            services.AddTransient<ICompany, CompanyConcrete>();
+
             services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
             {

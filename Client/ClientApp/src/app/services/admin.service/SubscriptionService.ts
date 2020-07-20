@@ -9,19 +9,19 @@ export class SubscriptionService {
   ) { }
 
   getSubscription(): Observable<Subscription[]> {
-    return <Observable<any>>this.http.get("/api/subscriptions");
+    return <Observable<any>>this.http.get("/api/subscription");
   }
 
   getSubscriptionById(id: any): Observable<Subscription> {
-    return <Observable<any>>this.http.get("/api/subscriptions/" + id);
+    return <Observable<any>>this.http.get("/api/subscription/" + id);
   }
 
   addSubscription(subscription: Subscription): Observable<any> {
-    return <Observable<any>>this.http.post("/api/subscriptions", subscription);
+    return <Observable<any>>this.http.post("/api/subscription", subscription);
   }
 
   editSubscription(subscription: Subscription): Observable<any> {
-    return <Observable<any>>this.http.put("/api/subscriptions/" + subscription.id, subscription);
+    return <Observable<any>>this.http.put("/api/subscription/" + subscription.id, subscription);
   }
 }
 
