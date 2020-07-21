@@ -1,5 +1,5 @@
 
-<strong>Create New Subscription </strong>
+<button class="btn-sidebar" (click)="manage('create')"><strong>Create New Subscription </strong></button> 
 <div *ngFor="let subscription of subscriptions| keyvalue">
   <div *ngFor="let detail of  subscription.value | keyvalue">
     <strong>{{detail.key}} </strong>

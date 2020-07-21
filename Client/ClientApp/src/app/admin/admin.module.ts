@@ -7,9 +7,9 @@ import { DashboardComponent } from './dashboard/dashboard.component.';
 import { AdminRouting } from './admin.routing';
 import { CompanyComponent } from './company/company.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
-import { PlanComponent } from './plan/plan.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { PlanComponent } from './plan/plan.component'; 
 import { CommonModule } from '@angular/common';
+import { CrudComponent } from './crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +24,16 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     HttpClientModule,
     FormsModule,
-    AdminRouting
-     
+    AdminRouting   
   ],
+
   exports: [
     AdminComponent,
     DashboardComponent 
+  ],
+
+  entryComponents: [
+    CrudComponent
   ],
 
   providers: [],

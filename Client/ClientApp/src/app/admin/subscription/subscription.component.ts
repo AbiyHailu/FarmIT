@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators";
-import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
-
+import { SubscriptionService } from '../../services/admin.service/SubscriptionService'; 
 @Component({
   selector: 'subscription',
   styleUrls: ['subscription.component.css'], 
@@ -13,7 +12,9 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
   subject: Subject<void> = new Subject();
   subscriptions: any
   constructor(
-    private subscriptionService: SubscriptionService
+    private subscriptionService: SubscriptionService,
+   // private modalService: NgbModal
+
   ) {
     this.subscriptions = []
     this.subscriptionService.getSubscription()
@@ -43,7 +44,14 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
         console.log(this.subscriptions)
       })
   }
- 
+
+
+  manage(create: string) {
+    //this.modalRef = this.modalService.open(ConfirmationModal, {
+    //  centered: true,
+    //  size: 'sm'
+    //});
+  }
 
   ngOnInit(): void {
   }
