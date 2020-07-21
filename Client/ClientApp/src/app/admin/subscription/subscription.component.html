@@ -1,0 +1,11 @@
+
+<strong>Create New Subscription </strong>
+<div *ngFor="let subscription of subscriptions| keyvalue">
+  <div *ngFor="let detail of  subscription.value | keyvalue">
+    <strong>{{detail.key}} </strong>
+    <div *ngFor="let item of  detail.value  | keyvalue">
+      {{item.value.planName }} Renew | Cancle
+    </div>
+  </div>
+</div>
+

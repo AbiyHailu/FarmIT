@@ -5,17 +5,27 @@ import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component.';
 import { AdminRouting } from './admin.routing';
+import { CompanyComponent } from './company/company.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { PlanComponent } from './plan/plan.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    DashboardComponent
+    DashboardComponent,
+    CompanyComponent,
+    PlanComponent,
+    SubscriptionComponent
   ],
-  imports: [ 
+  imports: [
+    CommonModule,
     RouterModule,
     HttpClientModule,
     FormsModule,
     AdminRouting
+     
   ],
   exports: [
     AdminComponent,

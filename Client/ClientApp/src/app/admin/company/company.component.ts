@@ -4,11 +4,12 @@ import { takeUntil } from "rxjs/operators";
 import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
 
 @Component({
-  selector: 'dashboard',
-  styleUrls: ['dashboard.component.css'], 
-  templateUrl: './dashboard.component.html',
+  selector: 'company',
+  styleUrls: ['company.component.css'], 
+  templateUrl: './company.component.html',
 })
-export class DashboardComponent implements OnInit, OnDestroy { 
+export class CompanyComponent implements OnInit, OnDestroy {
+
   subject: Subject<void> = new Subject();
   subscriptions: any
   constructor(
@@ -26,8 +27,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
   }
- 
+
   ngOnDestroy(): void {
     this.subject.next()
-  }
+  } 
 }

@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    BrowserModule,
     RouterModule.forRoot([ 
       {
         path: 'admin',

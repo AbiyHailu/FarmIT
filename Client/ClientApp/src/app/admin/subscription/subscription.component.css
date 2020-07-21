@@ -1,5 +1,5 @@
-body {
-}
+body
+{ }
 
 .sidebar {
   z-index: 1;
@@ -10,7 +10,13 @@ body {
   padding: 0% !important;
   margin: 0% !important;
 }
- 
+.side-btns {
+  height: 40px;
+  width: 100%;
+  padding: 2%;
+  padding-left:4%
+}
+
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;
