@@ -8,7 +8,7 @@ export class PlanService {
     private http: HttpClient
   ) { }
 
-  getPlan(): Observable<Plan[]> {
+  getPlans(): Observable<Plan[]> {
     return <Observable<any>>this.http.get("/api/plans");
   }
 
@@ -26,5 +26,6 @@ export class PlanService {
 }
 
 export interface Plan {
-  id
+  id: any;
+  planName:any
 }

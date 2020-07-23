@@ -1,12 +1,14 @@
 ﻿using Interface;
 using Microsoft.Extensions.Configuration;
 using Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ViewModels;
 
 namespace Concrete
 {
-    public class CompanyConcrete: ICompany
+    public class CompanyConcrete : ICompany
     {
         private readonly IConfiguration configuration;
         private readonly FarmItContext context;
@@ -16,30 +18,37 @@ namespace Concrete
             this.configuration = configuration;
 
         }
-
-        public bool DeleteCompany(int companyId)
+        public List<CompanyViewModel> GetCompanyList()
         {
-            throw new System.NotImplementedException();
+            var result = (from company in context.Companys
+                          select new CompanyViewModel
+                          {
+                              Id = company.Id,
+                              Name = company.Name
+
+                          }).ToList();
+
+            return result;
         }
 
-        public CompanyDisplayViewModel GetCompanybyId(int companyId)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public List<CompanyDisplayViewModel> GetCompanyList()
+        public CompanyViewModel GetCompanybyId(Guid companyId)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
-        public void InsertPlan(Company company)
+         
+        public void InsertCompany(Company company)
         {
-            throw new System.NotImplementedException();
-        }
-
+            throw new NotImplementedException();
+        } 
         public bool UpdateCompany(Company company)
         {
             throw new System.NotImplementedException();
         }
+        public bool DeleteCompany(Guid companyId)
+        {
+            throw new NotImplementedException();
+        }
+         
     }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators";
-import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
-
+import { CompanyService } from '../../services/admin.service/CompanyService';
+ 
 @Component({
   selector: 'company',
   styleUrls: ['company.component.css'], 
@@ -11,16 +11,16 @@ import { SubscriptionService } from '../../services/admin.service/SubscriptionSe
 export class CompanyComponent implements OnInit, OnDestroy {
 
   subject: Subject<void> = new Subject();
-  subscriptions: any
+  companys: any
   constructor(
-    private subscriptionService: SubscriptionService
+    private companyervice: CompanyService
   ) {
-    this.subscriptions = []
-    this.subscriptionService.getSubscription()
+    this.companys = []
+    this.companyervice.getCompanys()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        this.subscriptions = res;
-        console.log("this.subscriptions", this.subscriptions)
+        this.companys = res;
+        console.log("this.company", this.companys)
       })
   }
 

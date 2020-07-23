@@ -1,39 +1,40 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic; 
+using System.Net;
+using System.Net.Http; 
+using AutoMapper;
 using Interface;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Security.Claims;
-using ViewModels; 
+using ViewModels;
 
+ 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubscriptionController : ControllerBase
+    public class PlansController : ControllerBase
     {
 
-        private readonly ISubscription subscription;
-        public SubscriptionController(ISubscription subscription)
+        private readonly IPlan plan;
+
+        public PlansController(IPlan plan)
         {
-            this.subscription = subscription;
+            this.plan = plan;
         }
-         
+
         [HttpGet]
-        public IEnumerable<SubscriptionListViewModel> Get()
+        public IEnumerable<PlanListViewModel> Get()
         {
-            return subscription.GetSubscriptionList();
+            return plan.GetPlanList();
         }
          
         [HttpGet("{id}")]
-        public SubscriptionViewModel Get(int id)
+        public PlanViewModel Get(int id)
         {
             try
             {
-                return subscription.GetSubscriptionbyId(id);
+                return plan.GetPlanbyId(id);
             }
             catch (Exception)
             {
@@ -42,11 +43,11 @@ namespace API.Controllers
         }
          
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] SubscriptionViewModel subscriptionViewModel)
+        public HttpResponseMessage Post([FromBody] PlanViewModel planViewModel)
         {
             try
             {
-                if (subscription.CheckPlanExits(subscriptionViewModel.PlanId))
+                if (plan.CheckPlanExits(planViewModel.PlanId))
                 {
                     var response = new HttpResponseMessage()
                     {
@@ -56,12 +57,11 @@ namespace API.Controllers
                 }
                 else
                 {
-                    var companyId = User.FindFirstValue(ClaimTypes.Name);
-
+                
                     var x = new Mapper(null);
-                    var subcription =x.Map<Subscription>(subscriptionViewModel);
+                    var pln = x.Map<Plan>(planViewModel);
 
-                    subscription.InsertSubscription(subcription);
+                    plan.InsertPlan(pln);
 
                     var response = new HttpResponseMessage()
                     {
@@ -82,11 +82,11 @@ namespace API.Controllers
         }
          
         [HttpPut("{id}")]
-        public HttpResponseMessage Put(Guid id, [FromBody] SubscriptionViewModel subscriptionViewModel)
+        public HttpResponseMessage Put(Guid id, [FromBody] PlanViewModel planViewMode)
         {
             try
             {
-                if (subscription.CheckPlanExits(subscriptionViewModel.PlanId))
+                if (plan.CheckPlanExits(planViewMode.PlanId))
                 {
                     var response = new HttpResponseMessage()
                     {
@@ -96,12 +96,11 @@ namespace API.Controllers
                 }
                 else
                 {
-                    var companyId = User.FindFirstValue(ClaimTypes.Name);
 
                     var x = new Mapper(null);
-                    var subcription = x.Map<Subscription>(subscriptionViewModel);
+                    var pln = x.Map<Plan>(planViewMode);
 
-                    subscription.UpdateSubscription(subcription);
+                    plan.InsertPlan(pln);
 
                     var response = new HttpResponseMessage()
                     {
@@ -125,8 +124,8 @@ namespace API.Controllers
         public HttpResponseMessage Delete(Guid id)
         {
             try
-            { 
-                subscription.DeleteSubscription(id);
+            {
+                plan.DeletePlan(id);
                 var response = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK

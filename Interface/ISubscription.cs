@@ -11,7 +11,7 @@ namespace Interface
         List<SubscriptionListViewModel> GetSubscriptionList();
         bool CheckPlanExits( Guid planName);
         SubscriptionViewModel GetSubscriptionbyId(int subscriptionId);
-        bool DeleteSubscription(int subscriptionId);
+        bool DeleteSubscription(Guid subscriptionId);
         bool UpdateSubscription(Subscription subscription);
     }
 }

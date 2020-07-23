@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminComponent } from './admin.component';
 import { RouterModule } from '@angular/router';
@@ -17,26 +17,26 @@ import { CrudComponent } from './crud/crud.component';
     DashboardComponent,
     CompanyComponent,
     PlanComponent,
-    SubscriptionComponent
+    SubscriptionComponent, 
+    CrudComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule,
+    HttpClientModule, 
+    ReactiveFormsModule, 
     FormsModule,
-    AdminRouting   
+    AdminRouting
   ],
 
   exports: [
     AdminComponent,
     DashboardComponent 
   ],
-
+  
   entryComponents: [
     CrudComponent
-  ],
+  ]
 
-  providers: [],
-  bootstrap: [AdminComponent]
 })
 export class AdminModule { }

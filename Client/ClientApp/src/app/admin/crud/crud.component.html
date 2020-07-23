@@ -1,6 +1,39 @@
+<div class="modal-header">
+  <strong>{{type}}</strong>
+</div>
+<div class="modal-body"> 
+    <form *ngIf="enablform" [formGroup]="dataForm" autocomplete="new-password">
+      <div *ngFor="let layoutElement of data">
+        <label *ngIf="layoutElement.Label" [attr.for]="layoutElement" class="layoutelement-label">
+          <strong>{{layoutElement.Label }}</strong>
+        </label>
+        <div [ngSwitch]="layoutElement.Type" class="input-group">
 
- 
-    <div>
-    crud
-    </div>   
- 
+          <input *ngSwitchCase="'text'" class="form-control-input input-border" autocomplete="off"
+                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="text"
+                 (keyup)="onKey($event, layoutElement.Value)">
+
+          <input *ngSwitchCase="'number'" class="form-control input-border"
+                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="number"
+                 (keyup)="onKey($event, layoutElement.Value)">
+
+          <input *ngSwitchCase="'textDate'" class="form-control input-border"
+                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="date"
+                 (keyup)="onKey($event, layoutElement.Value)">
+
+        </div>
+      </div>
+      <br/>
+      <div class="modal-footer">
+        <button [disabled]='disableSubmit' (click)="submitData(conn.ConnectorConfigForm)" class="btn btn-submit">
+          {{'Submit'}}
+        </button>
+        <button  type="button" class="btn btn-submit" (click)="cancel()">
+          {{'Cancel' }}
+        </button>
+      </div>
+    </form> 
+</div>

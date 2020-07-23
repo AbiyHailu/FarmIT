@@ -1,4 +1,5 @@
 ﻿using Models;
+using System;
 using System.Collections.Generic;
 using ViewModels;
 
@@ -6,10 +7,10 @@ namespace Interface
 {
     public interface ICompany
     {
-        void InsertPlan(Company company);
-        List<CompanyDisplayViewModel> GetCompanyList();
-        CompanyDisplayViewModel GetCompanybyId(int companyId);
-        bool DeleteCompany(int companyId);
+        void InsertCompany(Company company);
+        List<CompanyViewModel> GetCompanyList();
+        CompanyViewModel GetCompanybyId(Guid companyId);
+        bool DeleteCompany(Guid companyId);
         bool UpdateCompany(Company company);
     }
 }

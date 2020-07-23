@@ -175,10 +175,10 @@ namespace Concrete
         {
             throw new NotImplementedException();
         }
-
-        public bool DeleteSubscription(int subscriptionId)
-        { 
+         
+        public bool DeleteSubscription(Guid subscriptionId)
+        {
             throw new NotImplementedException();
-        }  
-      }  
+        }
+    }  
 } 

@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators";
 import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdninCrudService } from '../../services/admin.service/AdminCrudService';
+import { PlanService } from '../../services/admin.service/PlanServices';
 
 @Component({
   selector: 'plan',
@@ -10,18 +13,21 @@ import { SubscriptionService } from '../../services/admin.service/SubscriptionSe
 })
 export class PlanComponent implements OnInit, OnDestroy {
 
-  subject: Subject<void> = new Subject();
-  subscriptions: any
+  subject: Subject<void> = new Subject(); 
+  modalRef: any
+  plans: any[];
 
   constructor(
-    private subscriptionService: SubscriptionService
+    private planSevice: PlanService,
+    private modalService: NgbModal,
+    private adminCrudService: AdninCrudService,
   ) {
-    this.subscriptions = []
-    this.subscriptionService.getSubscription()
+    this.plans = []
+    this.planSevice.getPlans()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        this.subscriptions = res;
-        console.log("this.subscriptions", this.subscriptions)
+        this.plans = res;
+        console.log("this.plans", this.plans)
       })
   }
 

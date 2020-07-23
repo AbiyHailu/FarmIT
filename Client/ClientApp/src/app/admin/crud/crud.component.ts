@@ -1,21 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators";
-import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
-
+import { FormGroup, FormControl } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+ 
 @Component({
   selector: 'crud',
   styleUrls: ['crud.component.css'], 
   templateUrl: './crud.component.html',
 })
-export class CrudComponent {
+export class CrudComponent implements OnInit, OnDestroy {
 
+  @Input() public data: any;
+  @Input() public type: any;
   subject: Subject<void> = new Subject();
   subscriptions: any
-  constructor(
-    private subscriptionService: SubscriptionService
-  ) {
+  constructor( 
+    public activeModal: NgbActiveModal,
+  ) { 
      
   }
- 
+
+  dataForm:FormGroup
+  ngOnInit(): void {
+    console.log("data", this.data)
+    this.dataForm = this.createForm(this.data)
+    console.log("this.dataForm", this.dataForm)
+  }
+
+  enablform=false
+  createForm(data) {
+    console.log("data", data)
+    const formGroup = {};
+    
+    data.forEach(e => {
+      formGroup[e.Binding] = new FormControl(e.Value || '')
+    })
+    this.enablform=true
+    return new FormGroup(formGroup);
+  }
+
+  cancel() {
+     
+    this.activeModal.close(this.data)
+  }
+  ngOnDestroy(): void {
+      this.subject.next()
+    }
 }
