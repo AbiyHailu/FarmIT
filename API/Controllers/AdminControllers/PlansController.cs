@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic; 
-using System.Net;
-using System.Net.Http; 
-using AutoMapper;
+﻿using AutoMapper;
 using Interface;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Models.AdminModels;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using ViewModels;
 
- 
+
 namespace API.Controllers
 {
     [Route("api/[controller]")]

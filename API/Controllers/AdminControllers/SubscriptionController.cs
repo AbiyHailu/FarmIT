@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using Interface;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Models.AdminModels;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using ViewModels; 
+using ViewModels;
 
-namespace API.Controllers
+namespace API.Controllers.AdminControllers
 {
     [Route("api/[controller]")]
     [ApiController]

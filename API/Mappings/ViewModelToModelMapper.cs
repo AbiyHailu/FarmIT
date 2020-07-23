@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Models;
+using Models.AdminModels;
 using ViewModels;
 
 namespace API.Mappings

@@ -1,6 +1,6 @@
 ﻿using Interface;
 using Microsoft.Extensions.Configuration;
-using Models;
+using Models.AdminModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using ViewModels;
 
 namespace Concrete
 {
-   public class PlanConcrete:IPlan
+    public class PlanConcrete:IPlan
     {
         private readonly IConfiguration configuration;
         private readonly FarmItContext context;
