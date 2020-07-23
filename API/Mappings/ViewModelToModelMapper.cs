@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Models.AdminModels;
-using ViewModels;
+using ViewModels.AdminViewModels;
 
 namespace API.Mappings
 {

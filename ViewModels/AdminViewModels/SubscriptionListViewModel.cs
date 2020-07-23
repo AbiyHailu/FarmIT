@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ViewModels
+namespace ViewModels.AdminViewModels
 {
     public class SubscriptionListViewModel
     {

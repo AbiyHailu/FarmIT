@@ -1,5 +1,6 @@
 using Concrete;
-using Interface;
+using Concrete.AdminConcrete;
+using Interface.AdminInterface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

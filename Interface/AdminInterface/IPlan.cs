@@ -1,9 +1,9 @@
 ﻿using Models.AdminModels;
 using System;
 using System.Collections.Generic;
-using ViewModels;
+using ViewModels.AdminViewModels;
 
-namespace Interface
+namespace Interface.AdminInterface
 {
     public interface IPlan
     {

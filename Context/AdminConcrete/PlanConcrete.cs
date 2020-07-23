@@ -1,12 +1,12 @@
-﻿using Interface;
+﻿using Interface.AdminInterface;
 using Microsoft.Extensions.Configuration;
 using Models.AdminModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ViewModels;
+using ViewModels.AdminViewModels;
 
-namespace Concrete
+namespace Concrete.AdminConcrete
 {
     public class PlanConcrete:IPlan
     {
@@ -15,8 +15,7 @@ namespace Concrete
         public PlanConcrete(FarmItContext context, IConfiguration configuration)
         {
             this.context = context;
-            this.configuration = configuration;
-
+            this.configuration = configuration; 
         }
  
         public List<PlanListViewModel> GetPlanList()

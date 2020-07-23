@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Interface;
+using Interface.AdminInterface;
 using Microsoft.AspNetCore.Mvc;
 using Models.AdminModels;
 using System;
@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using ViewModels;
+using ViewModels.AdminViewModels;
 
 namespace API.Controllers.AdminControllers
 {

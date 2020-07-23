@@ -1,10 +1,10 @@
-﻿using Interface;
+﻿using Interface.AdminInterface;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using ViewModels;
+using ViewModels.AdminViewModels;
 
 namespace API.Controllers
 {

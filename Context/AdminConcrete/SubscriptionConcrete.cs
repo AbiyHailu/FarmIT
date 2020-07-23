@@ -1,12 +1,12 @@
-﻿using Interface;
+﻿using Interface.AdminInterface;
 using Microsoft.Extensions.Configuration;
 using Models.AdminModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ViewModels;
+using ViewModels.AdminViewModels;
 
-namespace Concrete
+namespace Concrete.AdminConcrete
 {
     public   class SubscriptionConcrete : ISubscription
         {
