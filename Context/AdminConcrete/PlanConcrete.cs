@@ -11,8 +11,8 @@ namespace Concrete.AdminConcrete
     public class PlanConcrete:IPlan
     {
         private readonly IConfiguration configuration;
-        private readonly FarmItContext context;
-        public PlanConcrete(FarmItContext context, IConfiguration configuration)
+        private readonly AdminContext context;
+        public PlanConcrete(AdminContext context, IConfiguration configuration)
         {
             this.context = context;
             this.configuration = configuration; 

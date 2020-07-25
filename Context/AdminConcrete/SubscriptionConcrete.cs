@@ -11,8 +11,8 @@ namespace Concrete.AdminConcrete
     public   class SubscriptionConcrete : ISubscription
         {
             private readonly IConfiguration configuration;
-            private readonly FarmItContext  context;
-            public SubscriptionConcrete(FarmItContext context, IConfiguration configuration)
+            private readonly AdminContext  context;
+            public SubscriptionConcrete(AdminContext context, IConfiguration configuration)
             {
                 this.context = context;
                 this.configuration = configuration;

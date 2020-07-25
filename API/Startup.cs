@@ -26,7 +26,8 @@ namespace API
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FarmItContext>(options => options.UseSqlServer(Configuration.GetConnectionString("FarmItConnnection"), b => b.MigrationsAssembly("API")));
+            services.AddDbContext<AdminContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AdminConnnection"), b => b.MigrationsAssembly("API")));
+            services.AddDbContext<ManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ManagerConnnection"), b => b.MigrationsAssembly("API")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

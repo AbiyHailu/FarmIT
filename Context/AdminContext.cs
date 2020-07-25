@@ -3,9 +3,9 @@ using Models.AdminModels;
 
 namespace Concrete
 {
-    public class FarmItContext : DbContext
+    public class AdminContext : DbContext
     {   
-        public FarmItContext(DbContextOptions options) : base(options)
+        public AdminContext(DbContextOptions options) : base(options)
         {  } 
          
         public DbSet<Subscription> Subscriptions { get; set; }

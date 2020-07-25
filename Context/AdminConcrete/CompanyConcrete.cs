@@ -13,8 +13,8 @@ namespace Concrete.AdminConcrete
     public class CompanyConcrete : ICompany
     {
         private readonly IConfiguration configuration;
-        private readonly FarmItContext context;
-        public CompanyConcrete(FarmItContext context, IConfiguration configuration)
+        private readonly AdminContext context;
+        public CompanyConcrete(AdminContext context, IConfiguration configuration)
         {
             this.context = context;
             this.configuration = configuration;

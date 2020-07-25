@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
-    [DbContext(typeof(FarmItContext))]
+    [DbContext(typeof(AdminContext))]
     [Migration("20200719211439_companycreate2")]
     partial class companycreate2
     {

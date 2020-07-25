@@ -6,7 +6,7 @@ namespace Concrete
 {
     public class DbInitializer
     {
-        public static void Initialize(FarmItContext context)
+        public static void Initialize(AdminContext context)
         { 
             context.Database.EnsureCreated();
             if (!context.Subscriptions.Any())

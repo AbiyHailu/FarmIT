@@ -18,7 +18,7 @@ namespace API
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<FarmItContext>();
+                    var context = services.GetRequiredService<AdminContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
