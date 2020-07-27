@@ -9,6 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component'; 
 import { AdminModule } from './admin/admin.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpInterceptorService } from './services/shared.service/httpInterceptorService';
+import { ErrorInterceptorService } from './services/shared.service/errorInterceptorService';
  
  
 @NgModule({
@@ -45,7 +47,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ]),
         
   ] ,
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

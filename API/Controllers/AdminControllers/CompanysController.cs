@@ -1,6 +1,8 @@
 ﻿using Interface.AdminInterface;
 using Microsoft.AspNetCore.Mvc;
+using Models.AdminModels;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -36,12 +38,20 @@ namespace API.Controllers
                 throw;
             }
         }
-         
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
 
+        [HttpPost]
+        public IActionResult Register(Company newCompany)
+        {
+            IActionResult response = Unauthorized();
+            CompanyViewModel registerdCompany = company.GetCompanyList().SingleOrDefault(x => x.Emailaddress == newCompany.Emailaddress);
+            if (registerdCompany == null)
+            {
+                newCompany.UserType = "Manager";
+                company.InsertCompany(newCompany);
+                return Ok("{}");
+            }
+            return response;
+        }
         // PUT api/<CompanysController>/5
         [HttpPut("{id}")]
         public void Put(Guid id, [FromBody] string value)

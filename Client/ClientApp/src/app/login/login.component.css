@@ -1,0 +1,40 @@
+body {
+  background: transparent !important;
+  overflow-y: scroll
+}
+.container-fluid { 
+  height: 100%;
+  width: 100%;
+} 
+.login{
+    top:20%
+}
+.card {
+  background-color: transparent;
+  color:white
+}
+.card-header {
+  background-color: transparent;
+}
+.btn-primary{
+    float:right;
+    background-color:white;
+    color:black !important;
+    width:100px
+} 
+@media (max-width: 575.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+ 
+} 
+@media (min-width: 768px) and (max-width: 991.98px) { 
+   
+} 
+
+@media (min-width: 992px) and (max-width: 1199.98px) {  
+}
+
+@media (min-width: 1200px) {
+} 
+

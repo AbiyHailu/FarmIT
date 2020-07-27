@@ -5,7 +5,7 @@ namespace Concrete
 {
     public class AdminContext : DbContext
     {   
-        public AdminContext(DbContextOptions options) : base(options)
+        public AdminContext(DbContextOptions<AdminContext> options) : base(options)
         {  } 
          
         public DbSet<Subscription> Subscriptions { get; set; }

@@ -25,7 +25,12 @@ export class CompanyService {
   }
 }
 
-export interface Company {
-  id: any;
+export class Company {
+  id: any
   name: any
+  emailAddress: any
+  password: any
+  phone:any
+  userType:any
+
 }

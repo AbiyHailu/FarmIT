@@ -28,18 +28,8 @@ namespace API.Controllers.AdminControllers
             this.company = company;
             this.config = config;
         }
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet("{id}")]
-        public string Login(int id)
-        {
-            return "value";
-        }
- 
+  
+      
 
         [HttpPost] 
         public IActionResult Register(Company newCompany)
@@ -74,8 +64,8 @@ namespace API.Controllers.AdminControllers
         }
         CompanyViewModel AuthenticateUser(CompanyViewModel loginCredentials)
         {
-            CompanyViewModel user = company.GetCompanyList().SingleOrDefault(x => x.Emailaddress == loginCredentials.Emailaddress && x.Password == loginCredentials.Password);
-            return user;
+            CompanyViewModel companyVm = company.GetCompanyList().SingleOrDefault(x => x.Emailaddress == loginCredentials.Emailaddress && x.Password == loginCredentials.Password);
+            return companyVm;
         }
         string GenerateJWT(CompanyViewModel companyInfo)
         {

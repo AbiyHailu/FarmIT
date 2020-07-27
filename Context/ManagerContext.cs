@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.Store;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Concrete
 {
-   public class ManagerContext : DbContext
+    public class ManagerContext : DbContext
     {
-        public ManagerContext(DbContextOptions options) : base(options)
+        public ManagerContext(DbContextOptions<ManagerContext> options) : base(options)
         { }
 
         public DbSet<Product> Products { get; set; }
