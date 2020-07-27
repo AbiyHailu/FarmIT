@@ -13,8 +13,8 @@ export class AuthService {
     return this.http.post<any>('/api/register', userDetails)
   }
 
-  login(userDetails) {
-    return this.http.post<any>('/api/login', userDetails)
+  login(companyDetails) {
+    return this.http.post<any>('/api/login', companyDetails)
       .pipe(map(response => {
         localStorage.setItem('authToken', response.token);
         this.setUserDetails();
@@ -30,7 +30,7 @@ export class AuthService {
       const decodeUserDetails = JSON.parse(window.atob(localStorage.getItem('authToken').split('.')[1]));
       companyDetails.name = decodeUserDetails.sub;
       //companyDetails.userType = decodeUserDetails.firstName;
-      //companyDetails.isLoggedIn = true;
+      companyDetails.isLoggedIn = true;
       //companyDetails. = decodeUserDetails.role;
       this.companyData.next(companyDetails);
     }

@@ -11,13 +11,15 @@ import { AdminModule } from './admin/admin.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpInterceptorService } from './services/shared.service/httpInterceptorService';
 import { ErrorInterceptorService } from './services/shared.service/errorInterceptorService';
+import { LoginComponent } from './login/login.component';
  
  
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent 
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,9 @@ import { ErrorInterceptorService } from './services/shared.service/errorIntercep
         //  //canActivate: [AuthGuard],
         loadChildren: './admin/admin.module#AdminModule'
       },
+
+      { path: 'login', component: LoginComponent },
+
       {
         path: 'manager',
         //  //canActivate: [AuthGuard],

@@ -31,6 +31,7 @@ export class Company {
   emailAddress: any
   password: any
   phone:any
-  userType:any
+  userType: any
+  isLoggedIn: boolean
 
 }

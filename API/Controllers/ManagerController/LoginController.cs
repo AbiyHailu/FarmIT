@@ -10,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using ViewModels.AdminViewModels;
 
 namespace API.Controllers.ManagerController
 {
@@ -31,24 +32,26 @@ namespace API.Controllers.ManagerController
         public IActionResult Login([FromBody] Company login)
         {
             IActionResult response = Unauthorized();
-            Company user = AuthenticateUser(login);
-            if (user != null)
+            CompanyViewModel company = AuthenticateUser(login);
+            if (company != null)
             {
-                var tokenString = GenerateJWT(user);
+                var tokenString = GenerateJWT(company);
                 response = Ok(new
                 {
                     token = tokenString,
-                    userDetails = user
+                    userDetails = company
                 });
             }
             return response;
         }
-        Company AuthenticateUser(Company loginCredentials)
+        CompanyViewModel AuthenticateUser(Company loginCredentials)
         {
-            Company singleCompany = company.GetCompanyList.SingleOrDefault(x => x.Emailaddress == loginCredentials.Emailaddress && x.Password == loginCredentials.Password);
+            var x = company.GetCompanyList();
+           var y = x.SingleOrDefault(i => i.Password == loginCredentials.Password);
+            CompanyViewModel singleCompany = company.GetCompanyList().SingleOrDefault(x => x.Name == loginCredentials.Name && x.Password == loginCredentials.Password);
             return singleCompany;
         }
-        string GenerateJWT(Company userInfo)
+        string GenerateJWT(CompanyViewModel userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -56,7 +59,7 @@ namespace API.Controllers.ManagerController
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userInfo.Emailaddress),
                 new Claim("name", userInfo.Name.ToString()),
-                new Claim("role",userInfo.UserType),
+                new Claim("role", userInfo.UserType),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
             var token = new JwtSecurityToken(
