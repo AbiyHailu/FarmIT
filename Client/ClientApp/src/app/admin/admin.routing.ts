@@ -7,7 +7,7 @@ import { PlanComponent } from "./plan/plan.component";
 import { SubscriptionComponent } from "./subscription/subscription.component";
 
 const routes: Routes = [{
-  path: '', component: AdminComponent,
+  path: 'admin', component: AdminComponent,
   children: [ 
     { path: 'dashboard', component: DashboardComponent },
     { path: 'company', component: CompanyComponent },

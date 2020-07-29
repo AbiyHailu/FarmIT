@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'; 
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ManagerDashboardComponent } from './dashboard/dashboard.component.';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   
   declarations: [
-    ManagerComponent 
+    ManagerComponent,
+    ManagerDashboardComponent,
+    ManageUserComponent
   ],
 
   exports: [

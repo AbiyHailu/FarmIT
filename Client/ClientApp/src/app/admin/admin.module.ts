@@ -8,8 +8,7 @@ import { AdminRouting } from './admin.routing';
 import { CompanyComponent } from './company/company.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { PlanComponent } from './plan/plan.component'; 
-import { CommonModule } from '@angular/common';
-import { CrudComponent } from './crud/crud.component';
+import { CommonModule } from '@angular/common'; 
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { CrudComponent } from './crud/crud.component';
     DashboardComponent,
     CompanyComponent,
     PlanComponent,
-    SubscriptionComponent, 
-    CrudComponent
+    SubscriptionComponent
   ],
   imports: [
     CommonModule,
@@ -32,10 +30,6 @@ import { CrudComponent } from './crud/crud.component';
   exports: [
     AdminComponent,
     DashboardComponent 
-  ],
-  
-  entryComponents: [
-    CrudComponent
   ]
 
 })

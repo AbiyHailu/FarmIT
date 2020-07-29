@@ -1,3 +1,36 @@
-<div class="container-fluid cont-f">
-  Test manage 
+
+<div class="row sidebar">
+  <div class="col-lg-2  col-4 border-right sidebar ">
+
+    Manage
+    <button class="btn-sidebar" (click)="navigateTo('dashboard')">
+      Dashboard
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('manage-user')">
+      Manage User
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('store')">
+      Store
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('scout')">
+      Scout
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('protection')">
+      Protection
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('fertigatin')">
+      Fertigation
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('packhouse')">
+      Packhouse
+    </button>
+    <button class="btn-sidebar" (click)="navigateTo('hr')">
+      Human Resource
+    </button>
+    Reports
+  </div>
+  <div class="col-lg-10 col-8">
+    <router-outlet> </router-outlet>
+  </div>
 </div>
+

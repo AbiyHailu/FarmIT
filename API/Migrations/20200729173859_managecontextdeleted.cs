@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace API.Migrations.Manager
+namespace API.Migrations
 {
-    public partial class initialcreateManagerDb : Migration
+    public partial class managecontextdeleted : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,6 +52,22 @@ namespace API.Migrations.Manager
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserID = table.Column<Guid>(nullable: false),
+                    Emailaddress = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StoreBalances",
                 columns: table => new
                 {
@@ -71,6 +87,53 @@ namespace API.Migrations.Manager
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CompanyUserPermissions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    PlanId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyUserPermissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompanyUserPermissions_Companys_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompanyUserPermissions_Plans_PlanId",
+                        column: x => x.PlanId,
+                        principalTable: "Plans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompanyUserPermissions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyUserPermissions_CompanyId",
+                table: "CompanyUserPermissions",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyUserPermissions_PlanId",
+                table: "CompanyUserPermissions",
+                column: "PlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyUserPermissions_UserId",
+                table: "CompanyUserPermissions",
+                column: "UserId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_StoreBalances_ProductsId",
                 table: "StoreBalances",
@@ -80,6 +143,9 @@ namespace API.Migrations.Manager
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CompanyUserPermissions");
+
+            migrationBuilder.DropTable(
                 name: "IssueProducts");
 
             migrationBuilder.DropTable(
@@ -87,6 +153,9 @@ namespace API.Migrations.Manager
 
             migrationBuilder.DropTable(
                 name: "StoreBalances");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Products");

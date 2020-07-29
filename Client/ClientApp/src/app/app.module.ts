@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpInterceptorService } from './services/shared.service/httpInterceptorService';
 import { ErrorInterceptorService } from './services/shared.service/errorInterceptorService';
 import { LoginComponent } from './login/login.component';
+import { ManagerModule } from './manager/manager.module';
+import { CrudComponent } from './crud/crud.component';
  
  
 @NgModule({
@@ -19,7 +21,8 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +31,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     BrowserModule,
     AdminModule,
+    ManagerModule, 
     NgbModule,
     RouterModule.forRoot([ 
       {
@@ -51,7 +55,12 @@ import { LoginComponent } from './login/login.component';
      
     ]),
         
-  ] ,
+  ],
+
+  entryComponents: [
+    CrudComponent
+  ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }],

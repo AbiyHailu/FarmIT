@@ -1,4 +1,5 @@
 ﻿using Models.AdminModels;
+using Models.ManagerModels;
 using System;
 using System.Linq;
 
@@ -6,10 +7,10 @@ namespace Concrete
 {
     public class DbInitializer
     {
-        public static void Initialize(AdminContext context)
-        { 
-            context.Database.EnsureCreated();
-            if (!context.Subscriptions.Any())
+        public static void Initialize(AdminContext admincontext)
+        {
+            admincontext.Database.EnsureCreated();
+            if (!admincontext.Subscriptions.Any())
             {
                 var subscriptions = new Subscription[]
                 { 
@@ -30,12 +31,12 @@ namespace Concrete
 
                 foreach (Subscription s in subscriptions)
                 {
-                    context.Subscriptions.Add(s);
-                } 
-            context.SaveChanges(); 
+                    admincontext.Subscriptions.Add(s);
+                }
+                admincontext.SaveChanges(); 
             }
 
-            if (!context.Plans.Any())
+            if (!admincontext.Plans.Any())
             {
                 var plans = new Plan[]
                 {
@@ -50,11 +51,11 @@ namespace Concrete
 
                 foreach (Plan s in plans)
                 {
-                    context.Plans.Add(s);
+                    admincontext.Plans.Add(s);
                 }
-                context.SaveChanges();
+                admincontext.SaveChanges();
             }
-            if (!context.Companys.Any())
+            if (!admincontext.Companys.Any())
             {
                 var companys = new Company[]
                 {
@@ -67,10 +68,28 @@ namespace Concrete
 
                 foreach (Company c in companys)
                 {
-                    context.Companys.Add(c);
+                    admincontext.Companys.Add(c);
                 }
-                context.SaveChanges();
-            } 
+                admincontext.SaveChanges();
+            }
+            if (!admincontext.Users.Any())
+            {
+                var users = new User[]
+                {
+                    new User{ Emailaddress="abiy1@test.com", Phone="123456", FirstName="Abiy1", LastName="Sahle", Password ="123456"},
+                    new User{ Emailaddress="abiy2@test.com", Phone="123456", FirstName="Abiy2", LastName="Sahle", Password ="123456"},
+                    new User{ Emailaddress="abiy3@test.com", Phone="123456", FirstName="Abiy3", LastName="Sahle", Password ="123456"},
+                    new User{ Emailaddress="abiy4@test.com", Phone="123456", FirstName="Abiy4", LastName="Sahle", Password ="123456"},
+                    new User{ Emailaddress="abiy5@test.com", Phone="123456", FirstName="Abiy5", LastName="Sahle", Password ="123456"},
+                    new User{ Emailaddress="abiy6@test.com", Phone="123456", FirstName="Abiy6", LastName="Sahle", Password ="123456"},
+                };
+
+                foreach (User u in users)
+                {
+                    admincontext.Users.Add(u);
+                }
+                admincontext.SaveChanges();
+            }
         }
     }
 }

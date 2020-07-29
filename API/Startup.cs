@@ -1,6 +1,8 @@
 using Concrete;
 using Concrete.AdminConcrete;
+using Concrete.ManagerConcrete;
 using Interface.AdminInterface;
+using Interface.UserInterface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +29,6 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AdminContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AdminConnnection"), b => b.MigrationsAssembly("API")));
-            services.AddDbContext<ManagerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ManagerConnnection"), b => b.MigrationsAssembly("API")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -58,7 +59,7 @@ namespace API
             services.AddTransient<ISubscription, SubscriptionConcrete>();
             services.AddTransient<IPlan, PlanConcrete>();
             services.AddTransient<ICompany, CompanyConcrete>();
-
+            services.AddTransient<IUser, UserConcrete>();
             services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
             {

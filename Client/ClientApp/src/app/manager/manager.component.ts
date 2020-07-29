@@ -23,7 +23,9 @@ export class ManagerComponent implements OnInit, OnDestroy {
     activeIndex: number;
     control = null
   
-     
+  navigateTo(destination: string) {
+    this.router.navigate(['manager/' + destination]);
+  }
     ngOnDestroy(): void {
         this.subject.next();
     }

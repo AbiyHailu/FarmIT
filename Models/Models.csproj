@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Fertigation\" />
+    <Folder Include="HR\" />
+    <Folder Include="GreenHouse\" />
+    <Folder Include="PackHouse\" />
+    <Folder Include="Protection\" />
     <Folder Include="Scout\" />
   </ItemGroup>
 

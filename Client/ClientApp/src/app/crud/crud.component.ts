@@ -40,8 +40,11 @@ export class CrudComponent implements OnInit, OnDestroy {
     return new FormGroup(formGroup);
   }
 
-  cancel() {
-     
+  submitData(dataForm:any) { 
+    this.activeModal.close(dataForm.value)
+  }
+
+  cancel() { 
     this.activeModal.close(this.data)
   }
   ngOnDestroy(): void {

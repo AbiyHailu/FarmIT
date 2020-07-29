@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Models.AdminModels
+namespace Models.ManagerModels
 {
     public class User
     {
@@ -14,7 +14,5 @@ namespace Models.AdminModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
-        public Guid CompanyId { get; set; }
-        public Company Company { get; set; }
     }
 }

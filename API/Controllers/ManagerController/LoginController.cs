@@ -46,8 +46,6 @@ namespace API.Controllers.ManagerController
         }
         CompanyViewModel AuthenticateUser(Company loginCredentials)
         {
-            var x = company.GetCompanyList();
-           var y = x.SingleOrDefault(i => i.Password == loginCredentials.Password);
             CompanyViewModel singleCompany = company.GetCompanyList().SingleOrDefault(x => x.Name == loginCredentials.Name && x.Password == loginCredentials.Password);
             return singleCompany;
         }

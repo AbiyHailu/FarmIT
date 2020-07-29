@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators";
 import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CrudComponent } from '../crud/crud.component';
-import { AdninCrudService } from '../../services/admin.service/AdminCrudService';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  
+import { CrudComponent } from '../../crud/crud.component';
+import { AdninCrudService } from '../../services/shared.service/AdminCrudService';
 @Component({
   selector: 'subscription',
   styleUrls: ['subscription.component.css'], 
@@ -37,6 +37,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
         console.log(this.subscriptions)
       })
   }
+
   ngOnInit(): void {
   }
 
@@ -57,9 +58,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
       console.log('result',result)
     })
   }
-
-  
-
+    
   ngOnDestroy(): void {
     this.subject.next()
   }

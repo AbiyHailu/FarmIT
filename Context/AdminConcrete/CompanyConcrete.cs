@@ -1,11 +1,9 @@
-﻿using Interface;
-using Interface.AdminInterface;
+﻿using Interface.AdminInterface;
 using Microsoft.Extensions.Configuration;
 using Models.AdminModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ViewModels;
 using ViewModels.AdminViewModels;
 
 namespace Concrete.AdminConcrete
@@ -26,7 +24,10 @@ namespace Concrete.AdminConcrete
                           select new CompanyViewModel
                           {
                               Id = company.Id,
-                              Name = company.Name
+                              Name = company.Name,
+                              Password=company.Password,
+                              UserType=company.UserType,
+                              Emailaddress=company.Emailaddress
 
                           }).ToList();
 

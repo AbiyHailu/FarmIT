@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core'; 
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';  
 
 @Injectable({ providedIn: 'root' })
 export class AdninCrudService {
@@ -24,6 +23,15 @@ export class AdninCrudService {
   getAddCompany() {
     return [
       { Binding: 'name', Label: "Company Name" }
+    ]
+  }
+  getAddUser() {
+    return [
+      { Binding: 'emailAddress', Type: 'text', Label: "Email Address" },
+      { Binding: 'phone', Type: 'text', Label: "Phone" },
+      { Binding: 'firstName', Type: 'text', Label: "First Name" },
+      { Binding: 'lastName', Type: 'text', Label: "Last Name" },
+      { Binding: 'password', Type: 'text', Label: "Password" },
     ]
   }
 }

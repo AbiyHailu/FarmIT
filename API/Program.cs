@@ -18,8 +18,8 @@ namespace API
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<AdminContext>();
-                    DbInitializer.Initialize(context);
+                    var admincontext = services.GetRequiredService<AdminContext>();
+                    DbInitializer.Initialize(admincontext);
                 }
                 catch (Exception ex)
                 {
