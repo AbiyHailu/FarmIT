@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators"; 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
-import { PlanService } from '../../services/admin.service/PlanServices';
-import { AdninCrudService } from '../../services/shared.service/AdminCrudService';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  
+import { CrudService } from '../../crud/service/crud.service';
+import { PlanService } from './service/plan.services';
 
 @Component({
   selector: 'plan',
@@ -19,7 +19,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   constructor(
     private planSevice: PlanService,
     private modalService: NgbModal,
-    private adminCrudService: AdninCrudService,
+    private adminCrudService: CrudService,
   ) {
     this.plans = []
     this.planSevice.getPlans()

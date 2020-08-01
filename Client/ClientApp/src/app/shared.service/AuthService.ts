@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators'; 
-import { Company } from '../admin.service/CompanyService';
+import { map } from 'rxjs/operators';  
 import { Router } from '@angular/router';
+import { Company } from '../admin/company/service/company.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

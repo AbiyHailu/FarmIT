@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
-import { takeUntil } from "rxjs/operators";
-import { SubscriptionService } from '../../services/admin.service/SubscriptionService';
+import { takeUntil } from "rxjs/operators"; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  
-import { CrudComponent } from '../../crud/crud.component';
-import { AdninCrudService } from '../../services/shared.service/AdminCrudService';
+import { CrudComponent } from '../../crud/crud.component'; 
+import { CrudService } from '../../crud/service/crud.service';
+import { SubscriptionService } from './service/subscription.service';
 @Component({
   selector: 'subscription',
   styleUrls: ['subscription.component.css'], 
@@ -18,7 +18,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
   constructor(
     private subscriptionService: SubscriptionService,
     private modalService: NgbModal,
-    private adminCrudService: AdninCrudService,
+    private adminCrudService:  CrudService,
 
   ) {
     this.subscriptions = []

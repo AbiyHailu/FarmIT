@@ -8,12 +8,12 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component'; 
 import { AdminModule } from './admin/admin.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpInterceptorService } from './services/shared.service/httpInterceptorService';
-import { ErrorInterceptorService } from './services/shared.service/errorInterceptorService';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { LoginComponent } from './login/login.component';
 import { ManagerModule } from './manager/manager.module';
 import { CrudComponent } from './crud/crud.component';
+import { HttpInterceptorService } from './shared.service/httpInterceptorService';
+import { ErrorInterceptorService } from './shared.service/errorInterceptorService';
  
  
 @NgModule({

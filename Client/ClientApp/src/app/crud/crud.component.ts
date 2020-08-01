@@ -1,8 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs'; 
-import { takeUntil } from "rxjs/operators";
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'; 
 import { FormGroup, FormControl } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; 
  
 @Component({
   selector: 'crud',
@@ -12,11 +10,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class CrudComponent implements OnInit, OnDestroy {
 
   @Input() public data: any;
-  @Input() public type: any;
-  subject: Subject<void> = new Subject();
+  @Input() public type: any; 
   subscriptions: any
   constructor( 
-    public activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal 
   ) { 
      
   }
@@ -40,14 +37,15 @@ export class CrudComponent implements OnInit, OnDestroy {
     return new FormGroup(formGroup);
   }
 
-  submitData(dataForm:any) { 
-    this.activeModal.close(dataForm.value)
+  submitData(dataForm: any) {
+    this.activeModal.close(dataForm.value) 
   }
 
   cancel() { 
     this.activeModal.close(this.data)
   }
+
   ngOnDestroy(): void {
-      this.subject.next()
-    }
+
+  }
 }

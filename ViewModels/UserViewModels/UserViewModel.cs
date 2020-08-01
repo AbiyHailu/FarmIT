@@ -4,7 +4,7 @@ namespace ViewModels.UserViewModels
 {
     public class UserViewModel
     {
-        //public Guid UserId { get; set; }
+        public Guid UserId { get; set; }
         public string Emailaddress { get; set; }
         public string Phone { get; set; }
         public string FirstName { get; set; }

@@ -1,8 +1,11 @@
-﻿using Interface.UserInterface;
+﻿using AutoMapper;
+using Interface.UserInterface;
 using Microsoft.AspNetCore.Mvc;
 using Models.ManagerModels;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using ViewModels.UserViewModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,7 +22,7 @@ namespace API.Controllers.ManagerController
             this.user = user;
         }
         [HttpGet]
-        public IEnumerable<UserListVM> Get()
+        public IEnumerable<UserViewModel> Get()
         {
             return user.GetUserList();
         }
@@ -32,13 +35,52 @@ namespace API.Controllers.ManagerController
         }
 
 
+        //[HttpPost]
+        //public string Post(User newuser)
+        //{
+        //    return user.InsertUser(newuser);
+        //}
         [HttpPost]
-        public string Post(User newuser)
+       // public HttpResponseMessage Post([FromBody] User newuser)
+       public string Post([FromBody] User newuser)
         {
-            return user.InsertUser(newuser);
+            try
+            {
+                if (user.CheckUserExits(newuser.Emailaddress))
+                {
+                    //var response = new HttpResponseMessage()
+                    //{
+                    //    StatusCode = HttpStatusCode.Conflict
+                    //};
+                    return "User Already exist";
+                }
+                else
+                {
+
+                    //var x = new Mapper(null);
+                    //var use = x.Map<User>(userViewModel);
+
+                    user.InsertUser(newuser);
+
+                    //var response = new HttpResponseMessage()
+                    //{
+                    //    StatusCode = HttpStatusCode.OK
+                    //};
+
+                    // return response;
+                    return user.InsertUser(newuser);
+              }
+            }
+            catch (Exception)
+            {
+                //var response = new HttpResponseMessage()
+                //{
+                //    StatusCode = HttpStatusCode.InternalServerError
+                //};
+                return "error";
+            }
         }
 
-       
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

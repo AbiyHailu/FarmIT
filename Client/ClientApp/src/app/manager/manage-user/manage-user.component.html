@@ -2,5 +2,9 @@
 
 <button class="btn-sidebar" (click)="manage('create')"><strong>Create New User </strong></button>
 <div *ngFor="let user of users ">
-  {{user.firstName }}   Edit | Assign Permissions | Delete
+  <div class="row"></div>
+  <div class="col-3 col-lg-3">{{user.firstName }} </div>
+  <div class="col-3 col-lg-3">Edit User</div>
+  <div class="col-3 col-lg-3" (click)="assignPermissions(user.userId)">Edit Permissions</div>
+  <div class="col-3 col-lg-3">Delete </div> 
 </div>

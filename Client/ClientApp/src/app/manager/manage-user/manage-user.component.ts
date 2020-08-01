@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
-import { takeUntil } from "rxjs/operators"; 
-import { UserService } from '../../services/manger.service/userService';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AdninCrudService } from '../../services/shared.service/AdminCrudService';
+import { takeUntil } from "rxjs/operators";  
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 import { CrudComponent } from '../../crud/crud.component';
+import { CrudService } from '../../crud/service/crud.service';
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'manage-user',
@@ -20,7 +20,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private modalService: NgbModal,
-    private adminCrudService: AdninCrudService,
+    private adminCrudService:  CrudService,
   ) {
     this.users = []
     this.userService.getUsers()
@@ -34,6 +34,7 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
   }
+
   manage(create: string) {
     console.log(create)
     let builderItems = this.adminCrudService.getAddUser();
@@ -49,9 +50,11 @@ export class ManageUserComponent implements OnInit, OnDestroy {
     this.modalRef.componentInstance.type = "Add User";
     this.modalRef.result.then(result => {
       console.log('result', result) 
-      this.userService.addSUser(result) 
-   
+      this.userService.addSUser(result)  
     })
+  }
+  assignPermissions(userId) {
+    console.log(userId)
   }
  
   ngOnDestroy(): void {
