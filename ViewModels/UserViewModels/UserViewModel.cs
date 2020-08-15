@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.ManagerModels;
+using System;
 using System.Collections.Generic;
 
 namespace ViewModels.UserViewModels
@@ -11,7 +12,7 @@ namespace ViewModels.UserViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; } 
         public string Password { get; set; } 
-        public List<CompanyUserPermissionVM> Permissions { get; set; }
+        public IEnumerable<CompanyUserPermission>Permissions { get; set; }
     }
     
     public class UserListVM

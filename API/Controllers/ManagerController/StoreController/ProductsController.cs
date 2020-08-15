@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using ViewModels;
+using ViewModels.StoreViewModels;
 
-namespace API.Controllers.ManagerController
+namespace API.Controllers.ManagerController.StoreController
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -72,7 +72,16 @@ export class ManageUserComponent implements OnInit, OnDestroy {
     //check desplay permission if it has lessthan 2 or 10incse of scout
     //do not show those permission the user belong to 
   }
- 
+  editUser(userId) {
+    console.log(userId)
+    this.userService.getUserById(userId)
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => { 
+        console.log("user", res)
+        //then get all the permissions make a join on theis call on the backend 
+        //
+      })
+  }
   ngOnDestroy(): void {
     this.subject.next()
   } 

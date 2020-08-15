@@ -1,4 +1,4 @@
-﻿using Interface.UserInterface;
+﻿using Interface.UserInterface; 
 using Models.ManagerModels;
 using System;
 using System.Collections.Generic;
@@ -33,15 +33,13 @@ namespace Concrete.ManagerConcrete
         {//Todo: include permission
             var result = (from user in context.Users
                           where user.UserID == userId
-                          join permission in context.CompanyUserPermissions on userId equals permission.UserId 
                           select new UserViewModel
                           {
                               UserId = user.UserID,
                               Emailaddress = user.Emailaddress,
                               Phone = user.Phone,
                               FirstName = user.FirstName,
-                              LastName =  user.LastName, 
-                              //TOdo sort list join  => Permissions = permission.User,
+                              LastName =  user.LastName
                           }).FirstOrDefault(); 
             return result;
         } 

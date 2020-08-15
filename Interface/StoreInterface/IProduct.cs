@@ -1,7 +1,7 @@
 ﻿using Models.Store;
 using System;
 using System.Collections.Generic;
-using ViewModels;
+using ViewModels.StoreViewModels;
 
 namespace Interface.StoreInterface
 {
