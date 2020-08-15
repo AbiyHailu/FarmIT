@@ -7,96 +7,100 @@ using ViewModels.UserViewModels;
 
 namespace Concrete.ManagerConcrete
 {
-    public class UserConcrete : IUser, ICmpanyUserPermission
-    {
-        //private readonly IConfiguration configuration; 
-        private readonly AdminContext adminContext;
+    public class UserConcrete : IUser
+    { 
+        private readonly AdminContext context;
 
-        public UserConcrete(AdminContext adminContext)
+        public UserConcrete(AdminContext context)
         {
-            this.adminContext = adminContext;
-            //  this.configuration = configuration;
+            this.context = context; 
         }
         public List<UserViewModel> GetUserList()
         {
-            var result = (from user in adminContext.Users
-                              // join companyUser in adminContext.CompanyUserPermissions on user.UserID equals companyUser.UserId 
-                              // join plan in adminContext.Plans on companyUser.PlanId equals plan.Id
-                              //  join company in adminContext.Companys on companyUser.CompanyId equals company.Id
+            var result = (from user in context.Users 
                           select new UserViewModel
                           {
                               Emailaddress = user.Emailaddress,
                               FirstName = user.FirstName,
                               LastName = user.LastName,
                               Phone = user.Phone,
-                           UserId=  user.UserID
-
-                          }).ToList();
-
+                              UserId=  user.UserID 
+                          }).ToList(); 
             return result;
         }
 
-        public UserViewModel GetUserbyId(Guid companyId)
-        {
-            throw new NotImplementedException();
-        }
-        //needs improvment
+        public UserViewModel GetUserbyId(Guid userId)
+        {//Todo: include permission
+            var result = (from user in context.Users
+                          where user.UserID == userId
+                          join permission in context.CompanyUserPermissions on userId equals permission.UserId 
+                          select new UserViewModel
+                          {
+                              UserId = user.UserID,
+                              Emailaddress = user.Emailaddress,
+                              Phone = user.Phone,
+                              FirstName = user.FirstName,
+                              LastName =  user.LastName, 
+                              //TOdo sort list join  => Permissions = permission.User,
+                          }).FirstOrDefault(); 
+            return result;
+        } 
+
         public string InsertUser(User user)
+        { 
+                context.Users.Add(user);
+                context.SaveChangesAsync();
+                return user.UserID.ToString(); 
+        } 
+
+        public bool UpdateUser(User user)
         {
-            var totalUser = GetUserList().Count();
-            //total user all departments 2 except scou==10
-            if (totalUser < 22)
+            context.Entry(user).Property(x => x.Emailaddress).IsModified = true;
+            context.Entry(user).Property(x => x.Phone).IsModified = true;
+            context.Entry(user).Property(x => x.FirstName).IsModified = true;
+            context.Entry(user).Property(x => x.LastName).IsModified = true;
+            context.Entry(user).Property(x => x.Password).IsModified = true; 
+            context.Entry(user).Property(x => x.IsActive).IsModified = true;
+
+            var result = context.SaveChanges();
+            if (result > 0)
             {
-                adminContext.Users.Add(user);
-                adminContext.SaveChangesAsync();
-                return user.UserID.ToString();
+                return true;
             }
             else
             {
-                return "User Limit Exceded";
+                return false;
             }
-
         }
-
-
-        public bool UpdateUser(UserViewModel user)
-        {
-            throw new NotImplementedException();
-        }
+         
         public bool DeleteUser(Guid userId)
         {
-            throw new NotImplementedException();
-        }
+            var userToRemove = (from user in context.Users
+                              where user.UserID == userId
+                              select user).FirstOrDefault();
+            if (userToRemove != null)
+            {
+                context.Users.Remove(userToRemove);
+                var result = context.SaveChanges();
 
-        public void InsertCompanyUserPermission(CompanyUserPermissionVM companyUserPermission)
-        {
-            throw new NotImplementedException();
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-
-        public bool UpdateCompanyUserPermission(CompanyUserPermissionVM companyUserPermission)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<CompanyUserPermissionVM> GetCompanyUserPermissionList()
-        {
-            throw new NotImplementedException();
-        }
-
-        public CompanyUserPermissionVM GetCompanyUserPermissionbyId(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteCompanyUserPermission(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool CheckUserExits(string emailaddress)
         {
-            var result = (from user in adminContext.Users
-                          where user.Emailaddress== emailaddress
+            var result = (from user in context.Users
+                          where user.Emailaddress == emailaddress
                           select user).Count();
 
             return result > 0 ? true : false;

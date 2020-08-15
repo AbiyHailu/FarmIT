@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from '../../crud/crud.component';
 import { CrudService } from '../../crud/service/crud.service';
 import { UserService } from './service/user.service';
-
+import { SubscriptionService } from '../../admin/subscription/service/subscription.service'; 
 @Component({
   selector: 'manage-user',
   styleUrls: ['manage-user.component.css'], 
@@ -20,7 +20,10 @@ export class ManageUserComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private modalService: NgbModal,
-    private adminCrudService:  CrudService,
+    private adminCrudService: CrudService,
+    private subscriptionService: SubscriptionService,
+ //   private JwtDecodeService: JwtDecodeService,
+  
   ) {
     this.users = []
     this.userService.getUsers()
@@ -53,8 +56,21 @@ export class ManageUserComponent implements OnInit, OnDestroy {
       this.userService.addSUser(result)  
     })
   }
+
+  subscriptions
   assignPermissions(userId) {
     console.log(userId)
+    //get company id
+    let data = localStorage.getItem('authToken');
+     
+    console.log("data", data)
+    // this.subscriptionService.getSubscriptionByCompnyId()
+   // this.subscriptions =
+
+    //get planIds
+    //gget userpermission
+    //check desplay permission if it has lessthan 2 or 10incse of scout
+    //do not show those permission the user belong to 
   }
  
   ngOnDestroy(): void {

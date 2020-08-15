@@ -1,3 +1,5 @@
+using API.Mappings;
+using AutoMapper;
 using Concrete;
 using Concrete.AdminConcrete;
 using Concrete.ManagerConcrete;
@@ -15,7 +17,7 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Models.AdminModels;
 using System;
-using System.Text;
+using System.Text; 
 
 namespace API
 {
@@ -56,6 +58,7 @@ namespace API
                 config.AddPolicy(Policies.User, Policies.UserPolicy());
             });
 
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<ISubscription, SubscriptionConcrete>();
             services.AddTransient<IPlan, PlanConcrete>();
             services.AddTransient<ICompany, CompanyConcrete>();
@@ -65,6 +68,11 @@ namespace API
             {
                 configuration.RootPath = "../Client/ClientApp/dist";
             });
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile<ViewModelToModelMapper>();
+            });
+            var mapper = new Mapper(config);
+            services.AddAutoMapper(typeof(Startup));
         }  
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

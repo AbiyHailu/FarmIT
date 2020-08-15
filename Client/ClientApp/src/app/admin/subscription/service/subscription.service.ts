@@ -16,6 +16,10 @@ export class SubscriptionService {
     return <Observable<any>>this.http.get("/api/subscription/" + id);
   }
 
+  getSubscriptionByCompnyId(id: any): Observable<Subscription> {
+    return <Observable<any>>this.http.get("/api/subscription/", id);
+  }
+
   addSubscription(subscription: Subscription): Observable<any> {
     return <Observable<any>>this.http.post("/api/subscription", subscription);
   }

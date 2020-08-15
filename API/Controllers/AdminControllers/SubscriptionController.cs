@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using ViewModels;
 using ViewModels.AdminViewModels;
 
 namespace API.Controllers.AdminControllers
@@ -30,7 +29,7 @@ namespace API.Controllers.AdminControllers
         }
          
         [HttpGet("{id}")]
-        public SubscriptionViewModel Get(int id)
+        public SubscriptionViewModel Get(Guid id)
         {
             try
             {
@@ -41,7 +40,19 @@ namespace API.Controllers.AdminControllers
                 throw;
             }
         }
-         
+
+        [HttpGet("{id}")]
+        public List<SubscriptionListViewModel> GetByCompanyId(Guid id)
+        {
+            try
+            {
+                return subscription.GetSubscriptionbyCompanyId(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         [HttpPost]
         public HttpResponseMessage Post([FromBody] SubscriptionViewModel subscriptionViewModel)
         {

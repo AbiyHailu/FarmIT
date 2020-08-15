@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ViewModels.UserViewModels
 {
@@ -10,15 +11,16 @@ namespace ViewModels.UserViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; } 
         public string Password { get; set; } 
-        public string Permissions { get; set; }
+        public List<CompanyUserPermissionVM> Permissions { get; set; }
     }
+    
     public class UserListVM
     {
         public string Emailaddress { get; set; }
         public string Phone { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }  
-        public string Permissions { get; set; }
+        public string Password { get; set; }
     }
      
     public class UserLoginVM

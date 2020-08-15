@@ -10,8 +10,10 @@ namespace Interface.AdminInterface
     {
         void InsertSubscription(Subscription plan);
         List<SubscriptionListViewModel> GetSubscriptionList();
+        List<SubscriptionListViewModel> GetSubscriptionbyCompanyId(Guid companyId);
         bool CheckPlanExits( Guid planName);
-        SubscriptionViewModel GetSubscriptionbyId(int subscriptionId);
+        SubscriptionViewModel GetSubscriptionbyId(Guid subscriptionId); 
+       
         bool DeleteSubscription(Guid subscriptionId);
         bool UpdateSubscription(Subscription subscription);
     }

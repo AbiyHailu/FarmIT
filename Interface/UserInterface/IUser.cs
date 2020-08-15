@@ -7,11 +7,11 @@ namespace Interface.UserInterface
 {
     public interface IUser
     {
-        string InsertUser(User  User); 
+        string InsertUser(User User); 
         List<UserViewModel> GetUserList();
-        UserViewModel GetUserbyId(Guid companyId);
+        UserViewModel GetUserbyId(Guid userId);
+        bool UpdateUser(User user);
         bool DeleteUser(Guid userId);
-        bool UpdateUser(UserViewModel user);
         bool CheckUserExits(string emailaddress);
     }
 }

@@ -41,12 +41,7 @@ namespace Concrete.AdminConcrete
         //        paramater.Add("@RecStatus", plan.RecStatus);
         //        var value = con.Query<int>("sprocPlanMasterInsertUpdateSingleItem", paramater, null, true, 0, commandType: CommandType.StoredProcedure);
         //    }
-        //}
-
-
-
-
-       
+        //} 
 
         //    public bool UpdatePlanMaster(PlanMaster planMaster)
         //    {
@@ -170,13 +165,37 @@ namespace Concrete.AdminConcrete
                           }).ToList();
 
             return result;
-        }     
+        }
+        public  List<SubscriptionListViewModel> GetSubscriptionbyCompanyId(Guid companyId)
+        {
+            var result = (from subscription in context.Subscriptions 
+                          where subscription.CompanyId == companyId
+                          join plan in context.Plans on subscription.PlanId equals plan.Id
+                          join company in context.Companys on subscription.CompanyId equals company.Id 
+                        
+                          select new SubscriptionListViewModel
+                          {
+                              PlanId = subscription.PlanId,
+                              CompanyId = subscription.CompanyId, 
+                              PlanName = plan.PlanName
+
+                          }).ToList();
+
+            return result;
+        }
+
+
         public bool CheckPlanExits(Guid planName)
         {
             throw new NotImplementedException();
         }
          
         public bool DeleteSubscription(Guid subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SubscriptionViewModel GetSubscriptionbyId(Guid subscriptionId)
         {
             throw new NotImplementedException();
         }

@@ -36,9 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ClientApp\src\app\shared.service\AdminCrudService.ts">
-      <SubType>Code</SubType>
-    </None>
     <None Update="ClientApp\src\app\shared.service\AuthService.ts">
       <SubType>Code</SubType>
     </None>

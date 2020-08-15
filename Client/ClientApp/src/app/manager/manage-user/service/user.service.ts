@@ -38,18 +38,15 @@ export class UserService {
     //      console.log(res)
     //  }) 
     return <Observable<any>><any>this.http.post("/api/user", usermodel)
+      .pipe(catchError(this.handleError))
       .subscribe(res => {
           console.log(res)
       }) 
    
-  }
-   
-
+  } 
   editUser(user: User): Observable<any> {
     return <Observable<any>>this.http.put("/api/user/" + user.userId, user);
-  }
-
-
+  } 
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

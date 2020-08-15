@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.ManagerModels;
+using System;
 using System.Collections.Generic;
 using ViewModels.UserViewModels;
 
@@ -6,8 +7,8 @@ namespace Interface.UserInterface
 {
     public interface  ICmpanyUserPermission
     { 
-        void InsertCompanyUserPermission(CompanyUserPermissionVM companyUserPermission);
-        bool UpdateCompanyUserPermission(CompanyUserPermissionVM companyUserPermission);
+        string InsertCompanyUserPermission(CompanyUserPermission companyUserPermission);
+        bool UpdateCompanyUserPermission(CompanyUserPermission companyUserPermission);
         List<CompanyUserPermissionVM> GetCompanyUserPermissionList();
         CompanyUserPermissionVM GetCompanyUserPermissionbyId(Guid Id);
         bool DeleteCompanyUserPermission(Guid  Id);
