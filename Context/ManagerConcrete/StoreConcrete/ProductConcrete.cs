@@ -51,7 +51,7 @@ namespace Concrete.ManagerConcrete.StoreConcrete
             return product.Id.ToString();
         }
 
-        public bool UpdateProduct(ProductViewModel product)
+        public bool UpdateProduct(Product  product)
         {
             context.Entry(product).Property(x => x.Name).IsModified = true;
             context.Entry(product).Property(x => x.Category).IsModified = true;
