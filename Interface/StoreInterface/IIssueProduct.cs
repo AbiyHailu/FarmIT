@@ -10,8 +10,7 @@ namespace Interface.StoreInterface
         string InsertIssuedProduct(IssueProduct issuedProduct);
         List<IssuedProductViewModel> GetIssuedProductList();
         IssuedProductViewModel GetIssuedProductbyId(Guid issuedProductId);
-        bool UpdateIssuedProduct(IssuedProductViewModel issuedproduct);
+        bool UpdateIssuedProduct(IssueProduct  issuedproduct);
         bool DeleteIssuedProduct(Guid issuedProductId);
-        bool CheckIssuedProductExits(Guid id);//ToDO: id or name??
     }
 }

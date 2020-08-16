@@ -65,7 +65,28 @@ namespace Concrete.ManagerConcrete
         //Todo: make for each user, company and plan when you need it 
         public bool DeleteCompanyUserPermission(Guid Id)
         {
+            //var PermissionToRemove = (from issueProduct in context.IssueProducts
+            //                            where issueProduct.Id == issuedProductId
+            //                            select issueProduct).FirstOrDefault();
+            //if (IssueProductToRemove != null)
+            //{
+            //    context.IssueProducts.Remove(IssueProductToRemove);
+            //    var result = context.SaveChanges();
+
+            //    if (result > 0)
+            //    {
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    return false;
+            //}   
             throw new NotImplementedException();
-        } 
+        }
     }
 }

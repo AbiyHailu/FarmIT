@@ -10,7 +10,7 @@ namespace Interface.StoreInterface
         string InsertProduct(Product product);
         List<ProductViewModel> GetProductList();
         ProductViewModel GetProductbyId(Guid productId);
-        bool UpdateProduct(ProductViewModel product);
+        bool UpdateProduct(Product  product);
         bool DeleteProduct(Guid productId);
         bool CheckProductExits(string productname);
     }

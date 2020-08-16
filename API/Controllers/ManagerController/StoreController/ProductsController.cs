@@ -1,8 +1,11 @@
-﻿using Interface.StoreInterface;
+﻿using AutoMapper;
+using Interface.StoreInterface;
 using Microsoft.AspNetCore.Mvc;
+using Models.Store;
 using System;
 using System.Collections.Generic;
-using ViewModels;
+using System.Net;
+using System.Net.Http; 
 using ViewModels.StoreViewModels;
 
 namespace API.Controllers.ManagerController.StoreController
@@ -11,10 +14,12 @@ namespace API.Controllers.ManagerController.StoreController
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        IMapper mapper;
         private IProduct product;
-        public ProductsController(IProduct product)
+        public ProductsController(IMapper mapper, IProduct product)
         {
-            this.product = product; 
+            this.product = product;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -22,26 +27,111 @@ namespace API.Controllers.ManagerController.StoreController
         {
             return product.GetProductList();
         }
-         
+
         [HttpGet("{id}")]
         public ProductViewModel Get(Guid id)
         {
             return product.GetProductbyId(id);
         }
-         
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public HttpResponseMessage Post([FromBody] Product prod)
         {
-        } 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (product.CheckProductExits(prod.Name))
+                    {
+                        var response = new HttpResponseMessage()
+                        {
+                            StatusCode = HttpStatusCode.Conflict
+                        };
+
+                        return response;
+                    }
+
+                    else
+                    {
+                        var newProd = mapper.Map<Product>(prod);
+                        product.InsertProduct(newProd);
+
+                        var response = new HttpResponseMessage()
+                        {
+                            StatusCode = HttpStatusCode.OK
+                        };
+
+                        return response;
+                    }
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+
+                    return response;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public HttpResponseMessage Put(Guid id, [FromBody] Product value)
         {
+            try
+            {
+                var updatedProduct = mapper.Map<Product>(value);
+                product.UpdateProduct(updatedProduct);
+
+                var response = new HttpResponseMessage()
+                {
+                    StatusCode = HttpStatusCode.OK
+                };
+
+                return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
-         
+
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public HttpResponseMessage Delete(Guid id)
         {
+            try
+            {
+                var result = product.DeleteProduct(id);
+
+                if (result)
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                    return response;
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    return response;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

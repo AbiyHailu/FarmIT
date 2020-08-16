@@ -1,68 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using AutoMapper;
+﻿using AutoMapper;
 using Interface.StoreInterface;
 using Microsoft.AspNetCore.Mvc;
 using Models.Store;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using ViewModels.StoreViewModels;
 
 namespace API.Controllers.ManagerController.StoreController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IssuedProductsController : ControllerBase
+    public class StoreBalanceController : ControllerBase
     {
-        private readonly IMapper mapper;
-        private IIssueProduct issueProduct;
-        public IssuedProductsController(IMapper mapper, IIssueProduct isueProduct)
+        IMapper mapper;
+        private IStoreBalance  storeBalance;
+        public StoreBalanceController(IMapper mapper, IStoreBalance  storeBalance)
         {
-            this.issueProduct = isueProduct; 
             this.mapper = mapper;
+            this.storeBalance = storeBalance;
         }
-
         [HttpGet]
-        public IEnumerable<IssuedProductViewModel> Get()
+        public IEnumerable<StoreBalanceViewModel> Get()
         {
-            return issueProduct.GetIssuedProductList();
+            return storeBalance.GetStoreBalanceList();
         }
          
         [HttpGet("{id}")]
-        public IssuedProductViewModel Get(Guid id)
+        public StoreBalanceViewModel Get(Guid id)
         {
-            return issueProduct.GetIssuedProductbyId(id);
+            return storeBalance.GetStoreBalancebyProductId(id);
         }
          
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] IssuedProductViewModel value)
+        public HttpResponseMessage Post([FromBody] string value)
         {
             try
             {
-                var newIssue = mapper.Map<IssueProduct>(value);
-                issueProduct.InsertIssuedProduct(newIssue);
-
+                var newBalance = mapper.Map<StoreBalance>(value);
+                storeBalance.InsertStoreBalance(newBalance);
                 var response = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK
                 };
 
-                return response; 
+                return response;
             }
             catch (Exception)
             {
 
                 throw;
-            } 
+            }
+
         }
          
         [HttpPut("{id}")]
-        public HttpResponseMessage Put(Guid id, [FromBody] IssuedProductViewModel value)
+        public HttpResponseMessage Put(int id, [FromBody] StoreBalanceViewModel value)
         {
             try
             {
-                var updatedIssue = mapper.Map<IssueProduct>(value);
-                issueProduct.UpdateIssuedProduct( updatedIssue);
+                var updatedBalance = mapper.Map<StoreBalance>(value);
+                storeBalance.UpdateStoreBalance(updatedBalance);
 
                 var response = new HttpResponseMessage()
                 {
@@ -82,8 +81,8 @@ namespace API.Controllers.ManagerController.StoreController
         public HttpResponseMessage Delete(Guid id)
         {
             try
-            { 
-                var result = issueProduct.DeleteIssuedProduct(id);
+            {
+                var result = storeBalance.DeleteStoreBalance(id);
 
                 if (result)
                 {

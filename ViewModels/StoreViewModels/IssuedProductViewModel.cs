@@ -10,5 +10,6 @@ namespace ViewModels.StoreViewModels
         public int Amount { get; set; }
         public Guid DepartmentId { get; set; }
         public string Reason { get; set; }
+        public string ProductName { get; set; }
     }
 }

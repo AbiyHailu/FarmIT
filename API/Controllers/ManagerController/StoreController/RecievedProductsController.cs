@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using AutoMapper;
 using Interface.StoreInterface;
 using Microsoft.AspNetCore.Mvc;
@@ -12,57 +14,59 @@ namespace API.Controllers.ManagerController.StoreController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IssuedProductsController : ControllerBase
+    public class RecievedProductsController : ControllerBase
     {
         private readonly IMapper mapper;
-        private IIssueProduct issueProduct;
-        public IssuedProductsController(IMapper mapper, IIssueProduct isueProduct)
+        private readonly IRecieveProduct recieveProduct;
+
+        public RecievedProductsController(IRecieveProduct recieveProduct, IMapper mapper)
         {
-            this.issueProduct = isueProduct; 
             this.mapper = mapper;
+            this.recieveProduct = recieveProduct;
         }
 
         [HttpGet]
-        public IEnumerable<IssuedProductViewModel> Get()
+        public IEnumerable<RecievedProductViewModel> Get()
         {
-            return issueProduct.GetIssuedProductList();
+            return recieveProduct.GetRecievedProductList();
         }
          
+        //TODO: also add filter by date etc... also for issued 
         [HttpGet("{id}")]
-        public IssuedProductViewModel Get(Guid id)
+        public RecievedProductViewModel Get(Guid id)
         {
-            return issueProduct.GetIssuedProductbyId(id);
+            return recieveProduct.GetRecievedProductbyId(id);
         }
          
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] IssuedProductViewModel value)
+        public HttpResponseMessage Post([FromBody] string value)
         {
             try
             {
-                var newIssue = mapper.Map<IssueProduct>(value);
-                issueProduct.InsertIssuedProduct(newIssue);
+                var newRecieve = mapper.Map<RecieveProduct>(value);
+                recieveProduct.InsertRecieveddProduct(newRecieve);
 
                 var response = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK
                 };
 
-                return response; 
+                return response;
             }
             catch (Exception)
-            {
-
+            { 
                 throw;
-            } 
+            }
+
         }
          
         [HttpPut("{id}")]
-        public HttpResponseMessage Put(Guid id, [FromBody] IssuedProductViewModel value)
+        public HttpResponseMessage Put(Guid id, [FromBody] string value)
         {
             try
             {
-                var updatedIssue = mapper.Map<IssueProduct>(value);
-                issueProduct.UpdateIssuedProduct( updatedIssue);
+                var updatedRecieve= mapper.Map<RecieveProduct>(value);
+                recieveProduct.UpdateRecievedProduct(updatedRecieve);
 
                 var response = new HttpResponseMessage()
                 {
@@ -82,8 +86,8 @@ namespace API.Controllers.ManagerController.StoreController
         public HttpResponseMessage Delete(Guid id)
         {
             try
-            { 
-                var result = issueProduct.DeleteIssuedProduct(id);
+            {
+                var result = recieveProduct.DeleteRecievedProduct(id);
 
                 if (result)
                 {

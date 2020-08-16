@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace Models.Store
+namespace ViewModels.StoreViewModels
 {
-    public class StoreBalance
+    public class StoreBalanceViewModel
     {
-
-        [Key]
         public Guid ProductId { get; set; }
         public DateTime BalanceDate { get; set; }
         public int Amount { get; set; }
-        public Product Products { get; set; }
+        public string ProductName { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ViewModels.StoreViewModels;
 
-namespace Concrete.ManagerConcrete
+namespace Concrete.ManagerConcrete.StoreConcrete
 {
     public class IssueProductConcrete : IIssueProduct
     {
@@ -18,6 +18,7 @@ namespace Concrete.ManagerConcrete
         {
 
             var result = (from issuedProduct in context.IssueProducts
+                          join product in context.Products on issuedProduct.Id equals product.Id 
                           select new IssuedProductViewModel
                           {
                               Id = issuedProduct.Id,
@@ -25,7 +26,9 @@ namespace Concrete.ManagerConcrete
                               ProductId = issuedProduct.ProductId,
                               DepartmentId = issuedProduct.DepartmentId,
                               Amount = issuedProduct.Amount,
-                              Reason=issuedProduct.Reason
+                              Reason=issuedProduct.Reason,
+                              ProductName = product.Name
+
                           }).ToList();
             return result;
         }
@@ -35,6 +38,7 @@ namespace Concrete.ManagerConcrete
         {
             var result = (from issuedProduct in context.IssueProducts
                           where issuedProduct.Id == issuedProductId
+                          join product in context.Products on issuedProduct.Id equals product.Id
                           select new IssuedProductViewModel
                           {
                               Id = issuedProduct.Id,
@@ -42,7 +46,8 @@ namespace Concrete.ManagerConcrete
                               ProductId = issuedProduct.ProductId,
                               DepartmentId = issuedProduct.DepartmentId,
                               Amount = issuedProduct.Amount,
-                              Reason = issuedProduct.Reason
+                              Reason = issuedProduct.Reason,
+                              ProductName = product.Name
                           }).FirstOrDefault();
             return result;
         }
@@ -55,7 +60,7 @@ namespace Concrete.ManagerConcrete
             return issuedProduct.Id.ToString();
         }
 
-        public bool UpdateIssuedProduct(IssuedProductViewModel issuedproduct)
+        public bool UpdateIssuedProduct(IssueProduct issuedproduct)
         {
             context.Entry(issuedproduct).Property(x => x.ProductId).IsModified = true;
             context.Entry(issuedproduct).Property(x => x.DepartmentId).IsModified = true;
@@ -73,19 +78,30 @@ namespace Concrete.ManagerConcrete
                 return false;
             }
         } 
-        
-        public bool CheckIssuedProductExits(Guid issuedProductId)
-        {
-            var result = (from issuedProduct in context.IssueProducts
-                          where issuedProduct.Id == issuedProductId
-                          select issuedProduct).Count();
-
-            return result > 0 ? true : false;
-        }
-
+         
         public bool DeleteIssuedProduct(Guid issuedProductId)
         {
-            throw new NotImplementedException();
+            var IssueProductToRemove = (from issueProduct in context.IssueProducts
+                                        where issueProduct.Id == issuedProductId
+                                        select issueProduct).FirstOrDefault();
+            if (IssueProductToRemove != null)
+            {
+                context.IssueProducts.Remove(IssueProductToRemove);
+                var result = context.SaveChanges();
+
+                if (result > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
-    }
+    } 
 }

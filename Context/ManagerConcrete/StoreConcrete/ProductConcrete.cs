@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq; 
 using ViewModels.StoreViewModels;
 
-namespace Concrete.ManagerConcrete
+namespace Concrete.ManagerConcrete.StoreConcrete
 {
     public class ProductConcrete : IProduct
     {
@@ -44,7 +44,8 @@ namespace Concrete.ManagerConcrete
         } 
 
         public string InsertProduct(Product product)
-        {
+        { 
+            //TODO:check if it exists by Name
             context.Products.Add(product);
             context.SaveChangesAsync();
             return product.Id.ToString();
