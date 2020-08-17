@@ -15,15 +15,16 @@ namespace API.Controllers.AdminControllers
     [ApiController]
     public class SubscriptionController : ControllerBase
     {
-
+        private readonly IMapper mapper;
         private readonly ISubscription subscription;
-        public SubscriptionController(ISubscription subscription)
-        {
+        public SubscriptionController( IMapper mapper, ISubscription subscription)
+        { 
+            this.mapper = mapper;
             this.subscription = subscription;
         }
          
         [HttpGet]
-        public IEnumerable<SubscriptionListViewModel> Get()
+        public IEnumerable<SubscriptionViewModel> Get()
         {
             return subscription.GetSubscriptionList();
         }
@@ -42,7 +43,7 @@ namespace API.Controllers.AdminControllers
         }
 
         [HttpGet("{id}")]
-        public List<SubscriptionListViewModel> GetByCompanyId(Guid id)
+        public List<SubscriptionViewModel> GetByCompanyId(Guid id)
         {
             try
             {
@@ -58,30 +59,20 @@ namespace API.Controllers.AdminControllers
         {
             try
             {
-                if (subscription.CheckPlanExits(subscriptionViewModel.PlanId))
+               
+                var companyId = User.FindFirstValue(ClaimTypes.Name);
+
+                var subcription = mapper.Map<Subscription>(subscriptionViewModel); 
+
+                subscription.InsertSubscription(subcription);
+
+                var response = new HttpResponseMessage()
                 {
-                    var response = new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.Conflict
-                    };
-                    return response;
-                }
-                else
-                {
-                    var companyId = User.FindFirstValue(ClaimTypes.Name);
+                    StatusCode = HttpStatusCode.OK
+                };
 
-                    var x = new Mapper(null);
-                    var subcription =x.Map<Subscription>(subscriptionViewModel);
-
-                    subscription.InsertSubscription(subcription);
-
-                    var response = new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.OK
-                    };
-
-                    return response;
-                }
+                return response;
+               
             }
             catch (Exception)
             {
@@ -98,31 +89,20 @@ namespace API.Controllers.AdminControllers
         {
             try
             {
-                if (subscription.CheckPlanExits(subscriptionViewModel.PlanId))
-                {
-                    var response = new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.Conflict
-                    };
-                    return response;
-                }
-                else
-                {
-                    var companyId = User.FindFirstValue(ClaimTypes.Name);
+                var companyId = User.FindFirstValue(ClaimTypes.Name);
 
-                    var x = new Mapper(null);
-                    var subcription = x.Map<Subscription>(subscriptionViewModel);
+                var subcription = mapper.Map<Subscription>(subscriptionViewModel);
 
-                    subscription.UpdateSubscription(subcription);
+                subscription.UpdateSubscription(subcription);
 
                     var response = new HttpResponseMessage()
                     {
                         StatusCode = HttpStatusCode.OK
                     };
 
-                    return response;
-                }
+                    return response; 
             }
+
             catch (Exception)
             {
                 var response = new HttpResponseMessage()
@@ -137,22 +117,29 @@ namespace API.Controllers.AdminControllers
         public HttpResponseMessage Delete(Guid id)
         {
             try
-            { 
-                subscription.DeleteSubscription(id);
-                var response = new HttpResponseMessage()
+            {
+                var result =  subscription.DeleteSubscription(id);
+                if (result)
                 {
-                    StatusCode = HttpStatusCode.OK
-                };
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
 
-                return response;
+                    return response;
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    return response;
+                }
             }
             catch (Exception)
             {
-                var response = new HttpResponseMessage()
-                {
-                    StatusCode = HttpStatusCode.InternalServerError
-                };
-                return response;
+                throw;
             }
         }
     }

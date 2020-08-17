@@ -14,8 +14,8 @@ namespace API.Controllers.ManagerController.StoreController
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        IMapper mapper;
-        private IProduct product;
+        private readonly IMapper mapper;
+        private readonly IProduct product;
         public ProductsController(IMapper mapper, IProduct product)
         {
             this.product = product;

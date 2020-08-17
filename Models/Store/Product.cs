@@ -11,7 +11,7 @@ namespace Models.Store
         public string Category { get; set; }//make it enum 
         public DateTime ExpirationDate  { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; }//TODO: add decimal thingi
         public string Metrics { get; set; }
     }
 }

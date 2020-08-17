@@ -8,7 +8,7 @@ namespace Models.AdminModels
         [Key]
         public Guid Id { get; set; }
         public string PlanName { get; set; }
-
+        public decimal Price { get; set; } 
         public ICollection<Subscription> Subscription { get; set; }
     }
 }

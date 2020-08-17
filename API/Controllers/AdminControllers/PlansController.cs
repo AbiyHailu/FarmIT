@@ -14,22 +14,23 @@ namespace API.Controllers
     [ApiController]
     public class PlansController : ControllerBase
     {
-
+        private readonly IMapper mapper;
         private readonly IPlan plan;
 
-        public PlansController(IPlan plan)
+        public PlansController(IMapper mapper, IPlan plan)
         {
             this.plan = plan;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<PlanListViewModel> Get()
+        public IEnumerable<PlanViewModel> Get()
         {
             return plan.GetPlanList();
         }
          
         [HttpGet("{id}")]
-        public PlanViewModel Get(int id)
+        public PlanViewModel Get(Guid id)
         {
             try
             {
@@ -45,30 +46,14 @@ namespace API.Controllers
         public HttpResponseMessage Post([FromBody] PlanViewModel planViewModel)
         {
             try
-            {
-                if (plan.CheckPlanExits(planViewModel.PlanId))
-                {
-                    var response = new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.Conflict
-                    };
-                    return response;
-                }
-                else
-                {
-                
-                    var x = new Mapper(null);
-                    var pln = x.Map<Plan>(planViewModel);
-
-                    plan.InsertPlan(pln);
-
+            {  
+                var pln = mapper.Map<Plan>(planViewModel);
+                plan.InsertPlan(pln);
                     var response = new HttpResponseMessage()
                     {
                         StatusCode = HttpStatusCode.OK
                     };
-
-                    return response;
-                }
+                return response; 
             }
             catch (Exception)
             {
@@ -84,22 +69,9 @@ namespace API.Controllers
         public HttpResponseMessage Put(Guid id, [FromBody] PlanViewModel planViewMode)
         {
             try
-            {
-                if (plan.CheckPlanExits(planViewMode.PlanId))
-                {
-                    var response = new HttpResponseMessage()
-                    {
-                        StatusCode = HttpStatusCode.Conflict
-                    };
-                    return response;
-                }
-                else
-                {
-
-                    var x = new Mapper(null);
-                    var pln = x.Map<Plan>(planViewMode);
-
-                    plan.InsertPlan(pln);
+            { 
+                var pln = mapper.Map<Plan>(planViewMode); 
+                plan.InsertPlan(pln);
 
                     var response = new HttpResponseMessage()
                     {
@@ -107,7 +79,7 @@ namespace API.Controllers
                     };
 
                     return response;
-                }
+             
             }
             catch (Exception)
             {
@@ -124,21 +96,29 @@ namespace API.Controllers
         {
             try
             {
-                plan.DeletePlan(id);
-                var response = new HttpResponseMessage()
-                {
-                    StatusCode = HttpStatusCode.OK
-                };
+                var result = plan.DeletePlan(id);
 
-                return response;
+                if (result)
+                {
+                    plan.DeletePlan(id);
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                    return response;
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    return response;
+                }
             }
             catch (Exception)
             {
-                var response = new HttpResponseMessage()
-                {
-                    StatusCode = HttpStatusCode.InternalServerError
-                };
-                return response;
+                throw;
             }
         }
     }

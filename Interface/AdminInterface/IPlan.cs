@@ -7,10 +7,9 @@ namespace Interface.AdminInterface
 {
     public interface IPlan
     {
-        void InsertPlan(Plan plan);
-        List<PlanListViewModel> GetPlanList();
-        bool CheckPlanExits(Guid planName);
-        PlanViewModel GetPlanbyId(int planId);
+        string InsertPlan(Plan plan);
+        List<PlanViewModel> GetPlanList(); 
+        PlanViewModel GetPlanbyId(Guid  planId);
         bool DeletePlan(Guid planId);
         bool UpdatePlan(Plan plan);
     }

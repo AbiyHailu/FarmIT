@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using ViewModels.AdminViewModels;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -14,12 +15,14 @@ namespace API.Controllers
     [ApiController]
     public class CompanysController : ControllerBase
     {
-
+        private readonly IMapper mapper;
         private readonly ICompany company;
-        public CompanysController(ICompany company)
+        public CompanysController(IMapper mapper, ICompany company)
         {
-            this.company = company;
+            this.mapper = mapper;
+            this.company = company; 
         }
+
         [HttpGet]
         public IEnumerable<CompanyViewModel> Get()
         {
@@ -28,15 +31,8 @@ namespace API.Controllers
          
         [HttpGet("{id}")]
         public CompanyViewModel Get(Guid id)
-        {
-            try
-            {
-                return company.GetCompanybyId(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        { 
+            return company.GetCompanybyId(id); 
         }
 
         [HttpPost]
@@ -51,26 +47,53 @@ namespace API.Controllers
                 return Ok("{}");
             }
             return response;
-        }
-        // PUT api/<CompanysController>/5
-        [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] string value)
-        {
-        }
+        } 
 
-        // DELETE api/<CompanysController>/5
-        [HttpDelete("{id}")]
-        public HttpResponseMessage Delete(Guid id)
+        [HttpPut("{id}")]
+        public HttpResponseMessage Put(Guid id, [FromBody] string value)
         {
             try
             {
-                company.DeleteCompany(id);
+                var updatedCompany = mapper.Map<Company>(value);
+                company.UpdateCompany(updatedCompany);
+
                 var response = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK
                 };
 
                 return response;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+         
+        [HttpDelete("{id}")]
+        public HttpResponseMessage Delete(Guid id)
+        {
+            try
+            {
+                var result = company.DeleteCompany(id);
+                if (result)
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+
+                    return response;
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    return response;
+                }
             }
             catch (Exception)
             {
