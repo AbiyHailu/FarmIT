@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Profile
 {
@@ -10,7 +8,9 @@ namespace Models.Profile
         public string Location { get; set; }
         public  string Latittude { get; set; }
         public string  Longitude { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal TotalSize { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal ProductionAreaSize { get; set; } 
     }
 }

@@ -6,7 +6,7 @@ namespace ViewModels.StoreViewModels
     {
         public Guid ProductId { get; set; }
         public DateTime BalanceDate { get; set; }
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
         public string ProductName { get; set; }
     }
 }

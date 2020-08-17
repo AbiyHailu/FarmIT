@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Store
 {
@@ -9,7 +10,8 @@ namespace Models.Store
         [Key]
         public Guid ProductId { get; set; }
         public DateTime BalanceDate { get; set; }
-        public int Amount { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
+        public decimal Amount { get; set; }
         public Product Products { get; set; }
     }
 }

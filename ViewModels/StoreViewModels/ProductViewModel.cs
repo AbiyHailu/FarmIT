@@ -9,5 +9,7 @@ namespace ViewModels.StoreViewModels
         public string Category { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
+        public string Metrics { get; set; }
     }
 }

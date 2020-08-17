@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Profile
 {
@@ -8,7 +7,9 @@ namespace Models.Profile
     {
         public Guid OpenFieldID { get; set; }
         public string Name { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Length { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Width { get; set; }
     }
 }
