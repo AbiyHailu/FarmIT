@@ -30,7 +30,6 @@ import { CommonModule } from '@angular/common';
   exports: [
     AdminComponent,
     DashboardComponent 
-  ]
-
+  ] 
 })
 export class AdminModule { }

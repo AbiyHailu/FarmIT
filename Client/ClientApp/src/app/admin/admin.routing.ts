@@ -5,14 +5,15 @@ import { DashboardComponent } from "./dashboard/dashboard.component.";
 import { CompanyComponent } from "./company/company.component";
 import { PlanComponent } from "./plan/plan.component";
 import { SubscriptionComponent } from "./subscription/subscription.component";
+import { AdminGuard } from "../shared.service/adminGuard.service";
 
 const routes: Routes = [{
-  path: 'admin', component: AdminComponent,
+  path: 'admin', component: AdminComponent, canActivate: [AdminGuard],
   children: [ 
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'company', component: CompanyComponent },
-    { path: 'plans', component:PlanComponent },
-    { path: 'subscription', component: SubscriptionComponent }, 
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard]},
+    { path: 'company', component: CompanyComponent, canActivate: [AdminGuard]},
+    { path: 'plans', component: PlanComponent, canActivate: [AdminGuard]},
+    { path: 'subscription', component: SubscriptionComponent, canActivate: [AdminGuard]}, 
   ]}
 ];
 

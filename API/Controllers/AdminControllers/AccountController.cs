@@ -25,10 +25,9 @@ namespace API.Controllers.AdminControllers
             this.company = company;
             this.config = config;
         }
-  
-      
-
+   
         [HttpPost] 
+        [Authorize(Policy = Policies.Admin)] 
         public IActionResult Register(Company newCompany)
         {
             IActionResult response = Unauthorized();
@@ -83,28 +82,6 @@ namespace API.Controllers.AdminControllers
                 signingCredentials: credentials
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-  
-
-    [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-         
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
         } 
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-         
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

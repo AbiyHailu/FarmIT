@@ -29,9 +29,9 @@ export class AuthService {
       const companyDetails = new Company();
       const decodeUserDetails = JSON.parse(window.atob(localStorage.getItem('authToken').split('.')[1]));
       companyDetails.name = decodeUserDetails.sub;
-      //companyDetails.userType = decodeUserDetails.firstName;
+      companyDetails.userType = decodeUserDetails.firstName;
       companyDetails.isLoggedIn = true;
-      //companyDetails. = decodeUserDetails.role;
+      companyDetails.userType = decodeUserDetails.role;
       this.companyData.next(companyDetails);
     }
   }

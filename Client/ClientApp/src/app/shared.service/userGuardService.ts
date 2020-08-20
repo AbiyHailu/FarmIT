@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';   
-import { AuthService } from './authService'; 
+//import { AuthService } from './authService'; 
 
 @Injectable({ providedIn: 'root' })
 export class UserGuard
@@ -25,8 +25,9 @@ export class UserGuard
   //}
 }
 export enum Role {
-  Admin = 'Admin',
-  User = 'User'
+  Admin = 'admin',
+  Manager="manager",
+  User = 'user'
 }
 
 export class User {

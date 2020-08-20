@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ClientApp\src\app\shared.service\AuthService.ts">
+    <None Update="ClientApp\src\app\shared.service\auth.service.ts">
       <SubType>Code</SubType>
     </None>
     <None Update="ClientApp\src\app\shared.service\SharedService.ts">

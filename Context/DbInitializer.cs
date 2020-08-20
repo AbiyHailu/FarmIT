@@ -55,15 +55,16 @@ namespace Concrete
                 }
                 admincontext.SaveChanges();
             }
-            if (!admincontext.Companys.Any())
+            if (!admincontext.Companys.Where(e=>e.UserType =="Admin").Any())
             {
                 var companys = new Company[]
                 {
-                    new Company{ Name="TestCompany1"},
-                    new Company{ Name="TestCompany3"},
-                    new Company{ Name="TestCompany3"},
-                    new Company{ Name="TestCompany4"},
-                    new Company{ Name="TestCompany5"}
+                    //new Company{ Name="TestCompany1"},
+                    //new Company{ Name="TestCompany3"},
+                    //new Company{ Name="TestCompany3"},
+                    //new Company{ Name="TestCompany4"},
+                    //new Company{ Name="TestCompany5"},
+                    new Company{ Name="IT4Flower", UserType ="Admin" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"}
                 };
 
                 foreach (Company c in companys)

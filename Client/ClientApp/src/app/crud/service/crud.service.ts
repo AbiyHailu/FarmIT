@@ -22,7 +22,10 @@ export class  CrudService {
 
   getAddCompany() {
     return [
-      { Binding: 'name', Label: "Company Name" }
+      { Binding: 'name', Label: "Company Name", Type: 'text' },
+      { Binding: 'emailAddress', Label: "Email Address", Type: 'text' },
+      { Binding: 'phone', Label: "Phone", Type: 'text' },
+      { Binding: 'password', Label: "Password", Type: 'text' }
     ]
   }
   getAddUser() {
