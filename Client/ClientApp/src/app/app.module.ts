@@ -36,9 +36,9 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     NgbModule,
     RouterModule.forRoot([ 
       {
-        path: 'admin', 
-        loadChildren: './admin/admin.module#AdminModule',
-        canActivate: [AdminGuard]
+        path: 'admin',
+        canActivate: [AdminGuard],
+        loadChildren: './admin/admin.module#AdminModule' 
       },
 
       {

@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\admin\register\" />
+    <Folder Include="ClientApp\src\app\NewFolder\" />
     <Folder Include="ClientApp\src\app\user\user-login\" />
   </ItemGroup>
 

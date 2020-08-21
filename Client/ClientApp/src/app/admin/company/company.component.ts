@@ -11,7 +11,7 @@ import { CrudComponent } from '../../crud/crud.component';
   styleUrls: ['company.component.css'], 
   templateUrl: './company.component.html',
 })
-export class CompanyComponent implements OnInit, OnDestroy {
+export class CompanyComponent implements  OnDestroy {
 
   subject: Subject<void> = new Subject();
   companys: any 
@@ -30,11 +30,7 @@ export class CompanyComponent implements OnInit, OnDestroy {
         console.log("this.company", this.companys)
       })
   }
-
-  ngOnInit(): void {
-
-  }
-
+   
   createNewCompany(create:string) {
     console.log(create)
     let builderItems = this.adminCrudService.getAddCompany(); 

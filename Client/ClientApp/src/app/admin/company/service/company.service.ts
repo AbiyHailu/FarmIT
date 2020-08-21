@@ -32,6 +32,5 @@ export class Company {
   password: any
   phone:any
   userType: any
-  isLoggedIn: boolean
-
+  isLoggedIn: boolean 
 }

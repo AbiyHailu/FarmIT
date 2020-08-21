@@ -15,7 +15,6 @@ export class AdminComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router
   ) {
-      console.log("test admin")
   }
 
   ngOnInit(): void {

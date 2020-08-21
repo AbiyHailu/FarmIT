@@ -11,8 +11,8 @@
         data-target=".navbar-collapse"
         aria-label="Toggle navigation"
         [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
+        (click)="toggle()" >
+
         <span class="navbar-toggler-icon"></span>
       </button>
       <div
@@ -26,8 +26,11 @@
           <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">About</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+          <li *ngIf="!payload" class="nav-item" (click)="logIn()" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Login</a>
+          </li>
+          <li *ngIf="payload" class="nav-item" (click)="logOut()" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Logout</a>
           </li>
         </ul>
       </div>

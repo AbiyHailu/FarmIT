@@ -21,9 +21,10 @@ namespace Concrete.AdminConcrete
         public List<CompanyViewModel> GetCompanyList()
         {
             var result = (from company in context.Companys
+                          //TODO: join Plans here 
+                         // join subscription in context.Subscriptions on issuedProduct.Id equals product.Id
                           select new CompanyViewModel
-                          {
-                              Id = company.Id,
+                          {  Id = company.Id,
                               Name = company.Name,
                               Password=company.Password,
                               UserType=company.UserType,
