@@ -25,8 +25,7 @@ namespace Concrete.AdminConcrete
                               PlanId = subscription.PlanId,
                               CompanyId = subscription.CompanyId,
                               CompanyName = company.Name,
-                              PlanName = plan.PlanName
-
+                              PlanName = plan.PlanName 
                           }).ToList();
 
             return result;
@@ -48,7 +47,7 @@ namespace Concrete.AdminConcrete
 
             return result;
         }
-
+      
         public string InsertSubscription(Subscription subscription)
         {
             context.Subscriptions.Add(subscription);

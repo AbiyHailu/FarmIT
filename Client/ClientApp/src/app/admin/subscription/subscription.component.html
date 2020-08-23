@@ -1,11 +1,36 @@
-
-<button class="btn-sidebar" (click)="manage('create')"><strong>Create New Subscription </strong></button> 
-<div *ngFor="let subscription of subscriptions| keyvalue">
-  <div *ngFor="let detail of  subscription.value | keyvalue">
-    <strong>{{detail.key}} </strong>
-    <div *ngFor="let item of  detail.value  | keyvalue">
-      {{item.value.planName }} Renew | Cancle
-    </div>
+<br />
+<div class="container-fluid">
+  <button class="btn btn-success btn-create"
+          (click)="manage('create')">
+    <strong>Create New. Hoorra...!! </strong>
+  </button> 
+  <div *ngFor="let subscription of subscriptions| keyvalue">
+    <table class="table table-sm" *ngFor="let detail of  subscription.value | keyvalue">
+      <thead class="thead-dark">
+        {{detail.key}}
+      </thead>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Plan Name</th>
+          <th scope="col">subscription Date</th>
+          <th scope="col"> End Date</th>
+          <th scope="col"> Manage</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of detail.value | keyvalue;  let i = index">
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td> {{item.value.planName }} </td>
+          <td> {{item.value.subscriptionDate }}</td>
+          <td> {{item.value.subscriptionEndDate }}</td>
+          <td>
+            <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+            <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+          </td>
+      </tbody>
+    </table>
   </div>
 </div>
+
 

@@ -12,7 +12,8 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Phone</th>
+        <th scope="col">Phone</th> 
+        <th scope="col">Manage</th>
       </tr>
     </thead>
     <tbody *ngFor="let company of companys;  let i = index">
@@ -21,8 +22,9 @@
         <td>{{company.name}}</td>
         <td>{{company.emailaddress}}</td>
         <td>{{company.phone}}</td>
-      </tr>
-    </tbody>
+        <td><span class="span-manage" (click)=" editCompany(company.id)">Edit</span> |
+        <span class="span-manage" (click)="companyDetails(company.id)">Detail</span></td>
+</tbody>
   </table>
 </div>
 

@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\admin\register\" />
-    <Folder Include="ClientApp\src\app\NewFolder\" />
     <Folder Include="ClientApp\src\app\user\user-login\" />
   </ItemGroup>
 
@@ -40,7 +39,7 @@
     <None Update="ClientApp\src\app\shared.service\auth.service.ts">
       <SubType>Code</SubType>
     </None>
-    <None Update="ClientApp\src\app\shared.service\SharedService.ts">
+    <None Update="ClientApp\src\app\shared.service\sharedData.service.ts">
       <SubType>Code</SubType>
     </None>
   </ItemGroup>

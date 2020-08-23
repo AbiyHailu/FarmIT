@@ -1,34 +1,31 @@
 <div class="modal-header">
   <strong>{{type}}</strong>
 </div>
-<div class="modal-body"> 
-    <form *ngIf="enablform" [formGroup]="dataForm" autocomplete="new-password">
-      <div *ngFor="let layoutElement of data">
-        <label *ngIf="layoutElement.Label" [attr.for]="layoutElement" class="layoutelement-label">
-          <strong>{{layoutElement.Label }}</strong>
-        </label>
-        <div [ngSwitch]="layoutElement.Type" class="input-group"> 
-          <input *ngSwitchCase="'text'" class="form-control-input input-border" autocomplete="off"
-                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="text" >
+<div class="modal-body">
+  <form *ngIf="enablform" [formGroup]="dataForm" autocomplete="new-password">
+    <div *ngFor="let layoutElement of data">
+      <label *ngIf="layoutElement.Label" [attr.for]="layoutElement" class="layoutelement-label">
+        <strong>{{layoutElement.Label }}</strong>
+      </label>
+      <div [ngSwitch]="layoutElement.Type" class="input-group">
+        <input *ngSwitchCase="'text'" class="form-control" autocomplete="off"
+               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="text">
 
-          <input *ngSwitchCase="'number'" class="form-control input-border"
-                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="number" >
+        <input *ngSwitchCase="'number'" class="form-control"
+               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="number">
 
-          <input *ngSwitchCase="'textDate'" class="form-control input-border"
-                 [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-                 [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="date" > 
-        </div>
+        <input *ngSwitchCase="'textDate'" class="form-control"
+               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
+               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="date">
       </div>
-      <br/>
-      <div class="modal-footer">
-        <button  (click)="submitData(dataForm)" class="btn btn-submit">
-          {{'Submit'}}
-        </button>
-        <button  type="button" class="btn btn-submit" (click)="cancel()">
-          {{'Cancel' }}
-        </button>
-      </div>
-    </form> 
+    </div>
+    <button type="button" class="btn btn-primary btn-submit" (click)="cancel()">
+      {{'Cancel' }}
+    </button>
+    <button (click)="submitData(dataForm)" class="btn btn-primary btn-submit">
+      {{'Submit'}}
+    </button> 
+  </form>
 </div>

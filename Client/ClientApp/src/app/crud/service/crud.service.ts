@@ -7,7 +7,7 @@ export class  CrudService {
 
   getAddPlanItems() {
     return [
-      { Binding: 'planName', Type: 'text', Label: "Plan Namme" }
+      { Binding: 'planName', Type: 'text', Label: "Plan Name" }
     ]
   }
 

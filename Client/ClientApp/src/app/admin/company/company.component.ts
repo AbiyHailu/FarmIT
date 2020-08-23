@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators"; 
-import { CompanyService } from './service/company.service';
+import { CompanyService, Company } from './service/company.service';
 import { CrudService } from '../../crud/service/crud.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from '../../crud/crud.component';
+import { SubscriptionService } from '../subscription/service/subscription.service';
  
 @Component({
   selector: 'company',
@@ -14,7 +15,7 @@ import { CrudComponent } from '../../crud/crud.component';
 export class CompanyComponent implements  OnDestroy {
 
   subject: Subject<void> = new Subject();
-  companys: any 
+  companys: Company[]; 
   modalRef: any
 
   constructor(
@@ -22,12 +23,13 @@ export class CompanyComponent implements  OnDestroy {
     private adminCrudService: CrudService, 
     private modalService: NgbModal
   ) {
-    this.companys = []
+
+    this.companys = [] 
     this.companyervice.getCompanys()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        this.companys = res;
-        console.log("this.company", this.companys)
+        console.log('res', res)
+        this.companys = res; 
       })
   }
    
@@ -46,6 +48,14 @@ export class CompanyComponent implements  OnDestroy {
     this.modalRef.result.then(result => {
       console.log('result', result)
     })
+  }
+
+  editCompany(companyId) {
+    console.log("create a methode for edit", companyId)
+  }
+
+  companyDetails(companyId) {
+    console.log("create a methode for Detail Desplay", companyId)
   }
 
   ngOnDestroy(): void {

@@ -43,8 +43,7 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
 
   manage(create: string) {
     console.log(create)
-    let builderItems = this.adminCrudService.getAddSubscriptionItems(); 
-    console.log('builderItems', builderItems)
+    let builderItems = this.adminCrudService.getAddSubscriptionItems();  
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
       size: 'md',
@@ -58,7 +57,14 @@ export class SubscriptionComponent implements OnInit, OnDestroy{
       console.log('result',result)
     })
   }
-    
+
+  editSubscription(subscriptionid, companyId ) {
+    console.log("create a methode for Detail Desplay", subscriptionid,  companyId)
+  }
+
+  subscriptionDetails(subscriptionid, companyId) {
+    console.log("create a methode for Detail Desplay", subscriptionid, companyId)
+  }
   ngOnDestroy(): void {
     this.subject.next()
   }

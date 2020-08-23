@@ -16,10 +16,14 @@ export class NavMenuComponent {
     private authService: AuthService,
     private jwtDecoder: JwtDecodeService 
   ) { 
-    let data = this.jwtDecoder.jwtDecode(localStorage.getItem('authToken'))
-    if (data) { 
+    let data = this.checkUser();
+    if (data) {
+      console.log(data)
       this.payload = data['role'];
     } 
+  }
+  checkUser() {
+    return this.jwtDecoder.jwtDecode(localStorage.getItem('authToken')) 
   }
 
   collapse() {

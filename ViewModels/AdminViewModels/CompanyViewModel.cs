@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Models.AdminModels;
+using System;
+using System.Collections.Generic;
 
 namespace ViewModels.AdminViewModels
 {
@@ -9,6 +11,6 @@ namespace ViewModels.AdminViewModels
         public string Emailaddress { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
-        public string UserType { get; set; }
+        public string UserType { get; set; } 
     }
 }

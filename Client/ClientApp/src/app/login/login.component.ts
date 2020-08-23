@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         data => {
           let role = data.userDetails.userType
           if (role && role.toLowerCase() === 'admin') { 
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/admin/dashboard']);
           } else if (role && role.toLowerCase() === 'manager') {
             this.router.navigate(['/manager']);
           } else if (role && role.toLowerCase() === 'user') {

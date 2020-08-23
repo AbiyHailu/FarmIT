@@ -1,6 +1,30 @@
+ <br />
+<div class="container-fluid">
+  <button class="btn btn-success btn-create"
+          (click)="createNewPlan('create')">
+    <strong>Create New. Hoorra...!! </strong>
+  </button>
+  <br />
+  <br />
+  <table class="table table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Plan Name</th>
+        <th scope="col">Price</th> 
+        <th scope="col"> Manage</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let plan of plans;  let i = index">
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td> {{plan.planName}}</td>
+        <td> {{plan.price}}</td> 
+        <td>
+          <span class="span-manage" (click)="editPlan(plan.planId)">Edit</span> |
+          <span class="span-manage" (click)="planDetails(plan.planId)">Detail</span>
+        </td>
+</tbody>
+  </table>
+</div>
 
- 
-    <div *ngFor="let plan of plans">
-     {{plan.planName}}
-    </div>   
- 

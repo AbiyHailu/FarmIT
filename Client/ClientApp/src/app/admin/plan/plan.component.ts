@@ -4,6 +4,7 @@ import { takeUntil } from "rxjs/operators";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  
 import { CrudService } from '../../crud/service/crud.service';
 import { PlanService } from './service/plan.services';
+import { CrudComponent } from '../../crud/crud.component';
 
 @Component({
   selector: 'plan',
@@ -28,6 +29,29 @@ export class PlanComponent implements OnInit, OnDestroy {
         this.plans = res;
         console.log("this.plans", this.plans)
       })
+  }
+  createNewPlan() {
+    let builderItems = this.adminCrudService.getAddPlanItems();
+    this.modalRef = this.modalService.open(CrudComponent, {
+      centered: true,
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    this.modalRef.componentInstance.data = builderItems;
+    this.modalRef.componentInstance.type = "Add Company";
+    this.modalRef.result.then(result => {
+      console.log('result', result)
+    })
+  }
+
+  editPlan(planId) {
+    console.log("create a methode for edit", planId)
+  }
+
+  planDetails(planId) {
+    console.log("create a methode for Detail Desplay", planId)
   }
 
   ngOnInit(): void { 
