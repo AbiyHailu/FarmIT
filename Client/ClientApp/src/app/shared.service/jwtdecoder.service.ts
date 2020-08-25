@@ -8,7 +8,7 @@ export class JwtDecodeService {
       token.raw = t;
       token.header = JSON.parse(window.atob(t.split('.')[0]));
       token.payload = JSON.parse(window.atob(t.split('.')[1]));
-      return (token.payload)
+      return (token.payload )
     } else {
       return null;
     } 

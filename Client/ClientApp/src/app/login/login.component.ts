@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';      
 import { AuthService } from '../shared.service/auth.service';
+import { SharedDataService } from '../shared.service/sharedData.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService 
+    private authService: AuthService,
+    private sharedDataService: SharedDataService
   ) {  }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .pipe(first())
       .subscribe(
-        data => {
+        data => {  
           let role = data.userDetails.userType
           if (role && role.toLowerCase() === 'admin') { 
             this.router.navigate(['/admin/dashboard']);

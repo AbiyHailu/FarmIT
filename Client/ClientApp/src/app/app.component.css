@@ -3,14 +3,13 @@
   width: 100%;
 }
 
-.row-head {
-  height: 10vh;
+.row-head { 
   background: black;
   color: white
 }
 
 .row-body {
-  height: 82vh;
+  height: 92vh;
   padding: 0% !important;
 }
 

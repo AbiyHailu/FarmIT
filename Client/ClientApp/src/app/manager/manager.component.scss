@@ -1,22 +1,111 @@
 body {
 }
 
-.sidebar {
-  z-index: 1;
-  left: 0;
-  overflow-x: hidden;
-  border-right-color: black;
-  height: 100%;
-  padding: 0% !important;
-  margin: 0% !important;
+.container-fluid {
+  background: rgb(248, 248, 248);
 }
 
-@media screen and (max-height: 450px) {
-  .sidebar {
-    padding-top: 15px;
+.row {
+  background: rgb(255, 255, 255);
+  height: 100%;
+  margin: 0%;
+  padding: 0%
+}
+
+.col-12 {
+  margin: 0%;
+  padding: 0%
+}
+
+.profile {
+  height: 80px !important;
+}
+/* nav {
+  margin: 0;
+  padding: 0;
+  width: 100% ; 
+  height: 60px;
+} */
+.navbar-toggle-show {
+  display: block !important;
+  left: 0 !important
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.title {
+  width: 16.5%
+}
+
+.sidnav-togller {
+  margin-left: 8px;
+}
+
+#sideNav {
+  width: 16.5%
+}
+
+#main {
+  width: 83.5%
+}
+
+.main {
+  background: rgb(238, 238, 238);
+  height: 100%;
+}
+
+.btn-side-nav {
+  background: rgb(248, 248, 248);
+  height: 50px;
+}
+
+.card-body {
+  padding: 0
+}
+
+@media (max-width: 575.98px) {
+  .sidnav-togller {
+    float: left;
+    position: fixed
   }
 
-  .sidebar a {
-    font-size: 18px;
+  .title {
+    margin: auto
   }
+
+  #sideNav {
+    width: 0%
+  }
+
+  #main {
+    width: 100%
+  }
+}
+
+@media (max-width: 767.98px) {
+  .sidnav-togller {
+    float: left;
+    position: fixed
+  }
+
+  .title {
+    margin: auto
+  }
+
+  #sideNav {
+    width: 0%
+  }
+
+  #main {
+    width: 100%
+  }
+}
+
+@media (max-width: 991.98px) {
+}
+
+@media (max-width: 1199.98px) {
 }

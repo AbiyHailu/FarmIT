@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs'; 
 import { takeUntil } from "rxjs/operators"; 
 import { SubscriptionService } from '../subscription/service/subscription.service';
@@ -8,9 +8,9 @@ import { SubscriptionService } from '../subscription/service/subscription.servic
   styleUrls: ['dashboard.component.css'], 
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit, OnDestroy { 
+export class DashboardComponent implements OnDestroy { 
   subject: Subject<void> = new Subject();
-  subscriptions: any
+  subscriptions: any 
   constructor(
     private subscriptionService: SubscriptionService
   ) {
@@ -22,11 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log("this.subscriptions", this.subscriptions)
       })
   }
-
-  ngOnInit(): void {
-
-  }
- 
+   
   ngOnDestroy(): void {
     this.subject.next()
   }

@@ -1,36 +1,56 @@
+<div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
+  <div class="row">
+    <div class="sideNav" id="sideNav">
+      <div class=" profile border-bottom">
+        <div class=" ">
+          <span class="text-justify">
+            <!--{{user.Name}}--> userNaME 
+          </span>
+          <br />
+          <span>
+            <!--{{user.Name}}
+            {{user.Position}}
+            {{user.Notification}}-->
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 ">
+          <div id="accordion">
+            <div class="card-header border-bottom" id="headingOne{{i}}" (click)="toggleAccordion(i)">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Dashboard
+                  <span></span>
+                </button>
+              </h5>
+            </div>
+            <div *ngFor="let plans of subscription;  let i = index " class="card">
 
-<div class="row sidebar">
-  <div class="col-lg-2  col-4 border-right sidebar ">
-
-    Manage
-    <button class="btn-sidebar" (click)="navigateTo('dashboard')">
-      Dashboard
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('manage-user')">
-      Manage User
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('store')">
-      Store
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('scout')">
-      Scout
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('protection')">
-      Protection
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('fertigatin')">
-      Fertigation
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('packhouse')">
-      Packhouse
-    </button>
-    <button class="btn-sidebar" (click)="navigateTo('hr')">
-      Human Resource
-    </button>
-    Reports
-  </div>
-  <div class="col-lg-10 col-8">
-    <router-outlet> </router-outlet>
-  </div>
+              <div class="card-header border-bottom" id="headingOne{{i}}" (click)="toggleAccordion(i)">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {{plans.plan}}
+                    <span></span>
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  <ul class="list-group">
+                    <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item">
+                      {{items}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main" id="main">
+      test
+    </div>
+  </div> 
 </div>
-

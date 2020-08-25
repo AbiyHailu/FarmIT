@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared.service/auth.service';
 import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
+import { SharedDataService } from '../shared.service/sharedData.service';
+import { ManagerComponent } from '../manager/manager.component';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,10 +13,12 @@ import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
 export class NavMenuComponent {
   isExpanded = false;
   payload: any = null
+  
   constructor(
     private router: Router,
     private authService: AuthService,
-    private jwtDecoder: JwtDecodeService 
+    private jwtDecoder: JwtDecodeService,
+    private sharedDataService: SharedDataService
   ) { 
     let data = this.checkUser();
     if (data) {
@@ -26,14 +30,12 @@ export class NavMenuComponent {
     return this.jwtDecoder.jwtDecode(localStorage.getItem('authToken')) 
   }
 
-  collapse() {
-    this.isExpanded = false;
+  toggle = false
+  toggleSideBar() {
+    this.toggle = !this.toggle 
+    this.sharedDataService.changeToggleSideBar(this.toggle) 
   }
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
-
+   
   logIn() { 
     this.router.navigate(['/login']);
   }

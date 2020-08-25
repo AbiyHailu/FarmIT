@@ -42,7 +42,7 @@ namespace API.Controllers.AdminControllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("company/{id}")]
         public List<SubscriptionViewModel> GetByCompanyId(Guid id)
         {
             try

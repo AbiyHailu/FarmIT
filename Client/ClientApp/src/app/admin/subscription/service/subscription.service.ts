@@ -16,8 +16,8 @@ export class SubscriptionService {
     return <Observable<any>>this.http.get("/api/subscription/" + id);
   }
 
-  getSubscriptionByCompnyId(id: any): Observable<Subscription> {
-    return <Observable<any>>this.http.get("/api/subscription/", id);
+  getSubscriptionByCompnyId(id: any): Observable<Subscription[]> {
+    return <Observable<any>>this.http.get("/api/subscription/company/"+id);
   }
 
   addSubscription(subscription: Subscription): Observable<any> {
@@ -30,5 +30,11 @@ export class SubscriptionService {
 }
 
 export interface Subscription {
-  id
+  companyId: any
+  companyName: any
+  id: any
+  planId: any
+  planName: any
+  subscriptionDate: any
+  subscriptionEndDate: any
 }

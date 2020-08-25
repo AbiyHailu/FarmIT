@@ -29,7 +29,7 @@ namespace Concrete.AdminConcrete
                           }).ToList();
 
             return result;
-        }
+        } 
         public List<SubscriptionViewModel> GetSubscriptionbyCompanyId(Guid companyId)
         {
             var result = (from subscription in context.Subscriptions
@@ -72,6 +72,7 @@ namespace Concrete.AdminConcrete
 
             return result;
         }
+
         public bool UpdateSubscription(Subscription subscription)
         {
             context.Entry(subscription).Property(x => x.PlanId).IsModified = true;
