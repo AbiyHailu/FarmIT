@@ -1,6 +1,6 @@
 <div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
-  <div class="row">
-    <div class="sideNav" id="sideNav">
+  <div class="row border-right">
+    <div class="sideNav border-right " id="sideNav" >
       <div class=" profile border-bottom">
         <div class=" ">
           <span class="text-justify">
@@ -16,18 +16,10 @@
       </div>
       <div class="row">
         <div class="col-12 ">
-          <div id="accordion">
-            <div class="card-header border-bottom" id="headingOne{{i}}" (click)="toggleAccordion(i)">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Dashboard
-                  <span></span>
-                </button>
-              </h5>
-            </div>
-            <div *ngFor="let plans of subscription;  let i = index " class="card">
-
-              <div class="card-header border-bottom" id="headingOne{{i}}" (click)="toggleAccordion(i)">
+          <div id="accordion"> 
+            <div *ngFor="let plans of subscription;  let i = index " class="card"> 
+              <div class="card-header" id="headingOne{{i}}" (click)="toggleAccordion(i, plans.plan)">
+                {{loading}}
                 <h5 class="mb-0">
                   <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     {{plans.plan}}
@@ -49,8 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="main" id="main">
-      test
+    <div class="main" id="main"> 
+        <router-outlet> </router-outlet> 
     </div>
   </div> 
 </div>

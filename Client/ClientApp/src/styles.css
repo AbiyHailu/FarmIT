@@ -17,7 +17,23 @@ a {
 code {
   color: #e01a76;
 }
+/**Titles**/
+.main-title, .create-farm {
+  height: 100vh;
+  margin: 0%;
+  margin-bottom: 1%;
+  padding: 1.5%;
+  padding-left: 1%;
+  background-color: rgb(255, 255, 255);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
+.main-title {
+  height: 70px;
+  font-weight: bold;
+  font-size: 20px;
+}
 /** Buttons **/
 .btn-primary {
   color: #fff;

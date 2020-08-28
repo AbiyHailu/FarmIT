@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SharedDataService } from '../shared.service/sharedData.service';
-import { takeUntil } from 'rxjs/operators';
-import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
+import { takeUntil } from 'rxjs/operators'; 
 import { SubscriptionService } from '../admin/subscription/service/subscription.service';
+import { CommonMethedsService } from '../shared.service/commonMethodes';
 
 @Component(
   {
@@ -14,19 +14,21 @@ import { SubscriptionService } from '../admin/subscription/service/subscription.
   }
 )
 
-export class ManagerComponent implements  OnDestroy {
+export class ManagerComponent implements OnDestroy {
+
   subject: Subject<void> = new Subject();
   url: string
   company :any
-  payload: any
-  subscription =[]
+  role: any =null
+  subscription = []
+
   constructor(
     private router: Router,
-    private sharedDataService: SharedDataService,
-    private jwtDecoder: JwtDecodeService, 
-    private subscriptionService: SubscriptionService
-  ) {
-    this.subscription = []
+    private sharedDataService: SharedDataService, 
+    private subscriptionService: SubscriptionService,
+    private commonMethodService: CommonMethedsService
+  ) { 
+    this.subscription = [] 
     this.sharedDataService.currentSideToggler
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
@@ -41,32 +43,59 @@ export class ManagerComponent implements  OnDestroy {
           }
         }
       })
-    let companyId = localStorage.getItem('userDetail')
-    this.getSubscription(companyId)  
+
+    let data = this.commonMethodService.checkUser();
+    if (data) {
+      this.role = data['role'];
+      console.log(this.role)
+    }
+
+    let companyId = this.commonMethodService.checkCompany()
+    if (companyId) {
+        this.getSubscription(companyId)  
+    } 
   }
 
-  activeIndex: number;
-  control = null
-  getSubscription(companyId:any) {
-  console.log( localStorage.getItem('userDetail')) 
+  activeIndex: number; 
+  getSubscription(companyId:any) { 
     this.subscriptionService.getSubscriptionByCompnyId(companyId)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         console.log("res", res)
-        if (res.length>0) {
+        if (res.length > 0) {
+          if (this.role && this.role.toLowerCase() =='manager') {
+            this.subscription.push({ plan: 'Dashboard' })
+            this.subscription.push({ plan: 'Reports' })
+            this.subscription.push({ plan: 'Scheduler' })
+            this.subscription.push({ plan: 'User' })
+          }
+
           res.forEach(e => {
-           this.subscription.push({ plan: e.planName, items: ["item 1 ", "item 2", "item 3"] })
+            if (e.planName =='Store') {
+              this.subscription.push({ plan: e.planName, items: ["Products", "Recieved", "Issued"] })
+            }
+            if (e.planName == 'Protection') {
+              this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others" ] })
+            }
+            if (e.planName == 'Human Resource') {
+              this.subscription.push({ plan: e.planName, items: ["Create Employee", "Deactivate" ] })
+            }
+            if (e.planName == 'Scout') {
+              this.subscription.push({ plan: e.planName, items: ["Create Scout"] })
+            }
           })
-        }
-        
+        } 
       }) 
   }
-  activeIndex
-  toggleAccordion(index: any) {
+
+  toggleAccordion(index: any, plans:string) {
     console.log(index)
     this.activeIndex = index
+    this.navigateTo(plans.toLowerCase()) 
   }
+
   navigateTo(destination: string) {
+    console.log(destination)
     this.router.navigate(['manager/' + destination]);
   }
   ngOnDestroy(): void {

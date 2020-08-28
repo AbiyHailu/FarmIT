@@ -1,0 +1,63 @@
+ import { Observable, throwError, of } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+
+@Injectable({ providedIn: 'root' })
+export class ReportsService {  
+ reports: Report[] = [];
+  constructor(
+    private http: HttpClient
+  ) {   
+    let todo1 = { id: "1", title: "test1", priority: "high", createdDate: "26/8/2020", department: "1" }
+    let todo2 = { id: '2', title: "test2", priority: "high", createdDate: "26/8/2020", department: "1" }
+    let todo3 = { id: '3', title: "test3", priority: "low", createdDate: "25/8/2020", department: "2" }
+    let todo4 = { id: '4', title: "test4", priority: "medium", createdDate: "24/8/2020", department: "2" }
+    let todo5 = { id: '5', title: "test5", priority: "low", createdDate: "24/8/2020", department: "3" }
+    let todo6 = { id: '6', title: "test6", priority: "medium", createdDate: "24/8/2020", department: "3" }
+    this.reports.push(todo1, todo2, todo3, todo4, todo5, todo6)
+  }
+
+  getReports(): Observable<Report[]> {
+   // return <Observable<any>>this.http.get(this.apiUrl);  
+    return of(this.reports)
+  }
+
+  getReportById(id: any): Observable<Report> {
+    //return <Observable<any>>this.http.get("/api/user/" + id);
+    return of(this.reports.find(e=>e.id = id))
+  }
+
+  addSUser(usermodel: Report): Observable<any> { 
+    return <Observable<any>><any>this.http.post("/api/user", usermodel)
+      .pipe(catchError(this.handleError))
+      .subscribe(res => {
+          console.log(res)
+      }) 
+   
+  } 
+  editUser(user: Report): Observable<any> {
+    return <Observable<any>>this.http.put("/api/user/" + user.id, user);
+  } 
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError('Something bad happened; please try again later.');
+  };
+}
+
+export class Report {
+  id: any
+  title: string
+  priority: string //enum - high medium low
+  createdDate: any
+  department:string
+} 

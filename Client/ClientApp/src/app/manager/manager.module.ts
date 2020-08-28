@@ -6,7 +6,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ManagerDashboardComponent } from './dashboard/dashboard.component.';
-import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ManageUserComponent } from './user/user.component';
+import { ScoutComponent } from './scout/scout.component';
+import { StoreComponent } from './store/store.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 @NgModule({
@@ -22,7 +26,11 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
   declarations: [
     ManagerComponent,
     ManagerDashboardComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    ScoutComponent,
+    StoreComponent,
+    SchedulerComponent,
+    ReportsComponent
   ],
 
   exports: [

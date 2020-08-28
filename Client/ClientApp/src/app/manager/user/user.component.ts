@@ -5,11 +5,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from '../../crud/crud.component';
 import { CrudService } from '../../crud/service/crud.service';
 import { UserService } from './service/user.service';
-import { SubscriptionService } from '../../admin/subscription/service/subscription.service'; 
+import { SubscriptionService } from '../../admin/subscription/service/subscription.service';
+
 @Component({
-  selector: 'manage-user',
-  styleUrls: ['manage-user.component.css'], 
-  templateUrl: './manage-user.component.html',
+  selector: 'user',
+  styleUrls: ['user.component.css'], 
+  templateUrl: './user.component.html',
 })
 export class ManageUserComponent implements OnInit, OnDestroy {
 

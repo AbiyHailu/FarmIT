@@ -1,0 +1,67 @@
+<div class="main" id="main">
+  <div class="container-fluid">
+    <div class="row-fluid main-title">
+      Scheduler
+    </div>
+    <div class="row-fluid ">
+      <div class="col-lg-12">
+        Sort by :
+        <button class="btn btn-create" (click)="sortSchedules('createdDate')">
+          Created Date
+        </button>
+        <button class="btn btn-create"  (click)="sortSchedules('complitionDate')">
+          Complettion Date
+        </button>
+        <button class="btn btn-create"  (click)="sortSchedules('priority')">
+          priority
+        </button>
+        <button class="btn btn-create"  (click)="sortSchedules('isCompleted')">
+          Completion Status
+        </button>
+        <button class="btn btn-create" (click)="sortSchedules('department')">
+          Department
+        </button>
+      </div>
+      <div id="accordion">
+        <div *ngFor="let schedules of catagorizedSchedules| keyvalue;  let i = index " class="card">
+          <div class="card-header" id="headingOne{{i}}" (click)="toggleAccordion(i )">
+            <h5 class="mb-0">
+              <button *ngFor="let item of schedules.value| keyvalue;   " class="btn btn-link" data-toggle="collapse"
+                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{sortTitle}}: {{item.key }}
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse"
+            aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <ul class="list-group" *ngFor="let item of schedules.value| keyvalue;  let i = index ">
+                <li *ngFor="let items of item.value| keyvalue;  let i = index " class="list-group-item"
+                  (click)="getSchedule(items.value)">
+                  <div class="row">
+                    <div class="col-lg-2">
+                      {{items.value.titel}}
+                    </div>
+                    <div class="col-lg-2">
+                      {{items.value.priority}}
+                    </div>
+                    <div class="col-lg-3">
+                      {{items.value.complitionDate}}
+                    </div>
+                    <div class="col-lg-3">
+                      {{items.value.isCompleted}}
+                    </div>
+
+                    <div class="col-lg-2">
+                      <span>Edit</span> |
+                      <span>Delete</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

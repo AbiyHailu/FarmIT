@@ -4,6 +4,7 @@ import { AuthService } from '../shared.service/auth.service';
 import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
 import { SharedDataService } from '../shared.service/sharedData.service';
 import { ManagerComponent } from '../manager/manager.component';
+import { CommonMethedsService } from '../shared.service/commonMethodes';
 
 @Component({
   selector: 'app-nav-menu',
@@ -18,18 +19,15 @@ export class NavMenuComponent {
     private router: Router,
     private authService: AuthService,
     private jwtDecoder: JwtDecodeService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private commonMethodService: CommonMethedsService
   ) { 
-    let data = this.checkUser();
-    if (data) {
-      console.log(data)
+    let data = this.commonMethodService.checkUser();
+    if (data) { 
       this.payload = data['role'];
     } 
   }
-  checkUser() {
-    return this.jwtDecoder.jwtDecode(localStorage.getItem('authToken')) 
-  }
-
+ 
   toggle = false
   toggleSideBar() {
     this.toggle = !this.toggle 

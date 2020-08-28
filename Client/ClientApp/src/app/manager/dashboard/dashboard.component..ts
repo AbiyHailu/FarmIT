@@ -17,8 +17,7 @@ export class ManagerDashboardComponent {
   constructor(
     private subscriptionService: SubscriptionService,
   ) {
-
-    // this.profile ="test"
+     
     this.profile = null
     this.GreenHs = [{ length: 0, width: 0, rows: 0 }]
     this.subscriptions = []
