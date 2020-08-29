@@ -1,3 +1,4 @@
+@import "../src/assets/style/style.variables.scss"; 
 html, body {
   height: 100%;
   width: 100%;
@@ -17,6 +18,11 @@ a {
 code {
   color: #e01a76;
 }
+
+card, card-header , card-body{
+    border-radius:0px !important
+}
+
 /**Titles**/
 .main-title, .create-farm {
   height: 100vh;
@@ -24,16 +30,28 @@ code {
   margin-bottom: 1%;
   padding: 1.5%;
   padding-left: 1%;
-  background-color: rgb(255, 255, 255);
-  overflow-y: scroll;
-  overflow-x: hidden;
+  background-color: rgb(255, 255, 255); /**$white-background;*/
+  color:rgb(0,0,0); 
 }
 
 .main-title {
-  height: 70px;
+  height: 80px;
   font-weight: bold;
   font-size: 20px;
 }
+.main-body {
+  padding: 0% !important
+}
+
+.sort-by {
+  width: 99%
+}
+
+.main-accordion {
+  padding: 0% !important;
+  margin: 0% !important
+}
+ 
 /** Buttons **/
 .btn-primary {
   color: #fff;
@@ -42,9 +60,9 @@ code {
 }
 
 .btn-create{
-    border-radius:0px !important;
-    float:right;
-    height:40px; 
+    border-radius:0px !important; 
+    height:40px;
+    margin:.5%
 }
 
 .btn-sidebar {
@@ -66,7 +84,6 @@ code {
 /**Forms and input**/
 
 /*is in CRUD scss*/
-
 input, select {
   border-radius: 0px !important;
   border: 1px solid !important;
@@ -87,8 +104,13 @@ input, select {
   border-color: #FF0000;
   box-shadow: inset 0 1px 1px rgba(25, 179, 64, 0.5), 0 0 8px rgba(25, 179, 64, 0.6);
 }
- 
 
+.check-box {
+  height: 15px;
+  float: none !important;
+  width: auto !important;
+  vertical-align: middle;
+}
 /**Table common style**/
 
 /**Span**/
@@ -99,5 +121,37 @@ input, select {
 
 .span-manage:hover {
     color: rgb(25, 179, 64);
+} 
+
+.accordion{
+    margin:0%
 }
+
+.categorized-title {
+  height: 50px;
+  width: 95%;
+  margin: auto;
+  margin-bottom: .5%;
+  margin-top: .5%;
+  background: green;
+  color: white !important;
+  border-radius: 0px !important;
+  padding: 1% !important
+}
+ 
+.list-group {
+}
+
+.list-group-item {
+  width: 98% !important;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: rgb(224, 224, 224);
+  margin:0px;
+  color:rgb(0,0,0)
+}
+.list-group-item:hover {
+  background-color: rgb(3, 168, 42);
+  cursor:pointer
+ }
 

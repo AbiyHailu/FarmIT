@@ -2,14 +2,15 @@ body {
 }
 
 .container-fluid {
-  background: rgb(248, 248, 248);
+  background: rgb(255, 255, 255);
 }
 
 .row {
-  background: rgb(255, 255, 255);
+  background: rgb(72, 72, 72);
+  color: rgb(255, 255, 255);
   height: 100%;
   margin: 0%;
-  padding: 0%
+  padding: 0%;
 }
 
 .col-12 {
@@ -17,6 +18,43 @@ body {
   padding: 0%
 }
 
+#accordion, .card, .card-body {
+  border-radius: 0px;
+  border: none; 
+  background: rgb(72, 72, 72);
+  color: rgb(255, 255, 255);
+  margin: 0%;
+}
+
+.card-header {
+   padding:8%;
+  height:60px;
+  border-bottom: .2px solid;
+}
+
+.card-body {
+  color: rgb(0, 0, 0);
+}
+
+.card-header:hover {
+  cursor: pointer;
+  background: rgb(3, 168, 42); /*$green-background*/
+  color: rgb(255, 255, 255)
+}
+
+.list-group{
+    border-bottom:none
+}
+
+.list-group-item:hover {
+  background: rgb(3, 168, 42); /*$green-background*/
+  color: rgb(255, 255, 255)
+}
+.active-color,.active-list {
+  background: rgb(3, 168, 42); /*$green-background*/
+  color: rgb(255, 255, 255)
+}
+ 
 .profile {
   height: 80px !important;
 }

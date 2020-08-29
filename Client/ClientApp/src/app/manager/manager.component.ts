@@ -94,10 +94,17 @@ export class ManagerComponent implements OnDestroy {
     this.navigateTo(plans.toLowerCase()) 
   }
 
+  activeListIndex
+  activeList(i) {
+    this.activeListIndex =i
+  }
+
   navigateTo(destination: string) {
     console.log(destination)
     this.router.navigate(['manager/' + destination]);
   }
+
+
   ngOnDestroy(): void {
     this.subject.next();
   } 

@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ReportsService } from './service/reports.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CommonMethedsService } from '../../shared.service/commonMethodes';
 
 @Component({
   selector: 'reports-root',
@@ -14,9 +15,9 @@ export class ReportsComponent implements OnDestroy {
   catagorizedReports = []
   loading = true
   constructor(
-    private reportService : ReportsService
-  ) {
-
+    private reportService: ReportsService,
+    private commonMethodes:CommonMethedsService
+  ) { 
     this.reportService.getReports()
       .pipe(takeUntil(this.subject))
       .subscribe(res => { 
@@ -48,8 +49,9 @@ export class ReportsComponent implements OnDestroy {
     console.log(items)
   }
 
-  sortReports(sortvalue: string) {
-    this.editTitlestring(sortvalue)
+  sortTitle: any = "Created Date"
+  sortReports(sortvalue: string) { 
+    this.sortTitle =  this.commonMethodes.editTitlestring(sortvalue)
     this.catagorizedReports = []
     this.reports.forEach(item => {
       if (this.catagorizedReports.length == 0)
@@ -61,17 +63,16 @@ export class ReportsComponent implements OnDestroy {
         this.catagorizedReports.push(Object.assign({}, { [item[sortvalue]]: [item] }))
     })
   }
-  sortTitle: any = "Created Date"
-  editTitlestring(sortvalue: string) {
-    let str = sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[0]
-    let str1 = sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[1]
-    if (str && str1) {
-      this.sortTitle = str[0].toUpperCase() + str.slice(1) + ' ' + str1[0].toUpperCase() + str1.slice(1)
-    } else {
-      this.sortTitle = sortvalue[0].toUpperCase() + sortvalue.slice(1)
+  
+ 
+  editMarkasRead(items:any) {
+    console.log(items)
+    if (items) {
+      items.value.markasread = !items.value.markasread
+      this.reportService.editReport(items.value)
     }
+    console.log(items)
   }
-
   ngOnDestroy(): void {
     this.subject.next()
   } 

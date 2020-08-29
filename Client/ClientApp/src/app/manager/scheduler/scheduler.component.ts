@@ -1,25 +1,34 @@
-import { Component } from '@angular/core';  
+import { Component, OnDestroy } from '@angular/core';  
+import { Subject } from 'rxjs';
+import { SchedulerService } from './service/scheduler.service';
+import { takeUntil } from 'rxjs/operators';
+import { CommonMethedsService } from '../../shared.service/commonMethodes';
+
 
 @Component({
   selector: 'scheduler-root',
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.css']
 })
-export class SchedulerComponent {  
+export class SchedulerComponent implements OnDestroy {
+  subject: Subject<void> = new Subject();
   schedules=[]; 
   catagorizedSchedules =[]
-  constructor() { 
-    let todo1 = {id:1, titel: "test1", priority:"high", createdDate:"26/8/2020", complitionDate:"27/8/2020", isCompleted:"completed", actionid:1, department:"1"}
-    let todo2 = {id:2, titel: "test2", priority:"high", createdDate:"26/8/2020", complitionDate:"27/8/2020", isCompleted:"completed", actionid:2, department:"1"}
-    let todo3 = {id:3, titel: "test3", priority:"low", createdDate:"25/8/2020", complitionDate:"26/8/2020", isCompleted:"Not completed", actionid:10, department:"2"}
-    let todo4 = {id:4, titel: "test4", priority:"medium", createdDate:"24/8/2020", complitionDate:"26/8/2020", isCompleted:"completed", actionid:11, department:"2"}
-    let todo5 = {id:5, titel: "test5", priority:"low", createdDate:"24/8/2020", complitionDate:"27/8/2020", isCompleted:"Not completed", actionid:12, department:"3"}
-    let todo6 = {id:6, titel: "test6", priority:"medium", createdDate:"24/8/2020", complitionDate:"25/8/2020", isCompleted:"completed", actionid:13, department:"3"}
+  constructor(
+    private scheduleService: SchedulerService, 
+    private commonMethodes: CommonMethedsService
+  ) {
 
-    this.schedules.push( todo1, todo2, todo3, todo4, todo5, todo6) 
-    this.catagorizeByDate(this.schedules)
-    
-  } 
+    this.scheduleService.getSchedules()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.schedules = res
+        if (this.schedules.length > 0) {
+          this.catagorizeByDate(this.schedules) 
+        }
+      })   
+  }
+
   catagorizeByDate(schedules:any){ 
     schedules.forEach(item => {
       if (this.catagorizedSchedules.length == 0)
@@ -40,8 +49,9 @@ export class SchedulerComponent {
     console.log(items)
   }
 
+  sortTitle: any = "Created Date"
   sortSchedules(sortvalue:string){ 
-    this.editTitlestring(sortvalue)
+    this.sortTitle = this.commonMethodes.editTitlestring(sortvalue)
     this.catagorizedSchedules=[]
     this.schedules.forEach(item => {
       if (this.catagorizedSchedules.length == 0)
@@ -53,30 +63,19 @@ export class SchedulerComponent {
         this.catagorizedSchedules.push(Object.assign({}, { [item[sortvalue]]: [item] }))
     })  
   }
-  sortTitle:any= "Created Date"
-  editTitlestring(sortvalue:string){
-    let str= sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[0] 
-    let str1=  sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[1] 
-    if(str && str1){
-     this.sortTitle= str[0].toUpperCase() + str.slice(1)+' '+str1[0].toUpperCase() + str1.slice(1) 
-    }else{
-      this.sortTitle= sortvalue[0].toUpperCase()+ sortvalue.slice(1)
-    } 
+
+  editMarkasRead(item:any) {
+    console.log(item)
+    if (item) {
+      item.value.markasread = !item.value.markasread
+      this.scheduleService.editSchedule(item.value)
+    }
+    console.log(item)
   }
+ 
+  ngOnDestroy(): void {
+    this.subject.next()
+  } 
 }
 
-export class  Todo {
-  id:any
-  title: string
-  priority:string //enum - high medium low
-  createdDate:any
-  complitionDate:any
-  iSCompleted:boolean 
-  actionid:string
-}
-export interface action{
-  id:any
-  action:string 
-  departmentId:any //assigns repsonsible 
-  reportId:string //scout or other 
-}
+

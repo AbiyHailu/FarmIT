@@ -15,22 +15,20 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 ">
+        <div class="col-12">
           <div id="accordion"> 
             <div *ngFor="let plans of subscription;  let i = index " class="card"> 
-              <div class="card-header" id="headingOne{{i}}" (click)="toggleAccordion(i, plans.plan)">
+              <div class="card-header" [ngClass]="{'active-color': activeIndex == i}"  id="headingOne{{i}}" (click)="toggleAccordion(i, plans.plan)">
                 {{loading}}
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h6 class="mb-0">
                     {{plans.plan}}
-                    <span></span>
-                  </button>
-                </h5>
+                    <span></span> 
+                </h6>
               </div>
               <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="list-group">
-                    <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item">
+                    <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item" [ngClass]="{'active-list': activeListIndex == i}" (click) ="activeList(i)">
                       {{items}}
                     </li>
                   </ul>

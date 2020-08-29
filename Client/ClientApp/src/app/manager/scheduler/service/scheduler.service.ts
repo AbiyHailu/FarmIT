@@ -1,73 +1,50 @@
 
-import { Observable, throwError } from 'rxjs';
+import { Observable,  of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core'; 
 
 @Injectable({ providedIn: 'root' })
 export class SchedulerService {
-
-  private data: any;
-  private apiUrl = "/api/user/";
-  token: any;
-  username: any;
-
+  schedules:Schedule[]=[];  
   constructor(
     private http: HttpClient
   ) {
- //  this.data = JSON.parse(localStorage.getItem('authToken'));
-    console.log(this.data)
-  //  this.token = this.data.token;
+    let todo1 = { id: 1, title: "test1", priority: "high", createdDate: "26/8/2020", complitionDate: "27/8/2020", status: "completed", actionid: "1", department: "1" }
+    let todo2 = { id: 2, title: "test2", priority: "high", createdDate: "26/8/2020", complitionDate: "27/8/2020", status: "completed", actionid: "2", department: "1" }
+    let todo3 = { id: 3, title: "test3", priority: "low", createdDate: "25/8/2020", complitionDate: "26/8/2020", status: "Not completed", actionid: "10", department: "2" }
+    let todo4 = { id: 4, title: "test4", priority: "medium", createdDate: "24/8/2020", complitionDate: "26/8/2020", status: "canceled", actionid: "11", department: "2" }
+    let todo5 = { id: 5, title: "test5", priority: "low", createdDate: "24/8/2020", complitionDate: "27/8/2020", status: "Not completed", actionid: "12", department: "3" }
+    let todo6 = { id: 6, title: "test6", priority: "medium", createdDate: "24/8/2020", complitionDate: "25/8/2020", status: "completed", actionid: "13", department: "3" }
+
+    this.schedules.push(todo1, todo2, todo3, todo4, todo5, todo6) 
   }
 
-  getUsers(): Observable<User[]> {
-    return <Observable<any>>this.http.get(this.apiUrl);
+  getSchedules(): Observable<Schedule[]> {
+    // return <Observable<any>>this.http.get(this.apiUrl);  
+    return of(this.schedules)
   }
 
-  getUserById(id: any): Observable<User> {
-    return <Observable<any>>this.http.get("/api/user/" + id);
+  getScheduleById(id: any): Observable<Schedule> {
+    //return <Observable<any>>this.http.get("/api/user/" + id);
+    return of(this.schedules.find(e => e.id = id))
   }
 
-  addSUser(usermodel: User): Observable<any> {
-    //let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //console.log(this.token)
-    //headers = headers.append('Authorization', 'Bearer ' + `${this.token}`);
-    //return <Observable<any>><any>this.http.post<any>(this.apiUrl, usermodel, { headers: headers })
-    //  .pipe(
-    //    catchError(this.handleError)
-    //)   .subscribe(res => {
-    //      console.log(res)
-    //  }) 
-    return <Observable<any>><any>this.http.post("/api/user", usermodel)
-      .pipe(catchError(this.handleError))
-      .subscribe(res => {
-          console.log(res)
-      }) 
-   
-  } 
-  editUser(user: User): Observable<any> {
-    return <Observable<any>>this.http.put("/api/user/" + user.userId, user);
-  } 
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
-  };
+  editSchedule(report: Schedule): Observable<any> {
+    return <Observable<any>>this.http.put("/api/schedules/" + report.id, report);
+  }
+} 
+export class Schedule {
+  id: any
+  title: string
+  priority: string //enum - high medium low
+  createdDate: any
+  complitionDate: any
+  status: string
+  actionid: string
 }
-
-export interface User {
-  userId: any
-  emailAddress: any
-  phone: any
-  firstName: string
-  lastName: string
-  password: string
+export interface action {
+  id: any
+  action: string
+  departmentId: any //assigns repsonsible 
+  reportId: string //scout or other 
 }
