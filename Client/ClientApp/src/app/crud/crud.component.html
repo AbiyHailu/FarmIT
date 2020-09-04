@@ -8,17 +8,24 @@
         <strong>{{layoutElement.Label }}</strong>
       </label>
       <div [ngSwitch]="layoutElement.Type" class="input-group">
-        <input *ngSwitchCase="'text'" class="form-control" autocomplete="off"
-               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="text">
 
-        <input *ngSwitchCase="'number'" class="form-control"
-               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="number">
+        <input *ngSwitchCase="'text'" class="form-control" autocomplete="off" [formControlName]="layoutElement.Binding"
+          placeholder="{{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="text" disabled='layoutElement.Disable'>
 
-        <input *ngSwitchCase="'textDate'" class="form-control"
-               [formControlName]="layoutElement.Binding" placeholder="Enter {{layoutElement.Label}}"
-               [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' type="date">
+        <input *ngSwitchCase="'number'" class="form-control" [formControlName]="layoutElement.Binding"
+          placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="number" min="0">
+
+        <input *ngSwitchCase="'textDate'" class="form-control" [formControlName]="layoutElement.Binding"
+          placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="date">
+
+        <select *ngSwitchCase="'select'"  [formControlName]="layoutElement.Binding" >
+          <option disabled  selected value="">{{layoutElement.Label}}</option>
+          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop.id}}">{{prop.name}}</option>
+        </select>
+
       </div>
     </div>
     <button type="button" class="btn btn-primary btn-submit" (click)="cancel()">
@@ -26,6 +33,6 @@
     </button>
     <button (click)="submitData(dataForm)" class="btn btn-primary btn-submit">
       {{'Submit'}}
-    </button> 
+    </button>
   </form>
 </div>

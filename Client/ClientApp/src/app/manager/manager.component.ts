@@ -21,6 +21,7 @@ export class ManagerComponent implements OnDestroy {
   company :any
   role: any =null
   subscription = []
+  toggler:any
 
   constructor(
     private router: Router,
@@ -33,6 +34,8 @@ export class ManagerComponent implements OnDestroy {
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res != null) {
+          this.toggler =res
+          console.log("this.toggler", this.toggler)
           if (res == true) {
             document.getElementById("sideNav").style.width = "5%"
             document.getElementById("main").style.width = "95%";
@@ -72,16 +75,16 @@ export class ManagerComponent implements OnDestroy {
 
           res.forEach(e => {
             if (e.planName =='Store') {
-              this.subscription.push({ plan: e.planName, items: ["Products", "Recieved", "Issued"] })
+              this.subscription.push({ plan: e.planName, items: ["Products", "Inventory"] })
             }
             if (e.planName == 'Protection') {
-              this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others" ] })
+              this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others","Pests" ] })
             }
             if (e.planName == 'Human Resource') {
               this.subscription.push({ plan: e.planName, items: ["Create Employee", "Deactivate" ] })
             }
             if (e.planName == 'Scout') {
-              this.subscription.push({ plan: e.planName, items: ["Create Scout"] })
+              this.subscription.push({ plan: e.planName})
             }
           })
         } 

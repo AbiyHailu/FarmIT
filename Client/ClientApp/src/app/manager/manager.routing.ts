@@ -6,8 +6,8 @@ import { ManageUserComponent } from './user/user.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ScoutComponent } from './scout/scout.component';
 import { StoreComponent } from './store/store.component';
-import { SchedulerComponent } from './scheduler/scheduler.component';
-
+import { SchedulerComponent } from './scheduler/scheduler.component'; 
+import { PestComponent } from './pest/pest.component';
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
   children: [
@@ -17,6 +17,7 @@ const routes: Routes = [{
     { path: 'scout', component: ScoutComponent },
     { path: 'scheduler', component: SchedulerComponent }, 
     { path: 'user', component: ManageUserComponent },
+    { path: 'pest', component: PestComponent },
     //{ path: 'hr', component:HRComponent }, 
     //{ path: 'Protection', component: ProtectionComponent },
   ]

@@ -1,13 +1,13 @@
 <div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
   <div class="row border-right">
-    <div class="sideNav border-right " id="sideNav" >
+    <div class="sideNav border-right " id="sideNav">
       <div class=" profile border-bottom">
         <div class=" ">
           <span class="text-justify">
-            <!--{{user.Name}}--> userNaME 
+            <!--{{user.Name}}--> user
           </span>
           <br />
-          <span>
+          <span [ngClass]="{'show-sidenav': toggler}">
             <!--{{user.Name}}
             {{user.Position}}
             {{user.Notification}}-->
@@ -16,19 +16,22 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <div id="accordion"> 
-            <div *ngFor="let plans of subscription;  let i = index " class="card"> 
-              <div class="card-header" [ngClass]="{'active-color': activeIndex == i}"  id="headingOne{{i}}" (click)="toggleAccordion(i, plans.plan)">
+          <div id="accordion">
+            <div *ngFor="let plans of subscription;  let i = index " class="card">
+              <div class="card-header" [ngClass]="{'active-color': activeIndex == i}" id="headingOne{{i}}"
+                (click)="toggleAccordion(i, plans.plan)">
                 {{loading}}
                 <h6 class="mb-0">
-                    {{plans.plan}}
-                    <span></span> 
+                  <span [ngClass]="{'arrange-icons': toggler}">IC</span> &nbsp;
+                  <span [ngClass]="{'show-sidenav': toggler}">{{plans.plan}}</span>
                 </h6>
               </div>
-              <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+              <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse"
+                aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                   <ul class="list-group">
-                    <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item" [ngClass]="{'active-list': activeListIndex == i}" (click) ="activeList(i)">
+                    <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item"
+                      [ngClass]="{'active-list': activeListIndex == i}" (click)="activeList(i)">
                       {{items}}
                     </li>
                   </ul>
@@ -39,8 +42,8 @@
         </div>
       </div>
     </div>
-    <div class="main" id="main"> 
-        <router-outlet> </router-outlet> 
+    <div class="main" id="main">
+      <router-outlet> </router-outlet>
     </div>
-  </div> 
+  </div>
 </div>

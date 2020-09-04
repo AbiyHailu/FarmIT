@@ -1,10 +1,15 @@
 <div class="main" id="main">
   <div class="container-fluid">
-
-    <div class='row-fluid'>
-      <div *ngFor="let gh of ghs" class="col-lg-3 border; let i ==index" (click)="addScoutData(gh)">
-           {{gh.name}}
+    <div class="row-fluid main-title border-bottom border-top">
+      Scout
+    </div>
+    <div class="row-fluid main-body ">
+      <div *ngFor="let gh of ghs; let i = index" class="scout-gh text-center" (click)="addScoutData(gh)">
+        {{gh.name}}
+        <br/>
+        Plus Add New Scout Data
       </div>
-    </div>
-    </div>
+    </div> 
+    <!--  <h1>Test</h1><input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/> -->
   </div>
+</div>

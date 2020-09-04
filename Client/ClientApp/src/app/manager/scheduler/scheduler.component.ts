@@ -4,12 +4,12 @@ import { SchedulerService } from './service/scheduler.service';
 import { takeUntil } from 'rxjs/operators';
 import { CommonMethedsService } from '../../shared.service/commonMethodes';
 
-
 @Component({
   selector: 'scheduler-root',
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.css']
 })
+
 export class SchedulerComponent implements OnDestroy {
   subject: Subject<void> = new Subject();
   schedules=[]; 

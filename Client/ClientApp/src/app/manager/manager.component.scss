@@ -69,6 +69,19 @@ body {
   left: 0 !important
 }
 
+.show-sidenav{
+  display: none;
+}
+
+.arrange-icons{   
+  padding: 22% !important; 
+  margin: 10% !important; 
+  
+  margin-top: 20% !important; 
+  padding-top: 0% !important; 
+  width:100%; 
+}
+
 .nav > li {
   position: relative;
   display: block;

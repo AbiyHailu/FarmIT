@@ -10,8 +10,8 @@ import { ManageUserComponent } from './user/user.component';
 import { ScoutComponent } from './scout/scout.component';
 import { StoreComponent } from './store/store.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
-import { ReportsComponent } from './reports/reports.component';
-
+import { ReportsComponent } from './reports/reports.component'; 
+import { PestComponent } from './pest/pest.component';
 
 @NgModule({
   imports: [
@@ -30,7 +30,8 @@ import { ReportsComponent } from './reports/reports.component';
     ScoutComponent,
     StoreComponent,
     SchedulerComponent,
-    ReportsComponent
+    ReportsComponent,
+    PestComponent
   ],
 
   exports: [

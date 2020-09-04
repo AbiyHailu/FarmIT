@@ -2,8 +2,19 @@
 .container-fluid{ 
   background: rgb(248, 248, 248);
   padding: 0%; 
+} 
+.scout-gh { 
+  color:white;
+  background: green;
+  float: left; 
+  margin:2%; 
+  padding:1%;
+  padding-top:2%;
+  width:150px !important;
+  height:150px!important;
+  cursor: pointer;
 }
- 
+
 @media (max-width: 575.98px) { 
   
 } 
