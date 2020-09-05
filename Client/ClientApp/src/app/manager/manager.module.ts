@@ -8,10 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ManagerDashboardComponent } from './dashboard/dashboard.component.';
 import { ManageUserComponent } from './user/user.component';
 import { ScoutComponent } from './scout/scout.component';
-import { StoreComponent } from './store/store.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ReportsComponent } from './reports/reports.component'; 
-import { PestComponent } from './pest/pest.component';
+import { PestComponent } from './pest/pest.component'; 
+import { StoreComponent } from './store/store.component';
 
 @NgModule({
   imports: [
@@ -20,15 +20,15 @@ import { PestComponent } from './pest/pest.component';
     ManagerRouting,
     HttpClientModule,
     ReactiveFormsModule,  
-    FormsModule
+    FormsModule 
   ],
   
   declarations: [
-    ManagerComponent,
-    ManagerDashboardComponent,
-    ManageUserComponent,
+    ManagerComponent,  
     ScoutComponent,
     StoreComponent,
+    ManagerDashboardComponent,
+    ManageUserComponent,
     SchedulerComponent,
     ReportsComponent,
     PestComponent

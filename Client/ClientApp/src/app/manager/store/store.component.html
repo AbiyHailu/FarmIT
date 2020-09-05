@@ -1,10 +1,61 @@
-<div class="main" id="main">
-  <div class="container-fluid">
+ <div class="main" id="main">
+  <div class="container-fluid"> 
+    <div class="row-fluid main-title border-bottom border-top">
+      Store Manager
+    </div>
+    <div class="row-fluid main-body ">
+      <div class="col-lg-12 text-center sort-by col-padd">  
+        <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}" (click)="getSelected('product')">
+          Products
+        </button>
+        <button class="btn  btn-equal-width border-right"[ngClass]="{'selected-text-color': selectedindex ==2}" (click)="getSelected('issued')">
+          Issued Products
+        </button>
+        <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==3}" (click)="getSelected('recieved')">
+          Recieved Products
+        </button>
+        <button class="btn   btn-equal-width"[ngClass]="{'selected-text-color': selectedindex ==4}" (click)="getSelected('balance')">
+          Balance
+        </button> 
+      </div>
+    
+    </div> 
+    </div>
+    <div class="container-fluid">
+      <button class="btn btn-success btn-create btn-padding"
+              (click)="manage('create')">
+        <strong>{{title}}</strong>
+      </button> 
+      <div class="row-fluid">
+        <table class="table table-sm" >
+          <thead class="thead-dark">
+          test
+          </thead>
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              
+              <th scope="col" *ngFor="let item of sortedData; let i = index">Plan Name</th>
 
-    <div class='row-fluid'>
-      <div *ngFor="let gh of ghs" class="col-lg-3 border; let i ==index" (click)="addScoutData(gh)">
-           {{gh.name}}
+
+              <th scope="col">Plan Name</th>
+              <th scope="col">subscription Date</th>
+              <th scope="col"> End Date</th>
+              <th scope="col"> Manage</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of sortedData; let i = index">
+            <tr>
+              <th scope="row">{{i+1}}</th>
+              <td> {{item.name }} </td>
+              <td> {{item }}</td>
+              <td> {{item  }}</td>
+              <td>
+                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+              </td>
+          </tbody>
+        </table>
       </div>
     </div>
-    </div>
-  </div>
+  </div> 

@@ -1,4 +1,5 @@
-@import "../src/assets/style/style.variables.scss"; 
+@import ".//assets/style/style.variables.scss";
+
 html, body {
   height: 100%;
   width: 100%;
@@ -30,7 +31,7 @@ card, card-header , card-body{
   margin-bottom: 1%;
   padding: 1.5%;
   padding-left: 1%;
-  background-color: rgb(255, 255, 255); /**$white-background;*/
+  background-color:$background-white;  
   color:rgb(0,0,0); 
 }
 
@@ -41,7 +42,7 @@ card, card-header , card-body{
 }
 .main-body {
   padding: 0% !important;
-  color: black;
+  color: $dark-text-color;
 }
 
 .sort-by {
@@ -55,15 +56,25 @@ card, card-header , card-body{
  
 /** Buttons **/
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
+  color: $white-text-color;
+  background-color:$primary-color;
   border-color: #1861ac;
 }
 
 .btn-create{
     border-radius:0px !important; 
     height:40px;
-    margin:.5%
+    margin:.5%;
+    background:$success-color ;
+    color:$white-text-color
+}
+
+.btn-equal-width{
+  border-radius:0px !important; 
+  height:40px;
+  width:auto;
+  margin:0%; 
+  color:$dark-text-color
 }
 
 .btn-sidebar {
@@ -88,7 +99,7 @@ card, card-header , card-body{
 input, select {
   border-radius: 0px !important;
   border: 1px solid !important;
-  border-color: grey !important;
+  border-color: $input-border !important;
   width: 100%;
   height: 40px
 }
@@ -97,12 +108,14 @@ input, select {
     border-radius: 0px !important;
     border: 1px solid !important;
     background: none !important;
-    border-color: rgb(25, 179, 64) !important;
+    border-color:$success-color !important;
   }
-
+button:focus{
+  border:none !important;
+} 
 .form-control:focus {
   border-radius: 0px !important;
-  border-color: #FF0000;
+  border-color:$warning-color;
   box-shadow: inset 0 1px 1px rgba(25, 179, 64, 0.5), 0 0 8px rgba(25, 179, 64, 0.6);
 }
 
@@ -116,12 +129,12 @@ input, select {
 
 /**Span**/
 .span-manage {
-  color: rgb(0, 128, 255);
+  color: $primary-color;
   cursor:pointer;
 }
 
 .span-manage:hover {
-    color: rgb(25, 179, 64);
+    color: $success-color
 } 
 
 .accordion{
@@ -134,8 +147,8 @@ input, select {
   margin: auto;
   margin-bottom: .5%;
   margin-top: .5%;
-  background: green;
-  color: white !important;
+  background: $success-color;
+  color: $white-text-color !important;
   border-radius: 0px !important;
   padding: 1% !important
 }
@@ -148,14 +161,20 @@ input, select {
   width: 98% !important;
   border: none;
   border-bottom: 1px solid;
-  border-color: rgb(224, 224, 224);
+  border-color: $input-border;
   margin: 0px;
   margin-left:2%;
-  color: rgb(0,0,0);
+  color:$dark-text-color;
   border-radius: 0px !important;
 }
 .list-group-item:hover {
-  background-color: rgb(3, 168, 42);
+  background-color: $success-color;
   cursor:pointer
  }
+ /**Text**/
+ 
+.selected-text-color{
+  color:$success-color
+}
+
 

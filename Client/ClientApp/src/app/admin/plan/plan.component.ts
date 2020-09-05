@@ -8,7 +8,7 @@ import { CrudComponent } from '../../crud/crud.component';
 
 @Component({
   selector: 'plan',
-  styleUrls: ['plan.component.css'], 
+  styleUrls: ['plan.component.scss'], 
   templateUrl: './plan.component.html',
 })
 export class PlanComponent implements OnInit, OnDestroy {

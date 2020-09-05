@@ -8,6 +8,7 @@ import { ScoutComponent } from './scout/scout.component';
 import { StoreComponent } from './store/store.component';
 import { SchedulerComponent } from './scheduler/scheduler.component'; 
 import { PestComponent } from './pest/pest.component';
+
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
   children: [

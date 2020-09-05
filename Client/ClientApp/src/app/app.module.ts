@@ -14,7 +14,7 @@ import { ManagerModule } from './manager/manager.module';
 import { CrudComponent } from './crud/crud.component';
 import { HttpInterceptorService } from './shared.service/httpInterceptorService';
 import { ErrorInterceptorService } from './shared.service/errorInterceptorService';
-import { AdminGuard } from './shared.service/adminGuard.service';
+import { AdminGuard } from './shared.service/adminGuard.service'; 
  
  
 @NgModule({
@@ -32,7 +32,7 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     ReactiveFormsModule,
     BrowserModule,
     AdminModule,
-    ManagerModule, 
+    ManagerModule,  
     NgbModule,
     RouterModule.forRoot([ 
       {

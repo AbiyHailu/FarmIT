@@ -1,46 +1,89 @@
 import { Component } from '@angular/core';
+import { Issued, Recieved, Product, StoreService } from './service/store.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'store-root',
+  selector: 'store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  styleUrls: ['./store.component.scss']
 })
-export class StoreComponent {  
-  ghs:any
-  pest:any
-  constructor() {  
-    this.ghs = this.getGH()
-    this.pest = this.getPests()
+export class StoreComponent {
+  subject: Subject<void> = new Subject();
+  products: Product[] = []
+  issued: Issued[] = []
+  recieved: Recieved[] = []
+  balance:any =[]
+  sortedData=[]
+  selectedindex: number
+  constructor(
+    private storeService: StoreService
+  ) {
+    this.sortedData =[]
+    this.selectedindex = 1
+    this.getProducts()
+    this.getIssued()
+    this.getRecieved()
+    
   }
 
-  getGH(){  
-    return [
-      {id:1, name:"GH1"},
-      {id:2, name:"GH2"},
-      {id:3, name:"GH3"},
-      {id:4, name:"GH4"}
-    ]
+  getProducts() {
+    this.storeService.getProducts()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.products = res
+        this.sortedData = this.products
+        console.log( this.sortedData )
+      })
   }
 
-  getPests(){
-    return [
-      {id:1, name:"P1"},
-      {id:2, name:"P2"},
-      {id:3, name:"P3"},
-      {id:4, name:"P4"}
-    ]
-  }  
-  
-  addScoutData(gh){
-    console.log(gh)
+  getIssued() {
+    this.storeService.getIssued()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.issued = res
+      })
   }
-} 
 
-export class Scout {
-  id: any
-  ghid: string
-  pestId:string 
-  rownumberStart:any
-  rowNumberEnd:any
-  amount:any// severity with %
-} 
+  getRecieved() {
+    this.storeService.getRecieved()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.recieved = res
+      })
+  }
+ sorted=[]
+ title='Create a New Product'
+  getSelected(item: string) { 
+      this.sortedData =[]
+    if (item == 'product') {  
+      this.selectedindex = 1
+      this.sortedData =this.products
+      this.title='Create a New Product'
+    }
+    if (item == 'issued') {
+
+      this.selectedindex = 2
+      this.sortedData =this.issued
+      
+      this.title='Issue a Product'
+    }
+    if (item == 'recieved') {
+
+      this.selectedindex = 3
+      this.sortedData =this.recieved
+      
+      this.title='Recieve a Product'
+    }
+    if (item == 'balance') {
+
+      this.selectedindex = 4
+      this.sortedData =this.balance 
+      this.title=''
+    }
+  }
+}
+
+
+
+

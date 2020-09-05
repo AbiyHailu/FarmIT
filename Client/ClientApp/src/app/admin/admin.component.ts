@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'admin',
-  styleUrls: ['admin.component.css'], 
+  styleUrls: ['admin.component.scss'], 
   templateUrl: './admin.component.html'
 })
 

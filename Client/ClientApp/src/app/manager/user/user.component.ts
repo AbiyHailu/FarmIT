@@ -9,7 +9,7 @@ import { SubscriptionService } from '../../admin/subscription/service/subscripti
 
 @Component({
   selector: 'user',
-  styleUrls: ['user.component.css'], 
+  styleUrls: ['user.component.scss'], 
   templateUrl: './user.component.html',
 })
 export class ManageUserComponent implements OnInit, OnDestroy {

@@ -7,7 +7,7 @@ import { SharedDataService } from '../shared.service/sharedData.service';
 
 @Component({
   selector: 'app-login',
-  styleUrls: ['login.component.css'], 
+  styleUrls: ['login.component.scss'], 
   templateUrl: './login.component.html'
 })
 

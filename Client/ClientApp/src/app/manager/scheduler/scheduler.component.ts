@@ -7,7 +7,7 @@ import { CommonMethedsService } from '../../shared.service/commonMethodes';
 @Component({
   selector: 'scheduler-root',
   templateUrl: './scheduler.component.html',
-  styleUrls: ['./scheduler.component.css']
+  styleUrls: ['./scheduler.component.scss']
 })
 
 export class SchedulerComponent implements OnDestroy {

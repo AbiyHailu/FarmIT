@@ -10,7 +10,7 @@ import { CrudComponent } from 'src/app/crud/crud.component';
 @Component({
   selector: 'scout-root',
   templateUrl: './scout.component.html',
-  styleUrls: ['./scout.component.css']
+  styleUrls: ['./scout.component.scss']
 })
 
 export class ScoutComponent implements OnDestroy {

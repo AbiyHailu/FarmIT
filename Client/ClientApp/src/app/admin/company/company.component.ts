@@ -9,7 +9,7 @@ import { SubscriptionService } from '../subscription/service/subscription.servic
  
 @Component({
   selector: 'company',
-  styleUrls: ['company.component.css'], 
+  styleUrls: ['company.component.scss'], 
   templateUrl: './company.component.html',
 })
 export class CompanyComponent implements  OnDestroy {

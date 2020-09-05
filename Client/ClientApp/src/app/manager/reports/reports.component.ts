@@ -7,7 +7,7 @@ import { CommonMethedsService } from '../../shared.service/commonMethodes';
 @Component({
   selector: 'reports-root',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnDestroy {
   subject: Subject<void> = new Subject();

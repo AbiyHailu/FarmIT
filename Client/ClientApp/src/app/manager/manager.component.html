@@ -1,18 +1,15 @@
 <div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
   <div class="row border-right">
     <div class="sideNav border-right " id="sideNav">
-      <div class=" profile border-bottom">
-        <div class=" ">
-          <span class="text-justify">
-            <!--{{user.Name}}--> user
-          </span>
-          <br />
+      <div class=" profile border-bottom text-center"> 
+          <div class=" user-pic text-center">
+            U
+          </div> 
           <span [ngClass]="{'show-sidenav': toggler}">
-            <!--{{user.Name}}
-            {{user.Position}}
-            {{user.Notification}}-->
-          </span>
-        </div>
+          user Name 
+          Position 
+          email
+          </span> 
       </div>
       <div class="row">
         <div class="col-12">
@@ -31,7 +28,7 @@
                 <div class="card-body">
                   <ul class="list-group">
                     <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item"
-                      [ngClass]="{'active-list': activeListIndex == i}" (click)="activeList(i)">
+                      [ngClass]="{'active-list': activeListIndex == i}" (click)="activeList(i, plans.plan, items)">
                       {{items}}
                     </li>
                   </ul>

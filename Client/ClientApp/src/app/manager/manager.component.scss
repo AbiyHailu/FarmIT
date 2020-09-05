@@ -41,6 +41,16 @@ body {
   background: rgb(3, 168, 42); /*$green-background*/
   color: rgb(255, 255, 255)
 }
+.user-pic{
+  background: brown;
+  height:50px;
+  width:50px;   
+  font-size: 40px;
+  font-weight: bold;
+  margin: auto;
+  margin-top:10px;
+  border-radius: 50%;
+}
 
 .list-group{
     border-bottom:none
@@ -55,7 +65,7 @@ body {
   color: rgb(255, 255, 255)
 }
  
-.profile {
+.profile { 
   height: 80px !important;
 }
 /* nav {

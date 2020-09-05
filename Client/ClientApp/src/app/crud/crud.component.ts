@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  
 @Component({
   selector: 'crud',
-  styleUrls: ['crud.component.css'], 
+  styleUrls: ['crud.component.scss'], 
   templateUrl: './crud.component.html',
 })
 export class CrudComponent implements OnInit, OnDestroy {

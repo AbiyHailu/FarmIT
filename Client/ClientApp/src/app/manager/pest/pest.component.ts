@@ -6,7 +6,7 @@ import { CommonMethedsService } from '../../shared.service/commonMethodes';
 @Component({
   selector: 'pest-root',
   templateUrl: './pest.component.html',
-  styleUrls: ['./pest.component.css']
+  styleUrls: ['./pest.component.scss']
 })
 export class PestComponent implements OnDestroy {
   subject: Subject<void> = new Subject();

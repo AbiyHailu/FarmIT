@@ -75,7 +75,7 @@ export class ManagerComponent implements OnDestroy {
 
           res.forEach(e => {
             if (e.planName =='Store') {
-              this.subscription.push({ plan: e.planName, items: ["Products", "Inventory"] })
+              this.subscription.push({ plan: e.planName, items: [ ] })
             }
             if (e.planName == 'Protection') {
               this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others","Pests" ] })
@@ -98,13 +98,17 @@ export class ManagerComponent implements OnDestroy {
   }
 
   activeListIndex
-  activeList(i) {
+  activeList(i, plan, item) {
     this.activeListIndex =i
+    this.navigateToChildElement(plan, item)
   }
 
   navigateTo(destination: string) {
-    console.log(destination)
+    console.log("destination", destination)
     this.router.navigate(['manager/' + destination]);
+  }
+  navigateToChildElement(plan:string, item:string){
+    this.router.navigate(['manager/'+plan.toLowerCase()+'/'+item.toLowerCase()]);
   }
 
 

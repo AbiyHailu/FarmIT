@@ -7,7 +7,7 @@ import { CrudService } from '../../crud/service/crud.service';
 import { SubscriptionService } from './service/subscription.service';
 @Component({
   selector: 'subscription',
-  styleUrls: ['subscription.component.css'], 
+  styleUrls: ['subscription.component.scss'], 
   templateUrl: './subscription.component.html',
 })
 export class SubscriptionComponent implements OnInit, OnDestroy{

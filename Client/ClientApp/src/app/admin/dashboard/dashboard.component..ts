@@ -5,7 +5,7 @@ import { SubscriptionService } from '../subscription/service/subscription.servic
 
 @Component({
   selector: 'dashboard',
-  styleUrls: ['dashboard.component.css'], 
+  styleUrls: ['dashboard.component.scss'], 
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy { 

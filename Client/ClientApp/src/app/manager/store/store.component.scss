@@ -1,9 +1,18 @@
-
+ 
 .container-fluid{ 
   background: rgb(248, 248, 248);
-  padding: 0%; 
 }
- 
+.col-padd{ 
+  margin-left: -2% !important;   
+}
+.btn-padding{
+    margin-left: 2% !important;  
+}
+.row-fluid{
+  padding-left: 2% !important;  
+  padding-right: 2% !important; 
+}
+
 @media (max-width: 575.98px) { 
   
 } 

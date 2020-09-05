@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
-  styleUrls: ['dashboard.component.css'], 
+  styleUrls: ['dashboard.component.scss'], 
   templateUrl: './dashboard.component.html',
 })
 export class ManagerDashboardComponent {
