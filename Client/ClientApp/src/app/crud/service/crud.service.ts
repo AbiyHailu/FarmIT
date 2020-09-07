@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class  CrudService {
+ 
   constructor(
   ) { }
 
@@ -46,5 +47,38 @@ export class  CrudService {
       { Binding: 'row', Type: 'number', Label: "Row Number To" },
     ]
   }
+
+  getAddProduct(): any {
+    return [
+      { Binding: 'name', Type: 'text', Label: "Product Name" },
+      { Binding: 'category', Type: 'select', Label: "Select Category" ,  SelectList:[] }, 
+      { Binding: 'expiredDate', Type: 'textDate', Label: "Expiration Date" },
+      { Binding: 'price', Type: 'number', Label: "Price" }, 
+      { Binding: 'metric', Type: 'select', Label: "Select Unit" ,  SelectList:[] }, 
+      { Binding: 'activeIngredient', Type: 'select', Label: "Select Active Ingredient" , Disable:"", SelectList:[] }, 
+    ]
+  }
+
+  issueaProduct(): any {
+    return [ 
+      { Binding: 'productName', Type: 'select', Label: "Select Product" ,   SelectList:[] },  
+      { Binding: 'dateIssued', Type: 'textDate', Label: "Date" }, 
+      { Binding: 'amount', Type: 'number', Label: "Amount" },
+      { Binding: 'reason', Type: 'text', Label: "Reason", Disable:"" }
+    ]
+  }
+
+  recieveProduct(): any {return [
+    { Binding: 'productName', Type: 'select', Label: "Select Product" , SelectList:[] },  
+    { Binding: 'dateRecieved', Type: 'textDate', Label: "Date" }, 
+    { Binding: 'amount', Type: 'number', Label: "Amount" }, 
+  ] }
+
+  getAddAi (): any {return [ 
+    { Binding: 'iaName', Type: 'text', Label: "Name" },
+    { Binding: 'environmentalToxicity', Type: 'text', Label: "Environmental Toxicity" },
+    { Binding: 'terestrialToxicity', Type: 'text', Label: "Terestrial Toxicity" },
+    { Binding: 'hazardLevel', Type: 'select', Label: "Hazard Level" , SelectList:["green", "red", "yellow"] },  
+  ] }
 }
 

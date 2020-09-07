@@ -11,7 +11,7 @@
 
         <input *ngSwitchCase="'text'" class="form-control" autocomplete="off" [formControlName]="layoutElement.Binding"
           placeholder="{{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
-          type="text" disabled='layoutElement.Disable'>
+          type="text" > 
 
         <input *ngSwitchCase="'number'" class="form-control" [formControlName]="layoutElement.Binding"
           placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
@@ -23,7 +23,7 @@
 
         <select *ngSwitchCase="'select'"  [formControlName]="layoutElement.Binding" >
           <option disabled  selected value="">{{layoutElement.Label}}</option>
-          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop.id}}">{{prop.name}}</option>
+          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
         </select>
 
       </div>

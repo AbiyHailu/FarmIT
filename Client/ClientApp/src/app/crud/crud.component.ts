@@ -20,18 +20,15 @@ export class CrudComponent implements OnInit, OnDestroy {
 
   dataForm:FormGroup
   ngOnInit(): void {
-    console.log("data", this.data)
-    this.dataForm = this.createForm(this.data)
-    console.log("this.dataForm", this.dataForm)
+    this.dataForm = this.createForm(this.data) 
   }
 
   enablform=false
-  createForm(data) {
-    console.log("data", data)
+  createForm(data) { 
     const formGroup = {};
     
-    data.forEach(e => {
-      formGroup[e.Binding] = new FormControl(e.Value || '')
+    data.forEach(e => {  
+      formGroup[e.Binding] = new FormControl({value: e.Value ||'', disabled: e.Disable||false} ) 
     })
     this.enablform=true
     return new FormGroup(formGroup);
@@ -42,7 +39,7 @@ export class CrudComponent implements OnInit, OnDestroy {
   }
 
   cancel() { 
-    this.activeModal.close(this.data)
+    this.activeModal.close(null)
   }
 
   ngOnDestroy(): void {

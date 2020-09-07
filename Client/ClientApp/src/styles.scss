@@ -46,7 +46,7 @@ card, card-header , card-body{
 }
 
 .sort-by {
-  width: 99%
+  width: 99% !important
 }
 
 .main-accordion {
@@ -147,7 +147,7 @@ button:focus{
   margin: auto;
   margin-bottom: .5%;
   margin-top: .5%;
-  background: $success-color;
+  background: $success-color !important;
   color: $white-text-color !important;
   border-radius: 0px !important;
   padding: 1% !important

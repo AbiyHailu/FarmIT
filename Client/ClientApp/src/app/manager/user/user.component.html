@@ -1,11 +1,35 @@
-
-
-<button class="btn-sidebar" (click)="manage('create')"><strong>Create New User </strong></button>
-<div *ngFor="let user of users ">
-  <div class="row">
-    <div class="col-4 col-lg-6">{{user.firstName }} </div>
-    <div class="col-2 col-lg-2" (click)="editUser(user.userId)">Edit User</div>
-    <div class="col-3 col-lg-2" (click)="assignPermissions(user.userId)">Edit Permissions</div>
-    <div class="col-3 col-lg-2">Delete </div>
-  </div> 
+<div class="main" id="main">
+<div class="container-fluid">
+  <div class="row-fluid main-title border-bottom border-top">
+    User Manager
+  </div>
+  <button class="btn btn-success btn-create btn-padding" (click)="manage('create')">
+    <strong>Create New User</strong>
+  </button>
+  <div class="row-fluid">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"> Name</th>
+          <th scope="col"> Email</th>
+          <th scope="col"> Permissions</th> 
+          <th scope="col"> Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users ; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td> {{user.firstName}} {{user.lastName}}</td>
+          <td> {{user.emailaddress}}</td>        
+          <td> {{user.permissions}}</td> 
+          <td>
+            <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+            <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 </div>
