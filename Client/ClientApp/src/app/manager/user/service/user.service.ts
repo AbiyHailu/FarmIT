@@ -1,65 +1,50 @@
-import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { Observable,  of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core'; 
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class UserService { 
 
-  private data: any;
-  private apiUrl = "/api/user/";
-  token: any;
-  username: any;
+  private apiUrl = "/api/user/"; 
+  user:User[]=[]
 
   constructor(
     private http: HttpClient
   ) {
- //  this.data = JSON.parse(localStorage.getItem('authToken'));
-    console.log(this.data)
-  //  this.token = this.data.token;
+     this.user.push( 
+      {userId:"1", emailAddress:"abiy1@a.aa", phone:"1234567", firstName:"Abiy1", lastName:"sahle", password:"1234567", permission:"Scout", isActive:"Active"},
+      {userId:"1", emailAddress:"abiy2@a.aa", phone:"1234567", firstName:"Abiy2", lastName:"sahle", password:"1234567", permission:"Store", isActive:"Active"}, 
+      {userId:"1", emailAddress:"abiy3@a.aa", phone:"1234567", firstName:"Abiy3", lastName:"sahle", password:"1234567", permission:"Protection, Scout",isActive:"Active"}, 
+      {userId:"1", emailAddress:"abiy4@a.aa", phone:"1234567", firstName:"Abiy4", lastName:"sahle", password:"1234567", permission:"Scout", isActive:"Active"},  
+      {userId:"1", emailAddress:"abiy5@a.aa", phone:"1234567", firstName:"Abiy5", lastName:"sahle", password:"1234567", permission:"Scout", isActive:"Active"}
+     )
   }
 
   getUsers(): Observable<User[]> {
-    return <Observable<any>>this.http.get(this.apiUrl);
+    //return <Observable<any>>this.http.get(this.apiUrl);
+    return of(this.user)
   }
 
   getUserById(id: any): Observable<User> {
-    return <Observable<any>>this.http.get("/api/user/" + id);
+    //return <Observable<any>>this.http.get("/api/user/" + id);
+    return of(this.user.find(e=>e.userId =="1"))
   }
 
   addSUser(usermodel: User): Observable<any> {
-    //let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //console.log(this.token)
-    //headers = headers.append('Authorization', 'Bearer ' + `${this.token}`);
-    //return <Observable<any>><any>this.http.post<any>(this.apiUrl, usermodel, { headers: headers })
-    //  .pipe(
-    //    catchError(this.handleError)
-    //)   .subscribe(res => {
-    //      console.log(res)
-    //  }) 
-    return <Observable<any>><any>this.http.post("/api/user", usermodel)
-      .pipe(catchError(this.handleError))
+    /* return <Observable<any>><any>this.http.post("/api/user", usermodel)
+      //.pipe(catchError(this.handleError))
       .subscribe(res => {
           console.log(res)
-      }) 
-   
-  } 
-  editUser(user: User): Observable<any> {
-    return <Observable<any>>this.http.put("/api/user/" + user.userId, user);
+      })  */ 
+     return of(this.user.push(usermodel)) 
   } 
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
-  };
+  editUser(user: User): Observable<any> {
+    //return <Observable<any>>this.http.put("/api/user/" + user.userId, user);
+    let userEdited = this.user.find(e => e.userId == "1")
+    userEdited = user;
+    return of(userEdited); 
+  }  
 }
 
 export interface User {
@@ -69,4 +54,6 @@ export interface User {
   firstName: string
   lastName: string
   password: string
+  permission:string
+  isActive:string
 }

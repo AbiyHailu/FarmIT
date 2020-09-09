@@ -31,20 +31,23 @@ export class  CrudService {
   }
   getAddUser() {
     return [
-      { Binding: 'emailAddress', Type: 'text', Label: "Enter Email Address" },
-      { Binding: 'phone', Type: 'text', Label: "Enter Phone" },
       { Binding: 'firstName', Type: 'text', Label: "Enter First Name" },
       { Binding: 'lastName', Type: 'text', Label: "Enter Last Name" },
+      { Binding: 'emailAddress', Type: 'text', Label: "Enter Email Address" },
+      { Binding: 'phone', Type: 'text', Label: "Enter Phone" },
       { Binding: 'password', Type: 'text', Label: "Enter Password" },
+      { Binding: 'permission', Type: 'select', Label: "Permissions" , SelectList:["Scout", "Store", "Protection"] },  
+      { Binding: 'isActive', Type: 'select', Label: "Active or inactive" , SelectList:["Active", "Inactive" ] },  
+      
     ]
   }
   getAddScoutData() {
     return [
       { Binding: 'greenhouse', Type: 'text', Label: "",  Disable:"true"},
       { Binding: 'pest', Type: 'select', Label: "Select Pest" , Disable:"", SelectList:[] },
-      { Binding: 'value', Type: 'slide', Label: "Level" },
-      { Binding: 'row', Type: 'number', Label: "Row Number From" },
-      { Binding: 'row', Type: 'number', Label: "Row Number To" },
+      { Binding: 'amount', Type: 'slide', Label: "Level" },
+      { Binding: 'rownumberStart', Type: 'number', Label: "Row Number From" },
+      { Binding: 'rowNumberEnd', Type: 'number', Label: "Row Number To" },
     ]
   }
 

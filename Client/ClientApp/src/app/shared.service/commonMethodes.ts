@@ -31,6 +31,17 @@ export class CommonMethedsService {
     return sortTitle;
   }
 
+  //assign  values to  edited item
+  assignEditValues(buildItems:any, editedItem:any){
+    buildItems.forEach( e=>
+      {
+        e.Value = editedItem[e.Binding]
+      } 
+    ) 
+    return buildItems
+  }
+
+ 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

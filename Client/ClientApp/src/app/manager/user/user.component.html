@@ -1,35 +1,38 @@
 <div class="main" id="main">
-<div class="container-fluid">
-  <div class="row-fluid main-title border-bottom border-top">
-    User Manager
+  <div class="container-fluid">
+    <div class="row-fluid main-title border-bottom border-top">
+      User Manager
+    </div>
+    <button class="btn btn-success btn-create btn-padding" (click)="createNewUser( )">
+      <strong>Create New User</strong>
+    </button>
+    <div class="row-fluid">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"> Name</th>
+            <th scope="col"> Email</th> 
+            <th scope="col"> Phone</th> 
+            <th scope="col"> Permission</th> 
+            <th scope="col"> Status</th>
+            <th class ="text-center" scope="col"> Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users ; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{user.firstName}} {{user.lastName}}</td>
+            <td> {{user.emailAddress}}</td> 
+            <td> {{user.phone}}</td> 
+            <td> {{user.permission}}</td> 
+            <td> {{user.isActive}}</td>
+            <td class ="text-center">
+              <span class="span-manage" (click)="editUser(user)">Edit</span> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <button class="btn btn-success btn-create btn-padding" (click)="manage('create')">
-    <strong>Create New User</strong>
-  </button>
-  <div class="row-fluid">
-    <table class="table table-sm">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col"> Name</th>
-          <th scope="col"> Email</th>
-          <th scope="col"> Permissions</th> 
-          <th scope="col"> Manage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users ; let i = index">
-          <th scope="row">{{i+1}}</th>
-          <td> {{user.firstName}} {{user.lastName}}</td>
-          <td> {{user.emailaddress}}</td>        
-          <td> {{user.permissions}}</td> 
-          <td>
-            <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-            <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 </div>

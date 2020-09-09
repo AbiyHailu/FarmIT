@@ -1,144 +1,148 @@
- <div class="main" id="main">
-  <div class="container-fluid"> 
+<div class="main" id="main">
+  <div class="container-fluid">
     <div class="row-fluid main-title border-bottom border-top">
       Store Manager
     </div>
     <div class="row-fluid main-body ">
-      <div class="col-lg-12 text-center sort-by col-padd">  
-        <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}" (click)="getSelected('product')">
+      <div class="col-lg-12 text-center sort-by col-padd">
+        <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}"
+          (click)="getSelected('product')">
           Products
         </button>
-        <button class="btn  btn-equal-width border-right"[ngClass]="{'selected-text-color': selectedindex ==2}" (click)="getSelected('issued')">
+        <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==2}"
+          (click)="getSelected('issued')">
           Issued Products
         </button>
-        <button class="btn  btn-equal-width " [ngClass]="{'selected-text-color': selectedindex ==3}" (click)="getSelected('recieved')">
+        <button class="btn  btn-equal-width " [ngClass]="{'selected-text-color': selectedindex ==3}"
+          (click)="getSelected('recieved')">
           Recieved Products
         </button>
-        <button class="btn   btn-equal-width border-right"[ngClass]="{'selected-text-color': selectedindex ==4}" (click)="getSelected('balance')">
+        <button class="btn   btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==4}"
+          (click)="getSelected('balance')">
           Balance
-        </button> 
-        <button class="btn   btn-equal-width"[ngClass]="{'selected-text-color': selectedindex ==5}" (click)="getSelected('ai')">
+        </button>
+        <button class="btn   btn-equal-width" [ngClass]="{'selected-text-color': selectedindex ==5}"
+          (click)="getSelected('ai')">
           Active Ingredients
-        </button> 
-      </div>
-    
-    </div> 
+        </button>
+      </div> 
     </div>
-    <div class="container-fluid">
-      <button *ngIf="selectedindex !=4" class="btn btn-success btn-create btn-padding"
-              (click)="createNewItem(selectedindex)">
-        <strong>{{title}}</strong>
-      </button> 
-      <div class="row-fluid">
-        <table class="table table-sm" > 
-          <thead class="thead-dark">
-            <tr *ngIf="selectedindex ==1">
-              <th scope="col">#</th> 
-              <th scope="col">Product Name</th>
-              <th scope="col">Category</th>
-              <th scope="col"> Expiration Date</th>
-              <th scope="col"> Price</th>
-              <th scope="col"> Metric</th>
-              <th scope="col"> ActiveIngredient</th>  
-              <th scope="col"> Manage</th> 
-            </tr>
-            <tr *ngIf="selectedindex ==2">
-              <th scope="col">#</th> 
-              <th scope="col">Product Name</th> 
-              <th scope="col"> Issued Date</th> 
-              <th scope="col"> Reason</th> 
-              <th scope="col"> Amount</th> 
-              <th scope="col"> Manage</th> 
-            </tr>
-            <tr *ngIf="selectedindex ==3">
-              <th scope="col">#</th>  
-              <th scope="col">Product Name</th> 
-              <th scope="col"> Recieved Date</th>
-              <th scope="col"> Amount</th> 
-              <th scope="col"> Manage</th> 
-            </tr>
-            <tr *ngIf="selectedindex ==4">
-              <th scope="col">#</th> 
-              <th scope="col">Product Name</th>
-              <th scope="col">Balance Date</th>
-              <th scope="col"> Amount </th> 
-              <th scope="col"> Manage</th> 
-            </tr>
-            <tr *ngIf="selectedindex ==5">
-              <th scope="col">#</th> 
-              <th scope="col">Active Ingredient Name</th>
-              <th scope="col">Env'tal Toxicity</th>
-              <th scope="col"> Terestrial Toxicity </th>  
-              <th scope="col"> Hazard Level</th> 
-              <th scope="col"> Manage</th> 
-            </tr>
-          </thead>
-          <tbody *ngIf="selectedindex ==1">
-            <tr *ngFor="let item of sortedData; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td> {{item.name}} </td>
-              <td> {{item.category}}</td>
-              <td> {{item.expiredDate}}</td>
-              <td> {{item.price}}</td>
-              <td> {{item.metric}}</td>
-              <td> {{item.activeIngredient}}</td>
-              <td>
-                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-              </td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="selectedindex ==2">
-            <tr *ngFor="let item of sortedData; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td> {{item.productName}} </td>
-              <td> {{item.dateIssued}}</td>
-              <td> {{item.amount}}</td>
-              <td> {{item.reason}}</td> 
-              <td>
-                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-              </td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="selectedindex ==3">
-            <tr *ngFor="let item of sortedData; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td> {{item.productName}} </td>
-              <td> {{item.dateRecieved}}</td> 
-              <td> {{item.amount}}</td> 
-              <td>
-                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-              </td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="selectedindex ==4">
-            <tr *ngFor="let item of sortedData; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td> {{item.productName}} </td>
-              <td> {{item.balanceDate}}</td> 
-              <td> {{item.amount}}</td> 
-              <td>
-                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-              </td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="selectedindex ==5">
-            <tr *ngFor="let item of sortedData; let i = index">
-              <th scope="row">{{i+1}}</th>
-              <td> {{item.iaName}} </td>
-              <td> {{item.environmentalToxicity}}</td> 
-              <td> {{item.terestrialToxicity}}</td> 
-              <td [ngStyle]="{'background-color': item.hazardLevel}" > {{item.hazardLevel}}</td> 
-              <td>
-                <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
-                <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="container-fluid">
+    <button *ngIf="selectedindex !=4" class="btn btn-success btn-create btn-padding"
+      (click)="createNewItem(selectedindex)">
+      <strong>{{title}}</strong>
+    </button>
+    <div class="row-fluid">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr *ngIf="selectedindex ==1">
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Category</th>
+            <th scope="col"> Expiration Date</th>
+            <th scope="col"> Price</th>
+            <th scope="col"> Metric</th>
+            <th scope="col"> ActiveIngredient</th>
+            <th scope="col"> Manage</th>
+          </tr>
+          <tr *ngIf="selectedindex ==2">
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col"> Issued Date</th>
+            <th scope="col"> Reason</th>
+            <th scope="col"> Amount</th>
+            <th scope="col"> Manage</th>
+          </tr>
+          <tr *ngIf="selectedindex ==3">
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col"> Recieved Date</th>
+            <th scope="col"> Amount</th>
+            <th scope="col"> Manage</th>
+          </tr>
+          <tr *ngIf="selectedindex ==4">
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Balance Date</th>
+            <th scope="col"> Amount </th>
+            <th scope="col"> Manage</th>
+          </tr>
+          <tr *ngIf="selectedindex ==5">
+            <th scope="col">#</th>
+            <th scope="col">Active Ingredient Name</th>
+            <th scope="col">Env'tal Toxicity</th>
+            <th scope="col"> Terestrial Toxicity </th>
+            <th scope="col"> Hazard Level</th>
+            <th scope="col"> Manage</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="selectedindex ==1">
+          <tr *ngFor="let item of sortedData; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.name}} </td>
+            <td> {{item.category}}</td>
+            <td> {{item.expiredDate}}</td>
+            <td> {{item.price}}</td>
+            <td> {{item.metric}}</td>
+            <td> {{item.activeIngredient}}</td>
+            <td>
+              <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="selectedindex ==2">
+          <tr *ngFor="let item of sortedData; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.productName}} </td>
+            <td> {{item.dateIssued}}</td>
+            <td> {{item.amount}}</td>
+            <td> {{item.reason}}</td>
+            <td>
+              <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="selectedindex ==3">
+          <tr *ngFor="let item of sortedData; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.productName}} </td>
+            <td> {{item.dateRecieved}}</td>
+            <td> {{item.amount}}</td>
+            <td>
+              <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="selectedindex ==4">
+          <tr *ngFor="let item of sortedData; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.productName}} </td>
+            <td> {{item.balanceDate}}</td>
+            <td> {{item.amount}}</td>
+            <td>
+              <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="selectedindex ==5">
+          <tr *ngFor="let item of sortedData; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.iaName}} </td>
+            <td> {{item.environmentalToxicity}}</td>
+            <td> {{item.terestrialToxicity}}</td>
+            <td [ngStyle]="{'background-color': item.hazardLevel}"> {{item.hazardLevel}}</td>
+            <td>
+              <span class="span-manage" (click)="editSubscription(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="subscriptionDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div> 
+  </div>
+</div>
