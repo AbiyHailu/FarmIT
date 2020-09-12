@@ -2,9 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SharedDataService } from '../shared.service/sharedData.service';
-import { takeUntil } from 'rxjs/operators'; 
+import { takeUntil } from 'rxjs/operators';
 import { SubscriptionService } from '../admin/subscription/service/subscription.service';
 import { CommonMethedsService } from '../shared.service/commonMethodes';
+import { ProfileService } from './profile/service/profile.service';
 
 @Component(
   {
@@ -15,26 +16,27 @@ import { CommonMethedsService } from '../shared.service/commonMethodes';
 )
 
 export class ManagerComponent implements OnDestroy {
-
   subject: Subject<void> = new Subject();
-  url: string
-  company :any
-  role: any =null
+  profile: boolean
+  company: any
+  role: any = null
   subscription = []
-  toggler:any
+  toggler: any
 
   constructor(
     private router: Router,
-    private sharedDataService: SharedDataService, 
+    private profileService: ProfileService,
+    private sharedDataService: SharedDataService,
     private subscriptionService: SubscriptionService,
     private commonMethodService: CommonMethedsService
-  ) { 
-    this.subscription = [] 
+  ) {
+    this.getProfile()
+    this.subscription = []
     this.sharedDataService.currentSideToggler
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res != null) {
-          this.toggler =res
+          this.toggler = res
           console.log("this.toggler", this.toggler)
           if (res == true) {
             document.getElementById("sideNav").style.width = "5%"
@@ -55,51 +57,64 @@ export class ManagerComponent implements OnDestroy {
 
     let companyId = this.commonMethodService.checkCompany()
     if (companyId) {
-        this.getSubscription(companyId)  
-    } 
+      this.getSubscription(companyId)
+    }
   }
 
-  activeIndex: number; 
-  getSubscription(companyId:any) { 
+  getProfile() {
+    this.profileService.getFarm()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.profile = res[0].setupCompleted
+        console.log("profile", this.profile)
+      })
+  }
+
+  activeIndex: number;
+  getSubscription(companyId: any) {
     this.subscriptionService.getSubscriptionByCompnyId(companyId)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         console.log("res", res)
         if (res.length > 0) {
-          if (this.role && this.role.toLowerCase() =='manager') {
-            this.subscription.push({ plan: 'Dashboard' })
-            this.subscription.push({ plan: 'Reports' })
-            this.subscription.push({ plan: 'Scheduler' })
-            this.subscription.push({ plan: 'User' })
-          }
-
-          res.forEach(e => {
-            if (e.planName =='Store') {
-              this.subscription.push({ plan: e.planName, items: [ ] })
-            }
-            if (e.planName == 'Protection') {
-              this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others","Pests" ] })
-            }
-            if (e.planName == 'Human Resource') {
-              this.subscription.push({ plan: e.planName, items: ["Create Employee", "Deactivate" ] })
-            }
-            if (e.planName == 'Scout') {
-              this.subscription.push({ plan: e.planName})
-            }
-          })
-        } 
-      }) 
+          if (!this.profile) {
+            this.subscription.push({ plan: 'Profile' })
+            this.navigateTo('profile')
+          } else {
+            if (this.role && this.role.toLowerCase() == 'manager') {
+              this.subscription.push({ plan: 'Dashboard' })
+              this.subscription.push({ plan: 'Reports' })
+              this.subscription.push({ plan: 'Scheduler' })
+              this.subscription.push({ plan: 'User' })
+            } 
+            res.forEach(e => {
+              if (e.planName == 'Store') {
+                this.subscription.push({ plan: e.planName, items: [] })
+              }
+              if (e.planName == 'Protection') {
+                this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others", "Pests"] })
+              }
+              if (e.planName == 'Human Resource') {
+                this.subscription.push({ plan: e.planName, items: ["Create Employee", "Deactivate"] })
+              }
+              if (e.planName == 'Scout') {
+                this.subscription.push({ plan: e.planName })
+              }
+            })
+          } 
+        }
+      })
   }
 
-  toggleAccordion(index: any, plans:string) {
+  toggleAccordion(index: any, plans: string) {
     console.log(index)
     this.activeIndex = index
-    this.navigateTo(plans.toLowerCase()) 
+    this.navigateTo(plans.toLowerCase())
   }
 
   activeListIndex
   activeList(i, plan, item) {
-    this.activeListIndex =i
+    this.activeListIndex = i
     this.navigateToChildElement(plan, item)
   }
 
@@ -107,12 +122,12 @@ export class ManagerComponent implements OnDestroy {
     console.log("destination", destination)
     this.router.navigate(['manager/' + destination]);
   }
-  navigateToChildElement(plan:string, item:string){
-    this.router.navigate(['manager/'+plan.toLowerCase()+'/'+item.toLowerCase()]);
+  navigateToChildElement(plan: string, item: string) {
+    this.router.navigate(['manager/' + plan.toLowerCase() + '/' + item.toLowerCase()]);
   }
 
 
   ngOnDestroy(): void {
     this.subject.next();
-  } 
+  }
 }

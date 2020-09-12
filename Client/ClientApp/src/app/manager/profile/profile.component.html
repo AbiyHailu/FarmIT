@@ -1,0 +1,193 @@
+<div class="main" id="main">
+    <div class="container-fluid">
+      <div class="row-fluid main-title">
+        Profile
+      </div>
+      <div class="row-fluid main-body ">
+        <div class="col-lg-12 text-center sort-by col-padd">
+          <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}"
+            (click)="getSelected(1)">
+            Set up Greenhouses <span class="status" [ngClass]="{'statusNot': ghStstusIndex ==1}"  >{{statusGh}}</span>
+          </button>
+          <button class="btn  btn-equal-width " [ngClass]="{'selected-text-color': selectedindex ==2}"
+            (click)="getSelected(2)">
+            Planting <span class="status" [ngClass]="{'statusNot': plStstusIndex ==1}" >{{statusPlGh}}</span>
+          </button> 
+        </div> 
+      </div>
+    </div> 
+    <div *ngIf="selectedIndex ==1" class="container-fluid"> 
+        
+        <div *ngIf="statusGh =='(Not Completed)'"  class="row">
+            <div class='col-lg-6'>
+test1
+            </div>
+        </div>
+
+        <div *ngIf="statusGh =='(Completed)'"  class="row">
+            <div class='col-lg-6'>
+test
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="selectedIndex ==2 " class="container-fluid">
+        plants and greenhouses 
+    </div>
+
+
+
+<!--  
+      <div class="row">
+        <div class='col-lg-6'>
+          <div *ngIf="!profile" class="row-fluid create-farm create-gh">
+            <div class='col-lg-12'>
+              <div class='row-fluid h5'>
+                Let's create your Farm!
+              </div>
+              <div class='row'>
+                <div class='col-lg-12 '>
+                  <div class='row'>
+                    <div class='col-lg-12 h6'> What is the Total Size of your Farm?(including Production and other areas)
+                      {{totalSize}} </div>
+                    <div class='col-lg-12'>
+                      <br />
+                      <form>
+                        <div class="row">
+                          <div class="col-lg-2">
+                            <label for="size">Size:</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="size" name="size" min="1" #size>
+                            <h6 class="warn">{{errormessage}} <br> </h6>
+                          </div>
+                          <br>
+                          <br>
+                          <div class="col-lg-2">
+                            <label for="unit">Unit:</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <select type="unit" id="unit" name="unit" #unit>
+                              <option disabled hidden selected value="">Select unit</option>
+                              <option *ngFor="let unit of units" value="{{unit}}">{{unit}}</option>
+                            </select>
+                          </div>
+                          <br>
+                          <br>
+                          <div class="col-lg-12 text-right">
+                            <button class="btn btn-success btn-create " type="button"
+                              (click)="calculateDimensions( size.value, unit.value)">
+                              Create Farm
+                            </button>
+                          </div>
+                          <br />
+                          <hr />
+                        </div>
+                      </form>
+  
+                    </div>
+                  </div>
+                </div>
+  
+                <div *ngIf="totalSize>0" class='col-lg-12'>
+                  <div class='row'>
+                    <div class='col-lg-12 h6'> Howmany GreenHouses does your farm have? </div>
+                    <div class='col-lg-12'>
+                      <form>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <label for="length">Number of GH:</label>
+                          </div>
+                          <div class="col-lg-8 ">
+                            <input type="number" id="GHNumber" name="GHNumber" min="0" #GHNumber>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-4">
+                          </div>
+                          <div class="col-lg-8 text-right">
+                            <button class="btn  btn-success btn-create  " type="button"
+                              (click)="numberofGH( GHNumber.value)">
+                              Create Greenhouses
+                            </button>
+                          </div>
+                          <br />
+                          <br />
+                          <hr />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <div *ngIf="numberofGHs>0" class='col-lg-12'>
+                  <div class='row  form-bottom'>
+                    <div class='col-lg-12 h6'>
+                      What is the The dimentions and number of rows of each GH? {{totalSize}}
+                    </div>
+                    <div class='col-lg-12'>
+                      <form *ngFor="let gh of GreenHs; index as i" >
+                        <strong>GH{{i+1}}</strong>
+                        <br />
+                        <div class="row">
+                          <div class="col-lg-2">
+                            <label for="length">Length (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHlength{{i}}" name="GHlength{{i}}" min="1" #GHlength>
+                          </div> 
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="width">width (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHwidth{{i}}" name="GHwidth{{i}}" min="1" #GHwidth>
+                          </div> 
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="rows">Number of rows:</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHRows{{i}}" name="GHRows{{i}}" min="1" #GHrows>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-2">
+                          </div>
+                          <div class="col-lg-10 text-right">
+                            <button class="btn btn-success btn-create " type="button"
+                              (click)="addDimensionForGHs(i, GHlength.value , GHwidth.value, GHrows.value )">
+                              Create Greenhouse {{i+1}} with rows.
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-lg-6'>
+          <div class="row-fluid create-farm">
+            <div class='col-lg-12'>
+              <div class='row-fluid h5'>
+                Visual representation of your farm
+              </div>
+              <div class="row">
+                <div class='col-lg-12 farm'> 
+                  <div *ngFor="let gh of GreenHs; index as i" class= "greenhouses border"> 
+                   GH {{i+1}}
+                  </div> 
+                </div>
+              </div> 
+            </div>
+          </div> 
+        </div>
+      </div> -->
+
+  

@@ -9,7 +9,8 @@ html, body {
 .container-fluid {
   height: 100% !important;
   width: 100% !important;
-  padding: 0% !important
+  padding: 0% !important;
+  color:$dark-text-color
 }
 
 a {
@@ -177,4 +178,7 @@ button:focus{
   color:$success-color
 }
 
+.warn{
+  color:$secondary-color;
+}
 

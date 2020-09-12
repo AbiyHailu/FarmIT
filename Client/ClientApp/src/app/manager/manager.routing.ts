@@ -8,11 +8,13 @@ import { ScoutComponent } from './scout/scout.component';
 import { StoreComponent } from './store/store.component';
 import { SchedulerComponent } from './scheduler/scheduler.component'; 
 import { PestComponent } from './pest/pest.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
   children: [
-    { path: 'dashboard', component: ManagerDashboardComponent },
+    { path: 'dashboard', component: ManagerDashboardComponent }, 
+    { path: 'profile', component: ProfileComponent },
     { path: 'reports', component: ReportsComponent },
     { path: 'store', component: StoreComponent }, 
     { path: 'scout', component: ScoutComponent },

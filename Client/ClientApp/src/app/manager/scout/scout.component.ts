@@ -7,6 +7,7 @@ import { CrudService } from 'src/app/crud/service/crud.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from 'src/app/crud/crud.component';
 import { CommonMethedsService } from 'src/app/shared.service/commonMethodes';
+import { ProfileService } from '../profile/service/profile.service';
 
 @Component({
   selector: 'scout-root',
@@ -24,6 +25,7 @@ export class ScoutComponent implements OnDestroy {
 
   constructor(
     private pestService: PestService,
+    private profileService: ProfileService,
     private scoutService: ScoutService,
     private modalService: NgbModal,
     private adminCrudService: CrudService,
@@ -53,7 +55,7 @@ export class ScoutComponent implements OnDestroy {
   }
 
   getGHs() {
-    this.scoutService.getGHs()
+    this.profileService.getGHs()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         this.ghs = res

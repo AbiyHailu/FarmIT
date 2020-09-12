@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';   
+import { Injectable } from '@angular/core';
 import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CommonMethedsService {
+
   constructor(
     private jwtDecoder: JwtDecodeService,
   ) {
@@ -22,26 +23,25 @@ export class CommonMethedsService {
     let str1 = sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[1]
     let str2 = sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[2]
     if (str && str1 && str2) {
-       sortTitle = str[0].toUpperCase() + str.slice(1) + ' ' + str1[1].toUpperCase() + str1.slice(1) + ' ' + str2[0].toUpperCase() + str2.slice(1)
+      sortTitle = str[0].toUpperCase() + str.slice(1) + ' ' + str1[1].toUpperCase() + str1.slice(1) + ' ' + str2[0].toUpperCase() + str2.slice(1)
     } else if (str && str1) {
-       sortTitle = str[0].toUpperCase() + str.slice(1) + ' ' + str1[1].toUpperCase() + str1.slice(1)
+      sortTitle = str[0].toUpperCase() + str.slice(1) + ' ' + str1[1].toUpperCase() + str1.slice(1)
     } else {
-       sortTitle = sortvalue[0].toUpperCase() + sortvalue.slice(1)
+      sortTitle = sortvalue[0].toUpperCase() + sortvalue.slice(1)
     }
     return sortTitle;
   }
 
   //assign  values to  edited item
-  assignEditValues(buildItems:any, editedItem:any){
-    buildItems.forEach( e=>
-      {
-        e.Value = editedItem[e.Binding]
-      } 
-    ) 
+  assignEditValues(buildItems: any, editedItem: any) {
+    buildItems.forEach(e => {
+      e.Value = editedItem[e.Binding]
+    }
+    )
     return buildItems
   }
-
  
+
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

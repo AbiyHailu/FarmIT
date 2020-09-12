@@ -2,12 +2,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { GH } from '../../profile/service/profile.service';
 
 @Injectable({ providedIn: 'root' })
 export class ScoutService {
 
     scout: Scout[] = []
-    gh:GH[]=[]
     constructor(
         private _http: HttpClient,
     ) {
@@ -22,13 +22,7 @@ export class ScoutService {
             { id: 8, ghid:"5", ghName: "GH5", pestId:"1", pestName:"Spider", rownumberStart:4,  rowNumberEnd:23,amount:80  },
             { id: 9, ghid:"6", ghName: "GH6", pestId:"2", pestName:"Aphides", rownumberStart:13,  rowNumberEnd:15,amount:90  },
             { id: 10, ghid:"6", ghName: "GH6", pestId:"1", pestName:"Spider", rownumberStart:21,  rowNumberEnd:22,amount:100  }
-        )
-        this.gh.push(
-            { id: 1, name: "GH1", size:20, unit:"ha" },
-            { id: 2, name: "GH2", size:20, unit:"ha" },
-            { id: 3, name: "GH3", size:20, unit:"ha" },
-            { id: 4, name: "GH4", size:20, unit:"ha" }
-        )
+        ) 
     }
 
     getScouts(): Observable<Scout[]> {
@@ -49,12 +43,7 @@ export class ScoutService {
         let scoutEdited = this.scout.find(e => e.id == "1")
         scoutEdited = scout;
         return of(scoutEdited);
-    }
-
-    getGHs(): Observable<any[]> {
-        return of(this.gh)
-    }
- 
+    } 
 
 }
 export class Scout {
@@ -67,10 +56,4 @@ export class Scout {
     rowNumberEnd: any
     amount: any// severity with %
 } 
-export class GH {
-    id: any
-    name: string
-    size:number
-    unit:string 
-} 
-
+ 

@@ -12,6 +12,7 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ReportsComponent } from './reports/reports.component'; 
 import { PestComponent } from './pest/pest.component'; 
 import { StoreComponent } from './store/store.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { StoreComponent } from './store/store.component';
   ],
   
   declarations: [
+    ProfileComponent,
     ManagerComponent,  
     ScoutComponent,
     StoreComponent,
