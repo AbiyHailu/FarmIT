@@ -25,7 +25,13 @@ body
   margin:1%; 
   background-color: rgb(228, 248, 228);
 }
-
+.btn-padding{
+  margin-left: 1% !important;  
+} 
+.tabl-row{
+  padding-left: 2% !important;  
+  padding-right: 2% !important; 
+} 
 .status{ 
   color: green;
 }
