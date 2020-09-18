@@ -6,6 +6,7 @@ import { Plant, GH, ProfileService, GHPlant, Farm } from './service/profile.serv
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from 'src/app/crud/crud.component';
 import { CrudService } from 'src/app/crud/service/crud.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'profile',
@@ -18,21 +19,19 @@ export class ProfileComponent implements OnDestroy {
   gh: GH[] = []
   plants: Plant[] = []
   ghPlants: GHPlant[] = []
-  selectedIndex: number
-  farmStatusIndex: number
+  selectedIndex: number 
   ghStstusIndex: number
   plStstusIndex: number
-  statusFarm: string = "(Completed)"
-  statusGh: string
-  statusPlGh: string 
   modalRef: any
-  
+  units: any = []
+
   constructor(
     private profileService: ProfileService,
-    private commonMethodesService: CommonMethedsService, 
-    private modalService: NgbModal, 
+    private commonMethodesService: CommonMethedsService,
+    private modalService: NgbModal,
     private crudService: CrudService,
   ) {
+    this.units.push("ha", "m2")
     this.getFarm()
     this.getGH()
     this.getPlants()
@@ -40,17 +39,21 @@ export class ProfileComponent implements OnDestroy {
     this.selectedIndex = 0
   }
 
+  farmForm:FormGroup
+  enablFarmform=false
+  farmData:any
   getFarm() {
     this.profileService.getFarm()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
+        res=null
         if (res && res.length > 0) {
-          this.farm = res[0]
-          this.farmStatusIndex = 0
-          if (!this.farm.setupCompleted) {
-            this.statusFarm = "(Not Completed)"
-            this.farmStatusIndex = 1
-          }
+          this.farm = res[0] 
+        }else{ 
+          this.farmData =this.crudService.getAddFarm()
+          this.farmForm =this.createForm( this.farmData)
+          console.log( this.farmForm)
+          this.enablFarmform=true
         }
       })
   }
@@ -59,13 +62,11 @@ export class ProfileComponent implements OnDestroy {
     this.profileService.getGHs()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
+        res = null
         this.gh = res
         if (this.gh && this.gh.length > 0) {
-          this.statusGh = "(Completed)"
           this.ghStstusIndex = 0
         } else {
-          console.log(true)
-          this.statusGh = "(Not Completed)"
           this.ghStstusIndex = 1
         }
       })
@@ -87,10 +88,8 @@ export class ProfileComponent implements OnDestroy {
 
         console.log("this.ghPlants", this.ghPlants)
         if (this.ghPlants && this.ghPlants.length > 0) {
-          this.statusPlGh = "(Completed)"
           this.plStstusIndex = 0
         } else {
-          this.statusPlGh = "(Not Completed)"
           this.plStstusIndex = 1
         }
       })
@@ -106,33 +105,33 @@ export class ProfileComponent implements OnDestroy {
 
     this.modalRef.componentInstance.data = this.commonMethodesService.assignEditValues(this.crudService.getAddFarm(), farm);
     this.modalRef.componentInstance.type = "Edit Farm profile";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
+    })
   }
 
-  addGreenhouse(){  
-      this.modalRef = this.modalService.open(CrudComponent, {
-        centered: true,
-        size: 'md',
-        backdrop: 'static',
-        keyboard: false
-      });
-  
-      this.modalRef.componentInstance.data =  this.crudService.getAddGH() 
-      this.modalRef.componentInstance.type = "Edit GreenHouse";
-      this.modalRef.result.then(result => { 
-        console.log('result', result)
-        if (result != null) { 
-          this.profileService.editFarmProfile(result)
-        }
-      })   
+  addGreenhouse() {
+    this.modalRef = this.modalService.open(CrudComponent, {
+      centered: true,
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    this.modalRef.componentInstance.data = this.crudService.getAddGH()
+    this.modalRef.componentInstance.type = "Edit GreenHouse";
+    this.modalRef.result.then(result => {
+      console.log('result', result)
+      if (result != null) {
+        this.profileService.editFarmProfile(result)
+      }
+    })
   }
-  
-  editGreenHouses(greenhouse:GH){ 
+
+  editGreenHouses(greenhouse: GH) {
     console.log(greenhouse)
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
@@ -143,15 +142,15 @@ export class ProfileComponent implements OnDestroy {
 
     this.modalRef.componentInstance.data = this.commonMethodesService.assignEditValues(this.crudService.getAddGH(), greenhouse);
     this.modalRef.componentInstance.type = "Edit GreenHouse";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
+    })
   }
 
-  addPlant(){  
+  addPlant() {
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
       size: 'md',
@@ -159,17 +158,17 @@ export class ProfileComponent implements OnDestroy {
       keyboard: false
     });
 
-    this.modalRef.componentInstance.data =  this.crudService.getAddPlant() 
+    this.modalRef.componentInstance.data = this.crudService.getAddPlant()
     this.modalRef.componentInstance.type = "Add new Plant";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
-}
+    })
+  }
 
-  ediePlant(plant:GH){ 
+  ediePlant(plant: GH) {
     console.log(plant)
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
@@ -180,24 +179,24 @@ export class ProfileComponent implements OnDestroy {
 
     this.modalRef.componentInstance.data = this.commonMethodesService.assignEditValues(this.crudService.getAddPlant(), plant);
     this.modalRef.componentInstance.type = "Edit Plant";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
+    })
   }
 
-  addGhPlant(){
-    let buildItems =this.crudService.getAddGHPlant()
+  addGhPlant() {
+    let buildItems = this.crudService.getAddGHPlant()
     let plantNameList = []
-    this.plants.forEach(e => { plantNameList.push(e.name) }) 
+    this.plants.forEach(e => { plantNameList.push(e.name) })
     buildItems.filter(e => e.Binding == "plantName")[0].SelectList = plantNameList
 
     let ghNameList = []
-    this.gh.forEach(e => { ghNameList.push(e.name) }) 
+    this.gh.forEach(e => { ghNameList.push(e.name) })
     buildItems.filter(e => e.Binding == "ghName")[0].SelectList = ghNameList
- 
+
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
       size: 'md',
@@ -205,27 +204,27 @@ export class ProfileComponent implements OnDestroy {
       keyboard: false
     });
 
-    this.modalRef.componentInstance.data = buildItems ;
+    this.modalRef.componentInstance.data = buildItems;
     this.modalRef.componentInstance.type = "Edit Plant";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
+    })
   }
 
-  edieGhPlant(ghplt){
+  edieGhPlant(ghplt) {
     console.log(ghplt)
-    
-    let buildItems =this.crudService.getAddGHPlant()
+
+    let buildItems = this.crudService.getAddGHPlant()
     let plantNameList = []
-    this.plants.forEach(e => { plantNameList.push(e.name) }) 
+    this.plants.forEach(e => { plantNameList.push(e.name) })
     buildItems.filter(e => e.Binding == "plantName")[0].SelectList = plantNameList
 
     let ghNameList = []
-    this.gh.forEach(e => { ghNameList.push(e.name) }) 
-    buildItems.filter(e => e.Binding == "ghName")[0].SelectList = ghNameList 
+    this.gh.forEach(e => { ghNameList.push(e.name) })
+    buildItems.filter(e => e.Binding == "ghName")[0].SelectList = ghNameList
 
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
@@ -236,12 +235,12 @@ export class ProfileComponent implements OnDestroy {
 
     this.modalRef.componentInstance.data = this.commonMethodesService.assignEditValues(buildItems, ghplt);
     this.modalRef.componentInstance.type = "Edit Plant";
-    this.modalRef.result.then(result => { 
+    this.modalRef.result.then(result => {
       console.log('result', result)
-      if (result != null) { 
+      if (result != null) {
         this.profileService.editFarmProfile(result)
       }
-    })   
+    })
   }
 
   getSelected(index: number) {
@@ -249,6 +248,123 @@ export class ProfileComponent implements OnDestroy {
     this.selectedIndex = index
   }
 
+  
+  createForm(data) { 
+    const formGroup = {}; 
+    data.forEach(e => {  
+      formGroup[e.Binding] = new FormControl({value: e.Value ||'', disabled: e.Disable||false} ) 
+    })
+    return new FormGroup(formGroup);
+  }
+
+
+ 
+ 
+  totalSize: number
+  lengthmain: number
+  widthmain: number
+  errormessage = ''
+  unitError = ''
+  nameErrorMessage=''
+  calculateDimensions(size: number, unit: string) {
+    if (!unit) {
+      this.unitError = "Select unit"
+    } else { 
+      this.unitError = " "
+      if (unit == 'm2') {
+        //size must be below 1 digites :should be inproved 
+        if (size.toString().length <= 3) {
+          this.errormessage = "* Farm size is too small (min 1000 m2)"
+        } else {
+          this.errormessage = ""
+          this.widthmain = 500
+          this.lengthmain = 300
+          this.totalSize = size
+        }
+      } else if (unit == 'ha') {
+        if (size.toString().length > 3) {
+          this.errormessage = "farm size is too big (max 100 ha)"
+        } else {
+          if (size > 100) {
+            this.errormessage = "farm size is too big (max 100 ha)"
+          } else {
+            this.widthmain = 800
+            this.lengthmain = 500
+            this.totalSize = size
+          }
+        }
+      } 
+    } 
+  }
+
+  GreenHs: [{ name: string, type: string; length: number, width: number, rows: number, size: number, unit: string }]
+  numberofGHs: number
+  numberofGH(value: number) {
+    this.GreenHs = [{ name: '', type: '', length: 0, width: 0, rows: 0, size: 0, unit: 'ha' }]
+    this.numberofGHs = value
+    for (let index = 1; index < value; index++) {
+      this.GreenHs.push({ name: '', type: '', length: 0, width: 0, rows: 0, size: 0, unit: 'ha' })
+    }
+    console.log(this.GreenHs)
+  }
+
+  Plots: [{ name: string, type: string; length: number, width: number, rows: number, size: number, unit: string }]
+  numberofPlotss: number
+  numberofPlots(value: number) {
+    this.Plots = [{ name: '', type: '', length: 0, width: 0, rows: 0, size: 0, unit: 'ha' }]
+    this.numberofPlotss = value
+    for (let index = 1; index < value; index++) {
+      this.Plots.push({ name: '', type: '', length: 0, width: 0, rows: 0, size: 0, unit: 'ha' })
+    }
+    console.log("this.Plots", this.Plots)
+  }
+
+  addDimensionForGHs(index: number, width: number, length: number, rows: number) {
+    console.log(index, width, length)
+    this.GreenHs[index].width = width;
+    this.GreenHs[index].length = length
+    this.GreenHs[index].rows = rows
+    this.GreenHs[index].name = "GH" + index+1
+    this.Plots[index].type = "GreenHouse"  
+    this.GreenHs[index].size = this.calculateGhSize(length, width)
+    console.log(this.GreenHs)
+  }
+  addDimensionForPlotss(index: number, width: number, length: number, rows: number) {
+    console.log(index, width, length)
+    this.Plots[index].width = width;
+    this.Plots[index].length = length
+    this.Plots[index].rows = rows
+    this.Plots[index].name = "Plot" + index+1  
+    this.Plots[index].type = "Open Field"  
+    this.Plots[index].size = this.calculateGhSize(length, width)
+    console.log(this.GreenHs)
+  }
+
+  farmIndex:any
+  ghIndex:any
+  plotIndex:any
+  toggleFarm() {  
+    this.farmIndex =!this.farmIndex 
+    this.ghIndex=false
+    this.plotIndex=false 
+  }
+
+  toggleGh() {   
+    this.farmIndex =false!
+    this.ghIndex=!this.ghIndex
+    this.plotIndex=false 
+  }
+
+  togglePlot() {   
+    this.farmIndex =false!
+    this.ghIndex=false
+    this.plotIndex= !this.plotIndex
+  }
+
+
+  calculateGhSize(length: number, width: number) {
+    return length * width / 10000
+  }
   ngOnDestroy(): void {
     this.subject.next()
   }

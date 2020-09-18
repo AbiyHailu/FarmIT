@@ -18,13 +18,19 @@ body
   min-height:400px  !important;;
   background-color: green;
 }
-.greenhouses{ 
+.greenhouses, .plots{ 
   float: left;
-   width:70px !important;
-   height:100px  !important;
-  margin:1%; 
+  width:70px !important;
+  height:100px  !important;
+  margin:1%;  
+}
+.greenhouses{
   background-color: rgb(228, 248, 228);
 }
+.plots{
+ background-color: rgb(133, 85, 40);
+}
+
 .btn-padding{
   margin-left: 1% !important;  
 } 

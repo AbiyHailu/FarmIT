@@ -48,7 +48,7 @@ export class CrudService {
       { Binding: 'country', Type: 'text', Label: "Enter Area country" },
       { Binding: 'longitude', Type: 'number', Label: "Longitude" },
       { Binding: 'latittude', Type: 'number', Label: "Latittude" },
-      { Binding: 'totalSize', Type: 'number', Label: "Total Farm Size" },
+      { Binding: 'totalSize', Type: 'number', Label: "Total Farm Size (ha)" },
     ]
   }
 

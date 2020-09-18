@@ -60,6 +60,10 @@ card, card-header , card-body{
   color: $white-text-color;
   background-color:$primary-color;
   border-color: #1861ac;
+  border-radius:0px !important; 
+  width:auto;
+  float: right;
+  margin-top:1%;
 }
 
 .btn-create{
@@ -69,6 +73,7 @@ card, card-header , card-body{
     background:$success-color ;
     color:$white-text-color
 }
+ 
 
 .btn-equal-width{
   border-radius:0px !important; 

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../shared.service/auth.service';
 import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
 import { SharedDataService } from '../shared.service/sharedData.service';
-import { ManagerComponent } from '../manager/manager.component';
 import { CommonMethedsService } from '../shared.service/commonMethodes';
 
 @Component({

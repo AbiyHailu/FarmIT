@@ -3,187 +3,553 @@
     <div class="row-fluid main-title">
       Profile
     </div>
-    <div class="row-fluid main-body ">
-      <div class="col-lg-12 text-center sort-by col-padd">
-        <button class="btn btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==0}"
-          (click)="getSelected(0)">
-          Farm Profile
-          <!-- <span class="status" [ngClass]="{'statusNot': farmStatusIndex ==1}">{{statusFarm}}</span> -->
-        </button>
-        <button class="btn btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}"
-          (click)="getSelected(1)">
-          Greenhouses
-          <!--  <span class="status" [ngClass]="{'statusNot': ghStstusIndex ==1}">{{statusGh}}</span> -->
-        </button>
-        <button class="btn btn-equal-width  border-right" [ngClass]="{'selected-text-color': selectedindex ==2}"
-          (click)="getSelected(2)">
-          Plants
-          <!--  <span class="status" [ngClass]="{'statusNot': plStstusIndex ==1}">{{statusPlGh}}</span> -->
-        </button>
-        <button class="btn btn-equal-width " [ngClass]="{'selected-text-color': selectedindex ==3}"
-          (click)="getSelected(3)">
-          Plantings
-          <!--  <span class="status" [ngClass]="{'statusNot': plStstusIndex ==1}">{{statusPlGh}}</span> -->
-        </button>
-      </div>
-    </div>
 
-    <div *ngIf="selectedIndex ==0" class="container-fluid">
-      <div class="row-fluid tabl-row">
-        <br />
-        <table class="table table-sm">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col"> Name </th>
-              <th scope="col"> Area name/City</th>
-              <th scope="col"> Country</th>
-              <th scope="col"> Total Size</th>
-              <th scope="col"> Latittude</th>
-              <th scope="col"> Longitude</th>
-              <th class="text-center" scope="col"> Manage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td> {{farm.name}} </td>
-              <td> {{farm.areaName}}</td>
-              <td> {{farm.country}}</td>
-              <td> {{farm.totalSize}}</td>
-              <td> {{farm.latittude}}</td>
-              <td> {{farm.longitude}}</td>
-              <td class="text-center">
-                <span class="span-manage" (click)="editFarmtData(farm)">Edit</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="selectedIndex ==1" class="container-fluid">
-    <div *ngIf="statusGh =='(Not Completed)'" class="row">
-      <div class='col-lg-6'>
-        test1
-      </div>
-    </div>
+    <div *ngIf=" ghStstusIndex ==1" class="row-fluid main-body ">
+      <div class="row">
+        <div class='col-lg-6'>
+          <div *ngIf="!profile" class="row-fluid create-farm create-gh">
+            <div class='col-lg-12'>
+              <div class='row-fluid h5'>
+                Let's create your Farm!
+              </div>
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne" (click)="toggleFarm()">
+                    <h5 class="mb-0">
+                      Farm Size   {{totalSize}} 
+                    </h5>
+                  </div>
 
-    <div *ngIf="statusGh =='(Completed)'" class="row-fluid">
-      <button class="btn btn-create btn-success btn-padding" [ngClass]="{'selected-text-color': selectedindex ==1}"
-        (click)="addGreenhouse()">
-        Create New GreenHouse / Open field
-      </button>
-      <div class='col-lg-12'>
-        <div class="row-fluid">
-          <table class="table table-sm">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col"> Name </th>
-                <th scope="col"> Type </th>
-                <th scope="col"> length</th>
-                <th scope="col"> width</th>
-                <th scope="col"> size</th>
-                <th scope="col"> rows</th>
-                <th class="text-center" scope="col"> Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of gh; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td> {{item.name}} </td>
-                <td> {{item.type}} </td>
-                <td> {{item.length}}</td>
-                <td> {{item.width}}</td>
-                <td> {{item.size}}{{item.unit}}</td>
-                <td> {{item.rows}}</td>
-                <td class="text-center">
-                  <span class="span-manage" (click)="editGreenHouses(item)">Edit</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <div id="collapseOne" class="collapse" [ngClass]="{'show': farmIndex}" aria-labelledby="headingOne"
+                    data-parent="#accordion">
+                    <div class="card-body">
+                      <div class='row'> 
+                        <div class='col-lg-12'> 
+                            <form [formGroup]="farmForm" autocomplete="new-password">
+                              <div *ngFor="let layoutElement of farmData"> 
+                                <label *ngIf="layoutElement.Label" [attr.for]="layoutElement" class="layoutelement-label">
+                                  <strong>{{layoutElement.Label }}</strong>
+                                </label>
+                                <div [ngSwitch]="layoutElement.Type" class="input-group">
+                          
+                                  <input *ngSwitchCase="'text'" class="form-control" autocomplete="off" [formControlName]="layoutElement.Binding"
+                                    placeholder="{{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+                                    type="text" > 
+                          
+                                  <input *ngSwitchCase="'number'" class="form-control" [formControlName]="layoutElement.Binding"
+                                    placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+                                    type="number" min="0">
+                          
+                                  <input *ngSwitchCase="'textDate'" class="form-control" [formControlName]="layoutElement.Binding"
+                                    placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+                                    type="date">
+                          
+                                  <select *ngSwitchCase="'select'"  [formControlName]="layoutElement.Binding" >
+                                    <option disabled  selected value="">{{layoutElement.Label}}</option>
+                                    <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
+                                  </select>
+                          
+                                </div>
+                              </div> 
+                              <button (click)="submitData(dataForm)" class="btn btn-primary">
+                                {{'Create Farm'}}
+                              </button>
+                            </form> 
+          <!--                 <form>
+                            <div class="row">
+
+                              <div class="col-lg-2">
+                                <label for="name">Farm Name:</label>
+                              </div>
+                              <div class="col-lg-10">
+                                <input type="text" id="name" name="name" min="1" #name>
+                                <h6 class="warn">{{nameErrorMessage}} <br> </h6>
+                              </div>
+
+                              <div class="col-lg-2">
+                                <label for="areaName">Farm Name:</label>
+                              </div>
+                              <div class="col-lg-10">
+                                <input type="text" id="areaName" name="areaName" min="1" #areaName>
+                                <h6 class="warn">{{areaNameErrorMessage}} <br> </h6>
+                              </div>
+
+                              
+                              <div class="col-lg-2">
+                                <label for="country">Country:</label>
+                              </div>
+                              <div class="col-lg-10">
+                                <input type="text" id="country" name="country" min="1" #country>
+                                <h6 class="warn">{{countryErrorMessage}} <br> </h6>
+                              </div>
+
+                              <div class="col-lg-2">
+                                <label for="size">Size:</label>
+                              </div>
+                              <div class="col-lg-10">
+                                <input type="number" id="size" name="size" min="1" #size>
+                                <h6 class="warn">{{errormessage}} <br> </h6>
+                              </div>
+                              <br>
+                              <br>
+                              <div class="col-lg-2">
+                                <label for="unit">Unit:</label>
+                              </div>
+                              <div class="col-lg-10">
+                                <select type="unit" id="unit" name="unit" #unit>
+                                  <option disabled hidden selected value="">Select unit</option>
+                                  <option *ngFor="let unit of units" value="{{unit}}">{{unit}}</option>
+                                </select>
+                                <h6 class="warn">{{unitError}} <br> </h6>
+                              </div>
+                              <br>
+                              <br>
+                              <div class="col-lg-12 text-right">
+                                <button class="btn btn-success btn-create " type="button"
+                                  (click)="calculateDimensions( size.value, unit.value)">
+                                  Create Farm
+                                </button>
+                              </div>
+                              <br />
+                              <hr />
+                            </div>
+                          </form> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo" (click)="toggleGh()">
+                        Collapsible Group Item #2
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" [ngClass]="{'show': ghIndex}" aria-labelledby="headingTwo"
+                    data-parent="#accordion">
+                    <div class="card-body">
+                      gh
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree" (click)="togglePlot()">
+                        Collapsible Group Item #3
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" [ngClass]="{'show': plotIndex}"
+                    aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      plot
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class='row'>
+
+
+                <div *ngIf="totalSize>0" class='col-lg-12'>
+                  <div class='row'>
+                    <div class='col-lg-12 h6'> Howmany GreenHouses does your farm have? </div>
+                    <div class='col-lg-12'>
+                      <form>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <label for="length">Number of GH:</label>
+                          </div>
+                          <div class="col-lg-8 ">
+                            <input type="number" id="GHNumber" name="GHNumber" min="0" #GHNumber>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-4">
+                          </div>
+                          <div class="col-lg-8 text-right">
+                            <button class="btn  btn-success btn-create  " type="button"
+                              (click)="numberofGH( GHNumber.value)">
+                              Create Greenhouses
+                            </button>
+                          </div>
+                          <br />
+                          <br />
+                          <hr />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div *ngIf="numberofGHs>0" class='col-lg-12'>
+                  <div class='row  form-bottom'>
+                    <div class='col-lg-12 h6'>
+                      What is the The dimentions and number of rows of each GH? {{totalSize}}
+                    </div>
+                    <div class='col-lg-12'>
+                      <form *ngFor="let gh of GreenHs; index as i">
+                        <strong>GH{{i+1}}</strong>
+                        <br />
+                        <div class="row">
+                          <div class="col-lg-2">
+                            <label for="length">Length (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHlength{{i}}" name="GHlength{{i}}" min="1" #GHlength>
+                          </div>
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="width">width (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHwidth{{i}}" name="GHwidth{{i}}" min="1" #GHwidth>
+                          </div>
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="rows">Number of rows:</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="GHRows{{i}}" name="GHRows{{i}}" min="1" #GHrows>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-2">
+                          </div>
+                          <div class="col-lg-10 text-right">
+                            <button class="btn btn-success btn-create " type="button"
+                              (click)="addDimensionForGHs(i, GHlength.value , GHwidth.value, GHrows.value )">
+                              Create Greenhouse {{i+1}} with rows.
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="totalSize>0" class='col-lg-12'>
+                  <div class='row'>
+                    <div class='col-lg-12 h6'> Howmany Openfield production plots does your farm have? </div>
+                    <div class='col-lg-12'>
+                      <form>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <label for="length">Number of plots:</label>
+                          </div>
+                          <div class="col-lg-8 ">
+                            <input type="number" id="PlotNumber" name="PlotNumber" min="0" #PlotNumber>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-4">
+                          </div>
+                          <div class="col-lg-8 text-right">
+                            <button class="btn  btn-success btn-create  " type="button"
+                              (click)="numberofPlots( PlotNumber.value)">
+                              Create OpenField plots
+                            </button>
+                          </div>
+                          <br />
+                          <br />
+                          <hr />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div *ngIf="numberofPlotss>0" class='col-lg-12'>
+                  <div class='row  form-bottom'>
+                    <div class='col-lg-12 h6'>
+                      What is the The dimentions and number of rows of each Open Field plots? {{totalSize}}
+                    </div>
+                    <div class='col-lg-12'>
+                      <form *ngFor="let plot of Plots; index as i">
+                        <strong>Plot{{i+1}}</strong>
+                        <br />
+                        <div class="row">
+                          <div class="col-lg-2">
+                            <label for="length">Length (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="Plotlength{{i}}" name="Plotlength{{i}}" min="1" #Plotlength>
+                          </div>
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="width">width (meters):</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="Plotwidth{{i}}" name="Plotwidth{{i}}" min="1" #Plotwidth>
+                          </div>
+                          <br />
+                          <br />
+                          <div class="col-lg-2">
+                            <label for="rows">Number of rows:</label>
+                          </div>
+                          <div class="col-lg-10">
+                            <input type="number" id="PlotRows{{i}}" name="PlotRows{{i}}" min="1" #PlotRows>
+                          </div>
+                          <br>
+                          <br />
+                          <div class="col-lg-2">
+                          </div>
+                          <div class="col-lg-10 text-right">
+                            <button class="btn btn-success btn-create " type="button"
+                              (click)="addDimensionForPlotss(i, Plotlength.value , Plotwidth.value, PlotRows.value )">
+                              Create Open Field Plots {{i+1}} with rows.
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col-lg-6'>
+          <div class="row-fluid create-farm">
+            <div class='col-lg-12'>
+              <div class='row-fluid h5'>
+                Visual representation of your farm
+              </div>
+              <div class="row">
+                <div class='col-lg-12 farm'>
+                  <div *ngFor="let gh of GreenHs; index as i" class="greenhouses border">
+                    GH {{i+1}}
+                  </div>
+                  <div *ngFor="let plot of Plots; index as i" class="plots border">
+                    Plot {{i+1}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div *ngIf="selectedIndex ==2 " class="container-fluid">
-    <div class="row-fluid">
-      <button class="btn btn-create btn-success btn-padding" [ngClass]="{'selected-text-color': selectedindex ==2}"
-        (click)="addPlant()">
-        Add New Plant
-      </button>
-      <div class='col-lg-12'>
-        <div class="row-fluid">
-          <table class="table table-sm">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col"> Name </th>
-                <th scope="col"> Varity </th>
-                <th class="text-center" scope="col"> Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let plt of plants; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td> {{plt.name}} </td>
-                <td> {{plt.varity}} </td>
-                <td class="text-center">
-                  <span class="span-manage" (click)="ediePlant(plt)">Edit</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div *ngIf=" ghStstusIndex ==0" class="row-fluid main-body ">
+        <div class="col-lg-12 text-center sort-by col-padd">
+          <button class="btn btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==0}"
+            (click)="getSelected(0)">
+            Farm Profile
+            <!-- <span class="status" [ngClass]="{'statusNot': farmStatusIndex ==1}">{{statusFarm}}</span> -->
+          </button>
+          <button class="btn btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}"
+            (click)="getSelected(1)">
+            Greenhouses
+            <!--  <span class="status" [ngClass]="{'statusNot': ghStstusIndex ==1}">{{statusGh}}</span> -->
+          </button>
+          <button class="btn btn-equal-width  border-right" [ngClass]="{'selected-text-color': selectedindex ==2}"
+            (click)="getSelected(2)">
+            Plants
+            <!--  <span class="status" [ngClass]="{'statusNot': plStstusIndex ==1}">{{statusPlGh}}</span> -->
+          </button>
+          <button class="btn btn-equal-width " [ngClass]="{'selected-text-color': selectedindex ==3}"
+            (click)="getSelected(3)">
+            Plants in GreenHouses
+            <!--  <span class="status" [ngClass]="{'statusNot': plStstusIndex ==1}">{{statusPlGh}}</span> -->
+          </button>
+        </div>
+
+        <!--  Farm Profile  -->
+        <div *ngIf="selectedIndex ==0" class="container-fluid">
+          <div class="row-fluid tabl-row">
+            <br />
+            <table class="table table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col"> Name </th>
+                  <th scope="col"> Area name/City</th>
+                  <th scope="col"> Country</th>
+                  <th scope="col"> Total Size</th>
+                  <th scope="col"> Latittude</th>
+                  <th scope="col"> Longitude</th>
+                  <th class="text-center" scope="col"> Manage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> {{farm.name}} </td>
+                  <td> {{farm.areaName}}</td>
+                  <td> {{farm.country}}</td>
+                  <td> {{farm.totalSize}}</td>
+                  <td> {{farm.latittude}}</td>
+                  <td> {{farm.longitude}}</td>
+                  <td class="text-center">
+                    <span class="span-manage" (click)="editFarmtData(farm)">Edit</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- GreenHouses -->
+        <div *ngIf="selectedIndex ==1" class="container-fluid">
+          <div *ngIf="statusGh =='(Completed)'" class="row-fluid">
+            <button class="btn btn-create btn-success btn-padding"
+              [ngClass]="{'selected-text-color': selectedindex ==1}" (click)="addGreenhouse()">
+              Create New GreenHouse / Open field
+            </button>
+            <div class='col-lg-12'>
+              <div class="row-fluid">
+                <table class="table table-sm">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col"> Name </th>
+                      <th scope="col"> Type </th>
+                      <th scope="col"> length</th>
+                      <th scope="col"> width</th>
+                      <th scope="col"> size</th>
+                      <th scope="col"> rows</th>
+                      <th class="text-center" scope="col"> Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of gh; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td> {{item.name}} </td>
+                      <td> {{item.type}} </td>
+                      <td> {{item.length}}</td>
+                      <td> {{item.width}}</td>
+                      <td> {{item.size}}{{item.unit}}</td>
+                      <td> {{item.rows}}</td>
+                      <td class="text-center">
+                        <span class="span-manage" (click)="editGreenHouses(item)">Edit</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plants -->
+        <div *ngIf="selectedIndex ==2 " class="container-fluid">
+          <div class="row-fluid">
+            <button class="btn btn-create btn-success btn-padding"
+              [ngClass]="{'selected-text-color': selectedindex ==2}" (click)="addPlant()">
+              Add New Plant
+            </button>
+            <div class='col-lg-12'>
+              <div class="row-fluid">
+                <table class="table table-sm">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col"> Name </th>
+                      <th scope="col"> Varity </th>
+                      <th class="text-center" scope="col"> Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let plt of plants; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td> {{plt.name}} </td>
+                      <td> {{plt.varity}} </td>
+                      <td class="text-center">
+                        <span class="span-manage" (click)="ediePlant(plt)">Edit</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--GH & Plants -->
+        <div *ngIf="selectedIndex ==3 " class="container-fluid">
+          <div class="row-fluid">
+            <button class="btn btn-create btn-success btn-padding"
+              [ngClass]="{'selected-text-color': selectedindex ==3}" (click)="addGhPlant()">
+              Add Plant to Greenhouse
+            </button>
+            <div class='col-lg-12'>
+              <div class="row-fluid">
+                <table class="table table-sm">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col"> Plant Name </th>
+                      <th scope="col"> GreenHouse Name </th>
+                      <th scope="col"> Number Planted </th>
+                      <th scope="col"> ha Planted </th>
+                      <th scope="col"> Date Planted</th>
+                      <th scope="col"> Date Cleared/To be Cleared</th>
+                      <th class="text-center" scope="col"> Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let plt of ghPlants; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td> {{plt.plantName}} </td>
+                      <td> {{plt.ghName}} </td>
+                      <td> {{plt.numberPlanted}} </td>
+                      <td> {{plt.haPlanted}} </td>
+                      <td> {{plt.datePlanted}} </td>
+                      <td> {{plt.dateCleared}} </td>
+                      <td class="text-center">
+                        <span class="span-manage" (click)="edieGhPlant(plt)">Edit</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
-  </div>
-
-  <div *ngIf="selectedIndex ==3 " class="container-fluid">
-    <div class="row-fluid">
-      <button class="btn btn-create btn-success btn-padding" [ngClass]="{'selected-text-color': selectedindex ==3}"
-        (click)="addGhPlant()">
-        Plant
-      </button>
-      <div class='col-lg-12'>
-        <div class="row-fluid">
-          <table class="table table-sm">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col"> Plant Name </th>   
-                <th scope="col"> GreenHouse Name </th>
-                <th scope="col"> Number Planted </th>
-                <th scope="col"> ha Planted </th>
-                <th scope="col"> Date Planted</th> 
-                <th scope="col"> Date Cleared/To be Cleared</th>
-                <th class="text-center" scope="col"> Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let plt of ghPlants; let i = index">
-                <th scope="row">{{i+1}}</th>
-                <td> {{plt.plantName}} </td>
-                <td> {{plt.ghName}} </td> 
-                <td> {{plt.numberPlanted}} </td>
-                <td> {{plt.haPlanted}} </td>
-                <td> {{plt.datePlanted}} </td> 
-                <td> {{plt.dateCleared}} </td>
-                <td class="text-center">
-                  <span class="span-manage" (click)="edieGhPlant(plt)">Edit</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
-  <!--  
+
+
+
+
+
+    <!--  
       <div class="row">
         <div class='col-lg-6'>
           <div *ngIf="!profile" class="row-fluid create-farm create-gh">

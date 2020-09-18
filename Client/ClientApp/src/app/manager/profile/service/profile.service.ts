@@ -14,7 +14,7 @@ export class ProfileService {
         private _http: HttpClient,
     ) {
         this.farm.push(
-            { id: "1", name: "Farm1", latittude: 9.449062, longitude: 39.291354, areaName: "x", country: "Eth", totalSize: 20, setupCompleted: true }
+            { id: "1", name: "Farm1", latittude: 9.449062, longitude: 39.291354, areaName: "x", country: "Eth", totalSize: "20ha"  }
         )
 
         this.gh.push(
@@ -88,8 +88,7 @@ export class Farm {
     country: string
     longitude: number
     latittude: number
-    totalSize: number
-    setupCompleted: boolean
+    totalSize: string 
 }
 
 export class GH {

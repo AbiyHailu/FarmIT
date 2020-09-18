@@ -65,7 +65,6 @@ export class ManagerComponent implements OnDestroy {
     this.profileService.getFarm()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        this.profile = res[0].setupCompleted
         console.log("profile", this.profile)
       })
   }
@@ -106,8 +105,7 @@ export class ManagerComponent implements OnDestroy {
       })
   }
 
-  toggleAccordion(index: any, plans: string) {
-    console.log(index)
+  toggleAccordion(index: any, plans: string) { 
     this.activeIndex = index
     this.navigateTo(plans.toLowerCase())
   }
