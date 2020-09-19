@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class CommonMethedsService {
 
+
   constructor(
     private jwtDecoder: JwtDecodeService,
   ) {
@@ -40,7 +41,23 @@ export class CommonMethedsService {
     )
     return buildItems
   }
- 
+  //get expired in tendays
+  getExpiredintenDays(array:any) {
+    let newArray=[]
+    let now = new Date();
+    let date1= now.getTime()
+    let date2 =new Date(now.setDate(now.getDate() + 10 )).getTime() 
+    console.log("date1", date1)
+    console.log("date2", date2)
+   array.forEach(e => {
+      let actual = new Date(e.expiredDate).getTime()
+      console.log(actual)
+      
+      if (actual > date1 && actual < date2)
+        newArray.push(e) 
+    });
+    return newArray;
+  }
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

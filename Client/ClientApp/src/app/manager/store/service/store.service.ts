@@ -15,9 +15,9 @@ export class StoreService {
     private http: HttpClient
   ) {
     this.products.push(
-      { id: "1", name: "product1", category: "x", expiredDate: "1/02/2020", price: "20.22", metric: "kg", activeIngredientid:"1" , activeIngredient: "active1" },
-      { id: "2", name: "product2", category: "y", expiredDate: "2/02/2020", price: "2.22", metric: "lt",  activeIngredientid:"1" , activeIngredient: "active2" },
-      { id: "3", name: "product3", category: "z", expiredDate: "4/04/2020", price: "10.22", metric: "lt", activeIngredientid:"1" ,  activeIngredient: "active3" },
+      { id: "1", name: "product1", category: "x", expiredDate: "09/20/2020", price: "20.22", metric: "kg", activeIngredientid:"1" , activeIngredient: "active1" },
+      { id: "2", name: "product2", category: "y", expiredDate: "09/21/2020", price: "2.22", metric: "lt",  activeIngredientid:"1" , activeIngredient: "active2" },
+      { id: "3", name: "product3", category: "z", expiredDate: "22/09/2020", price: "10.22", metric: "lt", activeIngredientid:"1" ,  activeIngredient: "active3" },
       { id: "4", name: "product4", category: "x", expiredDate: "1/08/2020", price: "3.22", metric: "kg", activeIngredientid:"1" ,  activeIngredient: "active4" },
       { id: "5", name: "product5", category: "y", expiredDate: "12/10/2020", price: "40.22", metric: "lt",  activeIngredientid:"1" , activeIngredient: "actie5" },
       { id: "6", name: "product6", category: "z", expiredDate: "1/09/2020", price: "25.22", metric: "kg",  activeIngredientid:"1" , activeIngredient: "active6" },
@@ -51,7 +51,8 @@ export class StoreService {
     //return <Observable<any>>this.http.get(this.apiUrl);
     return of(this.products);
   }
-
+  
+ 
   getProductById(id: any): Observable<Product> {
     // return <Observable<any>>this.http.get("/api/user/" + id);
     return of(this.products.find(e => e.id == "1"))
