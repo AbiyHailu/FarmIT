@@ -12,12 +12,15 @@ export class CommonMethedsService {
   ) {
 
   }
+
   checkUser() {
     return this.jwtDecoder.jwtDecode(localStorage.getItem('authToken'))
   }
+
   checkCompany() {
     return localStorage.getItem('userDetail')
   }
+
   editTitlestring(sortvalue: string) {
     let sortTitle
     let str = sortvalue.match(/[A-Z]+[^A-Z]*|[^A-Z]+/g)[0]
@@ -41,23 +44,37 @@ export class CommonMethedsService {
     )
     return buildItems
   }
-  //get expired in tendays
-  getExpiredintenDays(array:any) {
-    let newArray=[]
+
+  //get expired in days
+  getExpiredinDays(array: any, days: number) {
+    let newArray = []
     let now = new Date();
-    let date1= now.getTime()
-    let date2 =new Date(now.setDate(now.getDate() + 10 )).getTime() 
-    console.log("date1", date1)
-    console.log("date2", date2)
-   array.forEach(e => {
-      let actual = new Date(e.expiredDate).getTime()
-      console.log(actual)
-      
+    let date1 = now.getTime()
+    let date2 = new Date(now.setDate(now.getDate() + days)).getTime()
+    array.forEach(e => {
+      let actual = new Date(e.expiredDate).getTime() 
       if (actual > date1 && actual < date2)
-        newArray.push(e) 
+        newArray.push(e)
     });
     return newArray;
   }
+
+  //get stock alerts in days
+  getStockAlerts(array: any, amt: number) { 
+    console.log()
+    let newArray = []
+    array.forEach(e => {   
+      if ( parseFloat(e.amount) < amt)
+        newArray.push(e)
+    });
+    return newArray;
+  }
+
+  getFirstRecords(array: string | any[], size: any){
+     return array.slice(0, size)  
+  }
+
+
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

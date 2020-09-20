@@ -5,6 +5,7 @@ html, body {
   width: 100%;
   padding: 0% !important;
   margin: 0% !important;
+  overflow: hidden;
 }
 .container-fluid {
   height: 100% !important;
@@ -172,7 +173,7 @@ button:focus{
   margin: 0px;
   margin-left:2%;
   color:$dark-text-color;
-  border-radius: 0px !important;
+  border-radius: 0px !important; 
 }
 .list-group-item:hover {
   background-color: $success-color;

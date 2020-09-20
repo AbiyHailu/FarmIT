@@ -46,7 +46,7 @@ export class ProfileComponent implements OnDestroy {
     this.profileService.getFarm()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        res=null
+        //res=null
         if (res && res.length > 0) {
           this.farm = res[0] 
         }else{ 
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnDestroy {
     this.profileService.getGHs()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        res = null
+       // res = null
         this.gh = res
         if (this.gh && this.gh.length > 0) {
           this.ghStstusIndex = 0

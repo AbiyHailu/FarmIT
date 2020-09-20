@@ -17,7 +17,7 @@ import { ProfileService } from './profile/service/profile.service';
 
 export class ManagerComponent implements OnDestroy {
   subject: Subject<void> = new Subject();
-  profile: boolean
+  profile: any
   company: any
   role: any = null
   subscription = []
@@ -36,23 +36,20 @@ export class ManagerComponent implements OnDestroy {
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res != null) {
-          this.toggler = res
-          console.log("this.toggler", this.toggler)
+          this.toggler = res 
           if (res == true) {
             document.getElementById("sideNav").style.width = "5%"
             document.getElementById("main").style.width = "95%";
           } else if (res == false) {
             document.getElementById("sideNav").style.width = "16.5%";
-            document.getElementById("main").style.width = "83.5%";
-            console.log(document.getElementById("main"))
+            document.getElementById("main").style.width = "83.5%"; 
           }
         }
       })
 
     let data = this.commonMethodService.checkUser();
     if (data) {
-      this.role = data['role'];
-      console.log(this.role)
+      this.role = data['role']; 
     }
 
     let companyId = this.commonMethodService.checkCompany()
@@ -65,7 +62,7 @@ export class ManagerComponent implements OnDestroy {
     this.profileService.getFarm()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        console.log("profile", this.profile)
+        this.profile = res 
       })
   }
 
@@ -73,8 +70,7 @@ export class ManagerComponent implements OnDestroy {
   getSubscription(companyId: any) {
     this.subscriptionService.getSubscriptionByCompnyId(companyId)
       .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        console.log("res", res)
+      .subscribe(res => { 
         if (res.length > 0) {
           if (!this.profile) {
             this.subscription.push({ plan: 'Profile' })
@@ -116,8 +112,7 @@ export class ManagerComponent implements OnDestroy {
     this.navigateToChildElement(plan, item)
   }
 
-  navigateTo(destination: string) {
-    console.log("destination", destination)
+  navigateTo(destination: string) { 
     this.router.navigate(['manager/' + destination]);
   }
   navigateToChildElement(plan: string, item: string) {
