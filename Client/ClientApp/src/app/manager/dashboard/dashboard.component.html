@@ -1,162 +1,118 @@
 <div class="main" id="main">
-  <div class="container-fluid">
-    <div class="row-fluid main-title">
+  <div class="container-fluid padd">
+    <div class="row-fluid main-title border-bottom">
       Dashboard
     </div>
-    <div class="row-fluid ">
-      <div id="accordion"class=" accordion-div">
-        <div class="card">
-          <div class="card-header" id="headingOne" (click)="toggleStor()">
-            <h5 class="mb-0">
-              Store
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse" [ngClass]="{'show': storeIndex}" aria-labelledby="headingOne"
-            data-parent="#accordion">
+    <div class="row-fluid" style="padding:1%">
+      <div class="row">
+        <div *ngIf="storReportCount>0" class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6>Unread reports from Store - {{storReportCount}}</h6>
+            </div>
             <div class="card-body">
-              <div class="row ">
-                <div class="col-lg-4"> 
-                  <div class="card">
-                    <div class="card-header">
-                      <h6>Unread reports from Store - {{reportCount}}</h6>
-                    </div>
-                    <div class="card-body"> 
-                      <div *ngFor= "let report of storReports" class="card-text">{{report.title}} </div>
-                      <br/>
-                      <a href="#" class="float-right" >Go to Reports</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-4"> 
-                  <div class="card">
-                    <div class="card-header">
-                      <h6>  Expiration Alerts - {{productCount}}</h6>
-                    </div>
-                    <div class="card-body"> 
-                      <div *ngFor= "let product of expiringProducts" class="card-text">{{product.name}} - Expired on {{product.expiredDate}}</div>
-                      <br/>
-                      <a href="#" class="float-right">Go to Product</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-4"> 
-                  <div class="card">
-                    <div class="card-header">
-                      <h6> Stock alerts  - {{stockCount}}</h6>
-                    </div>
-                    <div class="card-body"> 
-                      <div *ngFor= "let product of stockAlert" class="card-text">{{product.productName}} - Balance {{product.amount}}</div>
-                      <br/>
-                      <a href="#" class="float-right">Go to Stock Inventory</a>
-                    </div>
-                  </div>
-                </div>  
-              </div>
-            </div> 
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo" (click)="toggleScout()">
-                Scout
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" [ngClass]="{'show': scoutIndex}" aria-labelledby="headingTwo"
-            data-parent="#accordion">
-            <div class="card-body">
-              gh
+              <div *ngFor="let report of storReports" class="card-text">{{report.title}} </div>
+              <br />
+              <a href="#" class="float-right">Go to Reports</a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo" (click)="toggleScout()">
-                Scout
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" [ngClass]="{'show': scoutIndex}" aria-labelledby="headingTwo"
-            data-parent="#accordion">
+        <div *ngIf="productCount>0" class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6> Expiration Alerts - {{productCount}}</h6>
+            </div>
             <div class="card-body">
-              gh
+              <div *ngFor="let product of expiringProducts" class="card-text">{{product.name}} - Expired on
+                {{product.expiredDate}}</div>
+              <br />
+              <a href="#" class="float-right">Go to Product</a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo" (click)="toggleScout()">
-                Scout
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" [ngClass]="{'show': scoutIndex}" aria-labelledby="headingTwo"
-            data-parent="#accordion">
+        <div *ngIf="stockCount>0" class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6> Stock alerts - {{stockCount}}</h6>
+            </div>
             <div class="card-body">
-              gh
+              <div *ngFor="let product of stockAlert" class="card-text">{{product.productName}} - Balance
+                {{product.amount}}</div>
+              <br />
+              <a href="#" class="float-right">Go to Stock Inventory</a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo" (click)="toggleScout()">
-                Scout
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" [ngClass]="{'show': scoutIndex}" aria-labelledby="headingTwo"
-            data-parent="#accordion">
+        <div *ngIf="scoutReportCount>0" class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6>Unread reports from Scout - {{scoutReportCount}}</h6>
+            </div>
             <div class="card-body">
-              gh
+              <div *ngFor="let report of scoutReports" class="card-text">{{report.title}} </div>
+              <br />
+              <a href="#" class="float-right">Go to Reports</a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo" (click)="toggleScout()">
-                Scout
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" [ngClass]="{'show': scoutIndex}" aria-labelledby="headingTwo"
-            data-parent="#accordion">
+        <div *ngIf="scoutReportCount>0" class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6> Expiration Alerts - {{productCount}}</h6>
+            </div>
             <div class="card-body">
-              gh
+              <div *ngFor="let product of expiringProducts" class="card-text">{{product.name}} - Expired on
+                {{product.expiredDate}}</div>
+              <br />
+              <a href="#" class="float-right">Go to Product</a>
             </div>
           </div>
         </div>
 
-
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h5 class="mb-0">
-              <button class="btn collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                aria-controls="collapseThree" (click)="togglePlot()">
-                Collapsible Group Item #3
-              </button>
-            </h5>
-          </div>
-          <div id="collapseThree" class="collapse" [ngClass]="{'show': plotIndex}" aria-labelledby="headingThree"
-            data-parent="#accordion">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h6> Stock alerts - {{stockCount}}</h6>
+            </div>
             <div class="card-body">
-              plot
+              <div *ngFor="let product of stockAlert" class="card-text">{{product.productName}} - Balance
+                {{product.amount}}</div>
+              <br />
+              <a href="#" class="float-right">Go to Stock Inventory</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+
+   <!--  <div class="row-fluid wrapper ">
+      <div id="accordion">
+     
+
+        <div class="card">
+          <div class="card-header" id="headingThree" (click)="toggleProtection()">
+            <h5 class="mb-0">
+              Protection highlights
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" [ngClass]="{'show': protectionIndex}" aria-labelledby="headingThree"
+            data-parent="#accordion">
+            <div class="card-body">
+              Protection highlights
+              <a href="#" class="float-right">Go to Stock Inventory</a> <br />
+              <a href="#" class="float-right">Go to Stock Inventory</a> <br />
+
+              <a href="#" class="float-right">Go to Stock Inventory</a> <br />
+              <a href="#" class="float-right">Go to Stock Inventory</a> <br />
+
+              <a href="#" class="float-right">Go to Stock Inventory</a> <br />
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>

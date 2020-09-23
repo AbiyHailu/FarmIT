@@ -77,12 +77,15 @@ export class ManagerComponent implements OnDestroy {
             this.navigateTo('profile')
           } else {
             if (this.role && this.role.toLowerCase() == 'manager') {
-              this.subscription.push({ plan: 'Dashboard' })
+              this.subscription.push({ plan: 'Dashboard',items:["Analytics"] })         
+              this.subscription.push({ plan: 'Profile'})     
               this.subscription.push({ plan: 'Reports' })
               this.subscription.push({ plan: 'Scheduler' })
-              this.subscription.push({ plan: 'User' })
+              this.subscription.push({ plan: 'Protection',items:["Scout","Measures","Pest"] })   
+              this.subscription.push({ plan: 'Store',items:["Products","Inventory","Issued","Recieved"]  })
+              this.subscription.push({ plan: 'Settings' })
             } 
-            res.forEach(e => {
+           /*  res.forEach(e => {
               if (e.planName == 'Store') {
                 this.subscription.push({ plan: e.planName, items: [] })
               }
@@ -95,7 +98,7 @@ export class ManagerComponent implements OnDestroy {
               if (e.planName == 'Scout') {
                 this.subscription.push({ plan: e.planName })
               }
-            })
+            }) */
           } 
         }
       })

@@ -125,5 +125,12 @@ export class CrudService {
       { Binding: 'hazardLevel', Type: 'select', Label: "Hazard Level", SelectList: ["green", "red", "yellow"] },
     ]
   }
+  getThresholdSetting(): any {
+    return [
+      { Binding: 'pest', Type: 'selectEmit', Label: "Pests", SelectList: [ ] }, 
+      { Binding: 'economic', Type: 'number', Label: "Economic threshold level" },
+      { Binding: 'damage', Type: 'number', Label: "Damage threshold level" }
+    ]
+  }
 }
 

@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-
+import { RouterModule } from '@angular/router'; 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component'; 
@@ -14,7 +13,7 @@ import { ManagerModule } from './manager/manager.module';
 import { CrudComponent } from './crud/crud.component';
 import { HttpInterceptorService } from './shared.service/httpInterceptorService';
 import { ErrorInterceptorService } from './shared.service/errorInterceptorService';
-import { AdminGuard } from './shared.service/adminGuard.service'; 
+import { AdminGuard } from './shared.service/adminGuard.service';  
  
  
 @NgModule({
@@ -33,7 +32,7 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     BrowserModule,
     AdminModule,
     ManagerModule,  
-    NgbModule,
+    NgbModule, 
     RouterModule.forRoot([ 
       {
         path: 'admin',

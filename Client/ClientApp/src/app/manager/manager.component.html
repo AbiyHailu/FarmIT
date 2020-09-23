@@ -1,26 +1,16 @@
 <div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
   <div class="row border-right">
     <div class="sideNav border-right " id="sideNav">
-      <div class=" profile border-bottom text-center"> 
-          <div class=" user-pic text-center">
-            U
-          </div> 
-          <span [ngClass]="{'show-sidenav': toggler}">
-          user Name 
-          Position 
-          email
-          </span> 
-      </div>
       <div class="row">
         <div class="col-12">
           <div id="accordion">
             <div *ngFor="let plans of subscription;  let i = index " class="card">
-              <div class="card-header" [ngClass]="{'active-color': activeIndex == i}" id="headingOne{{i}}"
+              <div  class="card-header" [ngClass]="{'active-color': activeIndex == i}" id="headingOne{{i}}"
                 (click)="toggleAccordion(i, plans.plan)">
                 {{loading}}
                 <h6 class="mb-0">
-                  <span [ngClass]="{'arrange-icons': toggler}">IC</span> &nbsp;
-                  <span [ngClass]="{'show-sidenav': toggler}">{{plans.plan}}</span>
+                  <span  [ngClass]="{'arrange-icons': toggler}">IC</span> &nbsp;
+                  <span  [ngClass]="{'show-sidenav': toggler}">{{plans.plan}}</span>
                 </h6>
               </div>
               <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse"
@@ -31,12 +21,12 @@
                       [ngClass]="{'active-list': activeListIndex == i}" (click)="activeList(i, plans.plan, items)">
                       {{items}}
                     </li>
-                  </ul>
+                  </ul> 
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
     <div class="main" id="main">

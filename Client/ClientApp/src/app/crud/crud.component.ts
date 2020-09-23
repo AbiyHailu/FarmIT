@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'; 
+import { Component, Input, OnInit, OnDestroy, EventEmitter } from '@angular/core'; 
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; 
  
@@ -32,6 +32,10 @@ export class CrudComponent implements OnInit, OnDestroy {
     })
     this.enablform=true
     return new FormGroup(formGroup);
+  }
+  public event: EventEmitter<any> = new EventEmitter();
+  onChange(val:any){ 
+    this.event.emit(val);
   }
 
   submitData(dataForm: any) {

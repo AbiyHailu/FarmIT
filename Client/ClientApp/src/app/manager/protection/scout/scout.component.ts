@@ -6,8 +6,8 @@ import { Subject } from 'rxjs';
 import { CrudService } from 'src/app/crud/service/crud.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from 'src/app/crud/crud.component';
-import { CommonMethedsService } from 'src/app/shared.service/commonMethodes';
-import { ProfileService } from '../profile/service/profile.service';
+import { CommonMethedsService } from 'src/app/shared.service/commonMethodes'; 
+import { ProfileService } from '../../profile/service/profile.service';
 
 @Component({
   selector: 'scout-root',
@@ -99,8 +99,7 @@ export class ScoutComponent implements OnDestroy {
     })
   }
 
-  editSsoutData(scout:any){
-    console.log(scout) 
+  editSsoutData(scout:any){ 
     this.modalRef = this.modalService.open(CrudComponent, {
       centered: true,
       size: 'md',
@@ -113,7 +112,7 @@ export class ScoutComponent implements OnDestroy {
     this.modalRef.result.then(result => { 
       console.log('result', result)
       if (result != null) { 
-        this.scoutService.addScoutData(result)
+        this.scoutService.editScout(result)
       }
     })  
   }

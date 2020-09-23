@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from '@angular/core'; 
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { CommonMethedsService } from '../../shared.service/commonMethodes';
+import { Subject } from 'rxjs'; 
 
 @Component({
   selector: 'pest-root',
@@ -13,8 +12,7 @@ export class PestComponent implements OnDestroy {
   reports = [];
   catagorizedReports = []
   loading = true
-  constructor( 
-    private commonMethodes:CommonMethedsService
+  constructor(  
   ) { 
     
   }

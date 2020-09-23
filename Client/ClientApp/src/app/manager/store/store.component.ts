@@ -26,7 +26,7 @@ export class StoreComponent {
   constructor(
     private storeService: StoreService,
     private adminCrudService: CrudService,
-    private modalService: NgbModal,
+    private modalService: NgbModal
   ) {
     this.sortedData = []
     this.selectedindex = 1

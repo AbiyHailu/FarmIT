@@ -22,10 +22,15 @@ code {
   color: #e01a76;
 }
 
-card, card-header , card-body{
+.card, .card-header , .card-body{
     border-radius:0px !important
 }
-
+.wrapper{ 
+  width:100%; 
+  overflow-y:scroll; 
+  position:relative;
+  height: 300px;
+}
 /**Titles**/
 .main-title, .create-farm {
   height: 100vh;
@@ -38,9 +43,10 @@ card, card-header , card-body{
 }
 
 .main-title {
-  height: 80px;
+  height: 60px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 20px; 
+  margin-bottom: 0%;
 }
  
 .main-body {

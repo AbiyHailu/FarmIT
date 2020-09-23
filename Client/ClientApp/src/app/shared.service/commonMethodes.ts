@@ -38,13 +38,15 @@ export class CommonMethedsService {
 
   //assign  values to  edited item
   assignEditValues(buildItems: any, editedItem: any) {
+    console.log("editedItem,", editedItem)
     buildItems.forEach(e => {
+      console.log("e", e)
+      console.log("editedItem[e.Binding]", editedItem[e.Binding])
       e.Value = editedItem[e.Binding]
-    }
-    )
+    })
     return buildItems
   }
-
+ 
   //get expired in days
   getExpiredinDays(array: any, days: number) {
     let newArray = []
@@ -52,7 +54,7 @@ export class CommonMethedsService {
     let date1 = now.getTime()
     let date2 = new Date(now.setDate(now.getDate() + days)).getTime()
     array.forEach(e => {
-      let actual = new Date(e.expiredDate).getTime() 
+      let actual = new Date(e.expiredDate).getTime()
       if (actual > date1 && actual < date2)
         newArray.push(e)
     });
@@ -60,21 +62,19 @@ export class CommonMethedsService {
   }
 
   //get stock alerts in days
-  getStockAlerts(array: any, amt: number) { 
+  getStockAlerts(array: any, amt: number) {
     console.log()
     let newArray = []
-    array.forEach(e => {   
-      if ( parseFloat(e.amount) < amt)
+    array.forEach(e => {
+      if (parseFloat(e.amount) < amt)
         newArray.push(e)
     });
     return newArray;
   }
 
-  getFirstRecords(array: string | any[], size: any){
-     return array.slice(0, size)  
+  getFirstRecords(array: string | any[], size: any) {
+    return array.slice(0, size)
   }
-
-
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

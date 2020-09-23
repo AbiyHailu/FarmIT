@@ -13,7 +13,7 @@ import { CommonMethedsService } from '../shared.service/commonMethodes';
 export class NavMenuComponent {
   isExpanded = false;
   payload: any = null
-  
+  userData: any = null
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -23,6 +23,8 @@ export class NavMenuComponent {
   ) { 
     let data = this.commonMethodService.checkUser();
     if (data) { 
+      console.log(data)
+      this.userData =data
       this.payload = data['role'];
     } 
   }
@@ -30,6 +32,7 @@ export class NavMenuComponent {
   toggle = false
   toggleSideBar() {
     this.toggle = !this.toggle 
+    console.log("this.toggle" , this.toggle )
     this.sharedDataService.changeToggleSideBar(this.toggle) 
   }
    

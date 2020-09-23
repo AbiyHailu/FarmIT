@@ -25,6 +25,11 @@
           <option disabled  selected value="">{{layoutElement.Label}}</option>
           <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
         </select>
+        
+        <select *ngSwitchCase="'selectEmit'" (change)="onChange($event.target.value)" [formControlName]="layoutElement.Binding" >
+          <option disabled  selected value="">{{layoutElement.Label}}</option>
+          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
+        </select>
 
       </div>
     </div>

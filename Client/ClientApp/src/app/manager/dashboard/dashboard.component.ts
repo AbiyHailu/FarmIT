@@ -27,6 +27,7 @@ export class ManagerDashboardComponent {
     this.getCompanyDetails()
     this.storeIndex = true
     this.scoutIndex = true
+    this.protectionIndex =true
     this.getExpSetting()  
     this.getStockSetting()
     this.getLowStocks()
@@ -63,7 +64,9 @@ export class ManagerDashboardComponent {
   } 
 
   storReports: Report[] = []
-  reportCount: number = 0
+  storReportCount: number = 0
+  scoutReportCount: number = 0
+  scoutReports:Report[] = []
   getUnreadReports() {
     this.reportsService.getReports()
       .pipe(takeUntil(this.subject))
@@ -71,7 +74,9 @@ export class ManagerDashboardComponent {
         if (res && res.length>0)
        {
           this.storReports = res.filter(e=>e.isRead ==false && e.departmentName =="Store")
-          this.reportCount = this.storReports.length
+          this.scoutReports= res.filter(e=>e.isRead ==false && e.departmentName =="Scout")
+          this.storReportCount = this.storReports.length
+          this.scoutReportCount =this.scoutReports.length
        }
       })
   }
@@ -110,6 +115,11 @@ export class ManagerDashboardComponent {
   scoutIndex: boolean
   toggleScout() {
     this.scoutIndex = !this.scoutIndex
+  }
+
+  protectionIndex: boolean
+  toggleProtection() {
+    this.protectionIndex = !this.protectionIndex
   }
 
   ngOnDestroy(): void {
