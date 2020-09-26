@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
   templateUrl: './pest.component.html',
   styleUrls: ['./pest.component.scss']
 })
+
 export class PestComponent implements OnDestroy {
   subject: Subject<void> = new Subject();
   reports = [];

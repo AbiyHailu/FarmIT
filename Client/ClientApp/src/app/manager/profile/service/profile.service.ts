@@ -9,7 +9,8 @@ export class ProfileService {
     farm: Farm[] = []
     gh: GH[] = []
     plants: Plant[] = []
-    ghPlants: GHPlant[] = []
+    ghPlants: GHPlant[] = [] 
+
     constructor(
         private _http: HttpClient,
     ) {
@@ -69,8 +70,8 @@ export class ProfileService {
         return of(this.gh)
     }
 
-    getGHById(id: string): Observable<GH> {
-        return of(this.gh.find(e => e.id == id))
+    getGHByCompanyId(companyId: string): Observable<GH[]> {
+        return of(this.gh.filter(e => e.companyid == companyId))
     }
     getPlants(): Observable<any[]> {
         return of(this.plants)
@@ -124,3 +125,6 @@ export class GHPlant {
     datePlanted: string
     dateCleared: string
 }
+
+
+

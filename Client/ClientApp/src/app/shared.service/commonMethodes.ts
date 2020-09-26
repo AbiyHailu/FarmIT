@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { JwtDecodeService } from '../shared.service/jwtdecoder.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class CommonMethedsService {
 
-
   constructor(
     private jwtDecoder: JwtDecodeService,
+    private datePipe: DatePipe
   ) {
 
   }
@@ -38,15 +39,12 @@ export class CommonMethedsService {
 
   //assign  values to  edited item
   assignEditValues(buildItems: any, editedItem: any) {
-    console.log("editedItem,", editedItem)
     buildItems.forEach(e => {
-      console.log("e", e)
-      console.log("editedItem[e.Binding]", editedItem[e.Binding])
       e.Value = editedItem[e.Binding]
     })
     return buildItems
   }
- 
+
   //get expired in days
   getExpiredinDays(array: any, days: number) {
     let newArray = []
@@ -63,7 +61,6 @@ export class CommonMethedsService {
 
   //get stock alerts in days
   getStockAlerts(array: any, amt: number) {
-    console.log()
     let newArray = []
     array.forEach(e => {
       if (parseFloat(e.amount) < amt)
@@ -74,6 +71,57 @@ export class CommonMethedsService {
 
   getFirstRecords(array: string | any[], size: any) {
     return array.slice(0, size)
+  }
+
+  /* convertTime(time: any) {
+   // let date = this.datePipe.transform(new Date(), 'MM/dd/yyyy');
+  
+   let createdDate = new Date("09/20/2020").getTime()
+    if(time.toLowerCase()=="week"){ 
+      let date  = new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+      console.log(date > createdDate) 
+    }
+  } */
+
+  selectedTime(time) {
+    if (time.toLowerCase() == "week") {
+      return new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+    } else if (time.toLowerCase() == "2 weeks") {
+      return new Date().getTime() - 14 * 24 * 60 * 60 * 1000
+    } else if (time.toLowerCase() == "3 weeks") {
+      return new Date().getTime() - 21 * 24 * 60 * 60 * 1000
+    } else if (time.toLowerCase() == "month") {
+      return new Date().getTime() - 30 * 24 * 60 * 60 * 1000
+    } else {
+      return new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+    }
+  }
+
+  convertTime(time) {
+    return new Date(time).getTime()
+  }
+
+  weightedAverage(rowStart: number, rowEnd: number, totalrow: number) {
+    let x = (((rowEnd - rowStart) * 100) / totalrow)/100
+    console.log(x)
+    return x
+  }
+
+  prepareLineChartData(dataArray: any[]) {
+    let data = []
+    dataArray.forEach(e => {
+      data.push(e.weightAmount) 
+    })
+    console.log("data", data)
+    return data
+  }
+
+  prepareLineeChartLabels(dataArray: any[]) {
+    let data = []
+    dataArray.forEach(e => {
+      data.push(e.date)
+    })
+    return data
   }
 
   handleError(error: HttpErrorResponse) {

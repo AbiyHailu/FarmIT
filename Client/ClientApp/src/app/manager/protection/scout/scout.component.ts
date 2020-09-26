@@ -1,5 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { PestService } from '../pest/service/pest.service';
+import { Component, OnDestroy } from '@angular/core'; 
 import { ScoutService } from './service/scout.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -8,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from 'src/app/crud/crud.component';
 import { CommonMethedsService } from 'src/app/shared.service/commonMethodes'; 
 import { ProfileService } from '../../profile/service/profile.service';
+import { PestService } from '../../profile/pest/service/pest.service';
 
 @Component({
   selector: 'scout-root',
@@ -31,13 +31,19 @@ export class ScoutComponent implements OnDestroy {
     private adminCrudService: CrudService,
     private commonMethodesService: CommonMethedsService
   ) {
-    this.getScout()
-    this.getPests()
-    this.getGHs()
+    this.getCompanyDetails() 
+
+  }
+  company: string
+  getCompanyDetails() {
+    this.company = this.commonMethodesService.checkCompany() 
+    this.getScout(this.company)
+    this.getPests(this.company)
+    this.getGHs(this.company)
   }
 
-  getScout() {
-    this.scoutService.getScouts()
+  getScout(companyId) {
+    this.scoutService.getScoutByCompanyId(companyId)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         this.scout = res
@@ -45,8 +51,8 @@ export class ScoutComponent implements OnDestroy {
       })
   }
 
-  getPests() {
-    this.pestService.getPests()
+  getPests(companyid) {
+    this.pestService.getPestByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         this.pests = res
@@ -54,8 +60,8 @@ export class ScoutComponent implements OnDestroy {
       })
   }
 
-  getGHs() {
-    this.profileService.getGHs()
+  getGHs(companyid) {
+    this.profileService.getGHByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         this.ghs = res

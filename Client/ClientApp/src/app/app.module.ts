@@ -13,7 +13,10 @@ import { ManagerModule } from './manager/manager.module';
 import { CrudComponent } from './crud/crud.component';
 import { HttpInterceptorService } from './shared.service/httpInterceptorService';
 import { ErrorInterceptorService } from './shared.service/errorInterceptorService';
-import { AdminGuard } from './shared.service/adminGuard.service';  
+import { AdminGuard } from './shared.service/adminGuard.service';   
+import { ChartsModule, ThemeService } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
+import { AnalyticsComponent } from './manager/dashboard/analytics/analytics.component';
  
  
 @NgModule({
@@ -22,7 +25,8 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    CrudComponent
+    CrudComponent, 
+    AnalyticsComponent, 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +37,7 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     AdminModule,
     ManagerModule,  
     NgbModule, 
+    ChartsModule,
     RouterModule.forRoot([ 
       {
         path: 'admin',
@@ -58,6 +63,10 @@ import { AdminGuard } from './shared.service/adminGuard.service';
     ]),
         
   ],
+  
+  exports: [
+    ChartsModule
+  ],
 
   entryComponents: [
     CrudComponent
@@ -65,7 +74,11 @@ import { AdminGuard } from './shared.service/adminGuard.service';
 
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+    DatePipe,
+    ThemeService 
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

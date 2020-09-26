@@ -48,7 +48,7 @@ export class SettingService {
   } 
 
   getThresholdlevelSetting(id:string){
-    return of(this.thresh.filter(e=>e.id ==id)); 
+    return of(this.thresh.filter(e=>e.companyid ==id)); 
   }
   editThreshold(result: any) {
    let edited = this.thresh.find(e=>e.id ==result.id)

@@ -8,11 +8,11 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ProfileComponent } from './profile/profile.component' ;
 import { AnalyticsComponent } from './dashboard/analytics/analytics.component';
 import { ManagerDashboardComponent } from './dashboard/dashboard.component';
-import { ProtectionComponent } from './protection/protection.component';
-import { PestComponent } from './protection/pest/pest.component';
+import { ProtectionComponent } from './protection/protection.component'; 
 import { MeasuresComponent } from './protection/measures/measures.component';
 import { ScoutComponent } from './protection/scout/scout.component'; 
 import { SettingsComponent } from './setting/settings.component';
+//import { PestComponent } from './profile/pest/pest.component';
 
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
@@ -23,7 +23,7 @@ const routes: Routes = [{
    { path: 'profile', component: ProfileComponent },
 
    { path: 'protection', component:ProtectionComponent }, 
-   { path: 'protection/pest', component:PestComponent }, 
+   /* { path: 'protection/pest', component:PestComponent },  */
    { path: 'protection/scout', component:ScoutComponent },  
    { path: 'protection/measures', component: MeasuresComponent },
 
