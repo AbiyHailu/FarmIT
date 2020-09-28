@@ -73,6 +73,7 @@ export class ProfileService {
     getGHByCompanyId(companyId: string): Observable<GH[]> {
         return of(this.gh.filter(e => e.companyid == companyId))
     }
+    
     getPlants(): Observable<any[]> {
         return of(this.plants)
     }

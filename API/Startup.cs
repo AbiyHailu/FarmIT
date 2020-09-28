@@ -105,10 +105,43 @@ namespace API
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+            
+            //app.Map("/admin",
+            //   adminApp =>
+            //   {
+            //       adminApp.UseSpa(spa =>
+            //       {
+            //           spa.Options.SourcePath = "angular/admin";
+            //           spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
+            //           {
+            //               FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "angular", "admin"))
+            //           };
+
+            //           if (env.IsDevelopment())
+            //               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+            //       });
+            //   });
+
+            //app.Map("/Manager",
+            //  userApp =>
+            //  {
+            //      userApp.UseSpa(spa =>
+            //      {
+            //          spa.Options.SourcePath = "angular/user";
+            //          spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
+            //          {
+            //              FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "angular", "user"))
+            //          };
+
+            //          if (env.IsDevelopment())
+            //              spa.UseProxyToSpaDevelopmentServer("http://localhost:4201");
+            //      });
+            //  });
 
             app.UseSpa(spa =>
             { 
-                spa.Options.SourcePath = "../Client/ClientApp";
+              // spa.Options.SourcePath = "../Client/ClientApp";  
+                spa.Options.SourcePath = "../Client/ManagerApp"; 
 
                 if (env.IsDevelopment())
                 {

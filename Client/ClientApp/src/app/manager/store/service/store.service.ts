@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 
 export class StoreService {
-
   products: Product[] = []
   issued: Issued[] = []
   recieved: Recieved[] = []
@@ -46,16 +45,11 @@ export class StoreService {
       { id: "3", companyid: "53dd7524-3129-4a9e-4886-08d82c28e2a9", iaName: "ai3", environmentalToxicity: "32", terestrialToxicity: "7", hazardLevel: "red" },
     )
   }
+ 
 
-  getProducts(): Observable<Product[]> {
-    //return <Observable<any>>this.http.get(this.apiUrl);
-    return of(this.products);
-  }
-
-
-  getProductById(id: any): Observable<Product> {
+  getProductByCompanyId(id: any): Observable<Product[]> {
     // return <Observable<any>>this.http.get("/api/user/" + id);
-    return of(this.products.find(e => e.id == "1"))
+    return of(this.products.filter(e => e.companyid == id))
   }
 
   addProduct(product: Product): Observable<any> {
@@ -76,16 +70,10 @@ export class StoreService {
     return of(productEdited);
   }
 
-  /**Issue**/
-
-  getIssued(): Observable<Issued[]> {
-    //return <Observable<any>>this.http.get(this.apiUrl);
-    return of(this.issued);
-  }
-
-  getIssuedById(id: any): Observable<Issued> {
+  /**Issue**/ 
+  getIssuedByCompanyId(companyid: any): Observable<Issued[]> {
     // return <Observable<any>>this.http.get("/api/user/" + id);
-    return of(this.issued.find(e => e.id == "1"))
+    return of(this.issued.filter(e => e.companyid == companyid))
   }
 
   addIssued(issued: Issued): Observable<any> {
@@ -108,14 +96,10 @@ export class StoreService {
 
 
   /**Recieved**/
-  getRecieved(): Observable<Recieved[]> {
-    //return <Observable<any>>this.http.get(this.apiUrl);
-    return of(this.recieved);
-  }
-
-  getRecievedById(id: any): Observable<Recieved> {
+ 
+  getRecievedByCompanyId(companyid: any): Observable<Recieved[]> {
     // return <Observable<any>>this.http.get("/api/user/" + id);
-    return of(this.recieved.find(e => e.id == "1"))
+    return of(this.recieved.filter(e => e.companyid == companyid))
   }
 
   addRecieved(recieved: Recieved): Observable<any> {
@@ -137,19 +121,15 @@ export class StoreService {
   }
 
   /**Balance**/
-  getBalance(): Observable<Balance[]> {
-    return of(this.balance)
+  getInventoryByCompanyId(companyid: any): Observable<Balance[]> { 
+    return of(this.balance.filter(e => e.companyid== companyid))
   }
 
   /**ActiveIngredients**/
-  getAI(): Observable<ActiveIngredient[]> {
-    //return <Observable<any>>this.http.get(this.apiUrl);
-    return of(this.activeIngredient);
-  }
-
-  getAIyId(id: any): Observable<ActiveIngredient> {
+  
+  getAIByCompanyId(companyid: any): Observable<ActiveIngredient[]> {
     // return <Observable<any>>this.http.get("/api/user/" + id);
-    return of(this.activeIngredient.find(e => e.id == "1"))
+    return of(this.activeIngredient.filter(e => e.companyid== companyid))
   }
 
   addAI(activeIngredient: ActiveIngredient): Observable<any> {

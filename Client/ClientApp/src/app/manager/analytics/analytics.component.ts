@@ -3,11 +3,11 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CommonMethedsService } from 'src/app/shared.service/commonMethodes';
-import { Pest, PestService } from '../../profile/pest/service/pest.service';
-import { GH, ProfileService } from '../../profile/service/profile.service';
-import { Scout, ScoutService } from '../../protection/scout/service/scout.service';
-import { SettingService, ThresholdLevelSetting } from '../../setting/service/setting.service';
+import { CommonMethedsService } from 'src/app/shared.service/commonMethodes';  
+import { GH, ProfileService } from '../profile/service/profile.service';
+import { Pest, PestService } from '../protection/pest/service/pest.service';
+import { Scout, ScoutService } from '../protection/scout/service/scout.service';
+import { SettingService, ThresholdLevelSetting } from '../setting/service/setting.service';
 
 @Component({
   selector: 'analytics',
@@ -28,10 +28,8 @@ export class AnalyticsComponent {
     this.getCompanyDetails()
     // this.weightedAverage(5, 20, 200) 
     this.prepareChardData("1", "1", "week")
-  }
-
-
-
+  } 
+  
   lineChartData: ChartDataSets[] = [
     { data: [ ], label: ' ' },
     { data: [ 2.3, 4.4, 3.3], label: ' test' },
@@ -84,10 +82,7 @@ export class AnalyticsComponent {
     console.log("x", x) 
  
     // console.log(this.scoutdata, this.scoutdata)
-  }
-
-
-
+  } 
 
   company: string
   getCompanyDetails() {

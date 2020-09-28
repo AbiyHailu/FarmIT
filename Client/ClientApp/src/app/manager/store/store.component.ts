@@ -29,57 +29,8 @@ export class StoreComponent {
     private modalService: NgbModal
   ) {
     this.sortedData = []
-    this.selectedindex = 1
-    this.getProducts()
-    this.getIssued()
-    this.getRecieved()
-    this.getBalance()
-    this.getAI()
-  }
-
-  getAI() {
-    this.storeService.getAI()
-      .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        this.ai = res
-        this.sortedData = this.products
-        console.log(this.sortedData)
-      })
-  }
-
-  getProducts() {
-    this.storeService.getProducts()
-      .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        this.products = res
-        this.sortedData = this.products
-        console.log(this.sortedData)
-      })
-  }
-
-  getIssued() {
-    this.storeService.getIssued()
-      .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        this.issued = res
-      })
-  }
-
-  getRecieved() {
-    this.storeService.getRecieved()
-      .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        this.recieved = res
-      })
-  }
-
-  getBalance() {
-    this.storeService.getBalance()
-      .pipe(takeUntil(this.subject))
-      .subscribe(res => {
-        this.balance = res
-      })
-  }
+    this.selectedindex = 1   
+  } 
   createNewItem(index: number) {
     if (index == 1)
       this.addData(this.adminCrudService.getAddProduct(), index)

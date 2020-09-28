@@ -27,22 +27,23 @@ export class ManagerDashboardComponent {
     this.getCompanyDetails()
     this.storeIndex = true
     this.scoutIndex = true
-    this.protectionIndex =true
-    this.getExpSetting()  
-    this.getStockSetting()
-    this.getLowStocks()
-    this.getUnreadReports()
-    this.getExpiringProducts()
+    this.protectionIndex = true
+
   }
 
   company: string
   getCompanyDetails() {
     this.company = this.commonMethodService.checkCompany()
+    this.getExpSetting(this.company)
+    this.getStockSetting(this.company)
+    this.getLowStocks(this.company)
+    this.getUnreadReports(this.company)
+    this.getExpiringProducts(this.company)
   }
 
   expDateLeft: number
-  getExpSetting() {
-    this.settingService.getExpAlertSettingCId(this.company)
+  getExpSetting(companyid) {
+    this.settingService.getExpAlertSettingCId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res) {
@@ -53,38 +54,37 @@ export class ManagerDashboardComponent {
   }
 
   stockAmtleft: number
-  getStockSetting() {
-    this.settingService.getStockAlertSettingCId(this.company)
+  getStockSetting(companyid) {
+    this.settingService.getStockAlertSettingCId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res) {
           this.stockAmtleft = res[0].amountLeft
         }
       })
-  } 
+  }
 
   storReports: Report[] = []
   storReportCount: number = 0
   scoutReportCount: number = 0
-  scoutReports:Report[] = []
-  getUnreadReports() {
-    this.reportsService.getReports()
+  scoutReports: Report[] = []
+  getUnreadReports(companyid) {
+    this.reportsService.getReportsByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        if (res && res.length>0)
-       {
-          this.storReports = res.filter(e=>e.isRead ==false && e.departmentName =="Store")
-          this.scoutReports= res.filter(e=>e.isRead ==false && e.departmentName =="Scout")
+        if (res && res.length > 0) {
+          this.storReports = res.filter(e => e.isRead == false && e.departmentName == "Store")
+          this.scoutReports = res.filter(e => e.isRead == false && e.departmentName == "Scout")
           this.storReportCount = this.storReports.length
-          this.scoutReportCount =this.scoutReports.length
-       }
+          this.scoutReportCount = this.scoutReports.length
+        }
       })
   }
 
   expiringProducts: string | any[]
   productCount: any
-  getExpiringProducts() {
-    this.storeService.getProducts()
+  getExpiringProducts(companyid) {
+    this.storeService.getProductByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         if (res)
@@ -95,10 +95,10 @@ export class ManagerDashboardComponent {
 
   stockAlert: any[]
   stockCount: any
-  getLowStocks() {
-    this.storeService.getBalance()
+  getLowStocks(companyid) {
+    this.storeService.getInventoryByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
-      .subscribe(res => { 
+      .subscribe(res => {
         if (res) {
           this.stockAlert = this.commonMethodService.getStockAlerts(res, this.stockAmtleft)
           console.log("this.stockAlert", this.stockAlert)

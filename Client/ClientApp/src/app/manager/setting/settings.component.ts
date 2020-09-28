@@ -4,8 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CrudComponent } from 'src/app/crud/crud.component';
 import { CrudService } from 'src/app/crud/service/crud.service';
-import { CommonMethedsService } from 'src/app/shared.service/commonMethodes';
-import { PestService } from '../profile/pest/service/pest.service';
+import { CommonMethedsService } from 'src/app/shared.service/commonMethodes'; 
+import { PestService } from '../protection/pest/service/pest.service';
 import { SettingService, ThresholdLevelSetting } from './service/setting.service';
 
 @Component({

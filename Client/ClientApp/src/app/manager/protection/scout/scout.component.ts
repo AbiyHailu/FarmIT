@@ -6,8 +6,8 @@ import { CrudService } from 'src/app/crud/service/crud.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudComponent } from 'src/app/crud/crud.component';
 import { CommonMethedsService } from 'src/app/shared.service/commonMethodes'; 
-import { ProfileService } from '../../profile/service/profile.service';
-import { PestService } from '../../profile/pest/service/pest.service';
+import { ProfileService } from '../../profile/service/profile.service'; 
+import { PestService } from '../pest/service/pest.service';
 
 @Component({
   selector: 'scout-root',
@@ -31,8 +31,7 @@ export class ScoutComponent implements OnDestroy {
     private adminCrudService: CrudService,
     private commonMethodesService: CommonMethedsService
   ) {
-    this.getCompanyDetails() 
-
+    this.getCompanyDetails()  
   }
   company: string
   getCompanyDetails() {

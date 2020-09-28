@@ -17,16 +17,25 @@ export class SchedulerComponent implements OnDestroy {
   constructor(
     private scheduleService: SchedulerService, 
     private commonMethodes: CommonMethedsService
-  ) {
+  ) { 
+    this.getCompanyDetails()  
+  }
+  company: string
+  getCompanyDetails() {
+    this.company = this.commonMethodes.checkCompany()  
+    this.getSchedules(this.company)  
+  }
 
-    this.scheduleService.getSchedules()
+  getSchedules(companyid){
+       this.scheduleService.getScheduleByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
         this.schedules = res
         if (this.schedules.length > 0) {
           this.catagorizeByDate(this.schedules) 
         }
-      })   
+      }) 
+  
   }
 
   catagorizeByDate(schedules:any){ 

@@ -18,17 +18,27 @@ export class ReportsComponent implements OnDestroy {
     private reportService: ReportsService,
     private commonMethodes:CommonMethedsService
   ) { 
-    this.reportService.getReports()
+    this.getCompanyDetails()  
+  }
+
+  company: string
+  getCompanyDetails() {
+    this.company = this.commonMethodes.checkCompany()
+    this.getReports(this.company)
+  }
+
+  getReports(companyid) {
+    this.reportService.getReportsByCompanyId(companyid)
       .pipe(takeUntil(this.subject))
-      .subscribe(res => { 
+      .subscribe(res => {
         this.reports = res
         if (this.reports.length > 0) {
-          this.catagorizeByDate(this.reports) 
+          this.catagorizeByDate(this.reports)
           this.loading = false
         }
       })  
-  }
-
+  } 
+  
   catagorizeByDate(reports: any) {
     reports.forEach(item => {
       if (this.catagorizedReports.length == 0)
@@ -44,11 +54,8 @@ export class ReportsComponent implements OnDestroy {
   activeIndex
   toggleAccordion(index: any, value: string) {
     this.activeIndex = index
-  }
-  getReports(items) {
-    console.log(items)
-  }
-
+  } 
+  
   sortTitle: any = "Created Date"
   sortReports(sortvalue: string) { 
     this.sortTitle =  this.commonMethodes.editTitlestring(sortvalue)
@@ -63,8 +70,7 @@ export class ReportsComponent implements OnDestroy {
         this.catagorizedReports.push(Object.assign({}, { [item[sortvalue]]: [item] }))
     })
   }
-  
- 
+   
   editMarkasRead(items:any) {
     console.log(items)
     if (items) {

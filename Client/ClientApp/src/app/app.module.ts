@@ -15,8 +15,8 @@ import { HttpInterceptorService } from './shared.service/httpInterceptorService'
 import { ErrorInterceptorService } from './shared.service/errorInterceptorService';
 import { AdminGuard } from './shared.service/adminGuard.service';   
 import { ChartsModule, ThemeService } from 'ng2-charts';
-import { DatePipe } from '@angular/common';
-import { AnalyticsComponent } from './manager/dashboard/analytics/analytics.component';
+import { DatePipe } from '@angular/common'; 
+import { AnalyticsComponent } from './manager/analytics/analytics.component';
  
  
 @NgModule({
@@ -25,8 +25,7 @@ import { AnalyticsComponent } from './manager/dashboard/analytics/analytics.comp
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    CrudComponent, 
-    AnalyticsComponent, 
+    CrudComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,10 +33,8 @@ import { AnalyticsComponent } from './manager/dashboard/analytics/analytics.comp
     FormsModule, 
     ReactiveFormsModule,
     BrowserModule,
-    AdminModule,
-    ManagerModule,  
+    AdminModule, 
     NgbModule, 
-    ChartsModule,
     RouterModule.forRoot([ 
       {
         path: 'admin',

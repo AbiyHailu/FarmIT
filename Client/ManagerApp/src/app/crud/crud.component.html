@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <strong>{{type}}</strong>
+</div>
+<div class="modal-body">
+  <form *ngIf="enablform" [formGroup]="dataForm" autocomplete="new-password">
+    <div *ngFor="let layoutElement of data">
+      <label *ngIf="layoutElement.Label" [attr.for]="layoutElement" class="layoutelement-label">
+        <strong>{{layoutElement.Label }}</strong>
+      </label>
+      <div [ngSwitch]="layoutElement.Type" class="input-group">
+
+        <input *ngSwitchCase="'text'" class="form-control" autocomplete="off" [formControlName]="layoutElement.Binding"
+          placeholder="{{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="text" > 
+
+        <input *ngSwitchCase="'number'" class="form-control" [formControlName]="layoutElement.Binding"
+          placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="number" min="0">
+
+        <input *ngSwitchCase="'textDate'" class="form-control" [formControlName]="layoutElement.Binding"
+          placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
+          type="date">
+
+        <select *ngSwitchCase="'select'"  [formControlName]="layoutElement.Binding" >
+          <option disabled  selected value="">{{layoutElement.Label}}</option>
+          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
+        </select>
+        
+        <select *ngSwitchCase="'selectEmit'" (change)="onChange($event.target.value)" [formControlName]="layoutElement.Binding" >
+          <option disabled  selected value="">{{layoutElement.Label}}</option>
+          <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
+        </select>
+
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-submit" (click)="cancel()">
+      {{'Cancel' }}
+    </button>
+    <button (click)="submitData(dataForm)" class="btn btn-primary btn-submit">
+      {{'Submit'}}
+    </button>
+  </form>
+</div>

@@ -50,11 +50,14 @@ body {
   background: rgb(3, 168, 42); /*$green-background*/
   color: rgb(255, 255, 255)
 }
-.active-color,.active-list {
+.active-color {
   background: rgb(3, 168, 42); /*$green-background*/
   color: rgb(255, 255, 255)
 }
- 
+ .active-list {
+  background: rgb(122, 174, 134); /*$green-background*/
+  color: rgb(255, 255, 255)
+}
 .profile { 
   height: 80px !important;
 }

@@ -1,39 +1,55 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManagerComponent } from './manager.component'; 
+import { ManagerComponent } from './manager.component';
 import { ManageUserComponent } from './user/user.component';
-import { ReportsComponent } from './reports/reports.component'; 
+import { ReportsComponent } from './reports/reports.component';
 import { StoreComponent } from './store/store.component';
-import { SchedulerComponent } from './scheduler/scheduler.component';  
-import { ProfileComponent } from './profile/profile.component' ;
-import { AnalyticsComponent } from './dashboard/analytics/analytics.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ManagerDashboardComponent } from './dashboard/dashboard.component';
-import { ProtectionComponent } from './protection/protection.component'; 
+import { ProtectionComponent } from './protection/protection.component';
 import { MeasuresComponent } from './protection/measures/measures.component';
-import { ScoutComponent } from './protection/scout/scout.component'; 
+import { ScoutComponent } from './protection/scout/scout.component';
 import { SettingsComponent } from './setting/settings.component';
-//import { PestComponent } from './profile/pest/pest.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { PestComponent } from './protection/pest/pest.component';
+import { ProductComponent } from './store/product/product.component';
+import { RecievedComponent } from './store/recieved/recieved.component';
+import { IssuedComponent } from './store/issued/issued.component';
+import { ActiveingredientsComponent } from './store/activeingredients/activeingredients.component';
 
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
-  children: [ 
-   { path: 'dashboard', component: ManagerDashboardComponent }, 
-   { path: 'dashboard/analytics', component: AnalyticsComponent }, 
+  children: [
 
-   { path: 'profile', component: ProfileComponent },
+    { path: 'dashboard', component: ManagerDashboardComponent },
+    { path: 'analytics', component: AnalyticsComponent },
 
-   { path: 'protection', component:ProtectionComponent }, 
-   /* { path: 'protection/pest', component:PestComponent },  */
-   { path: 'protection/scout', component:ScoutComponent },  
-   { path: 'protection/measures', component: MeasuresComponent },
+    { path: 'profile', component: ProfileComponent },
 
-   { path: 'store', component: StoreComponent }, 
+    { path: 'protection', component: ProtectionComponent },
+    { path: 'protection/pest', component: PestComponent },
+    { path: 'protection/scout', component: ScoutComponent },
+    { path: 'protection/measures', component: MeasuresComponent },
+,
 
+      {
+        path: 'store',
+        //canActivate: [AuthGuard],
+        loadChildren: './store/store.module#StoreModule'
+      }, 
+/*     { path: 'store', component: StoreComponent },  
+    { path: 'store/product', component: ProductComponent },  
+    { path: 'store/activeingredients', component: ActiveingredientsComponent },  
+    { path: 'store/recieved', component: RecievedComponent },  
+    { path: 'store/issued', component: IssuedComponent },  
+    { path: 'store', component: StoreComponent },
+ */
     { path: 'reports', component: ReportsComponent },
-   
-    { path: 'scheduler', component: SchedulerComponent }, 
-    { path: 'user', component: ManageUserComponent } ,
-    { path: 'settings', component: SettingsComponent }, 
+
+    { path: 'scheduler', component: SchedulerComponent },
+    { path: 'user', component: ManageUserComponent },
+    { path: 'settings', component: SettingsComponent },
   ]
 }];
 
