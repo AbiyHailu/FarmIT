@@ -1,48 +1,13 @@
 <body> 
-    <div class="container-fluid">
-      <div class="row-head"> 
-        <app-nav-menu></app-nav-menu>
-      </div>
-      <div class="row-body"> 
-          <div class="container-fluid d-flex h-100 flex-column " style=" padding:0%; overflow: hidden; ">
-        <div class="row border-right">
-          <div class="sideNav border-right " id="sideNav">
-            <div class="row">
-              <div class="col-12">
-                <div id="accordion">
-                  <div *ngFor="let plans of subscription;  let i = index " class="card">
-                    <div  class="card-header" [ngClass]="{'active-color': activeIndex == i}" id="headingOne{{i}}"
-                      (click)="toggleAccordion(i, plans.plan)">
-                      {{loading}}
-                      <h6 class="mb-0">
-                        <span  [ngClass]="{'arrange-icons': toggler}">IC</span> &nbsp;
-                        <span  [ngClass]="{'show-sidenav': toggler}">{{plans.plan}}</span>
-                      </h6>
-                    </div>
-                    <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse"
-                      aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        <ul class="list-group">
-                          <li *ngFor="let items  of plans.items;  let i = index " class="list-group-item"
-                            [ngClass]="{'active-list': activeListIndex == i}" (click)="activeList(i, plans.plan, items)">
-                            {{items}}
-                          </li>
-                        </ul> 
-                      </div>
-                    </div> 
-                  </div>
-                </div>
-              </div> 
-            </div>
-          </div>
-          <div class="main" id="main">
-            <router-outlet> </router-outlet>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div class="text-center row-footer">
-        <h6>©2020 Copyright: FarmIt</h6>
-      </div>
-    </div> 
-  </body>
+  <div class="container-fluid">
+    <div class="row-head">
+      <app-nav-menu></app-nav-menu>
+    </div>
+    <div class="row-body"> 
+      <router-outlet> </router-outlet>
+    </div>
+    <div class="text-center row-footer">
+      <h6>©2020 Copyright: FarmIt</h6>
+    </div>
+  </div> 
+</body>
