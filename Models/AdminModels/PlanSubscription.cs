@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models.AdminModels
 {
-    public class Subscription 
+    public class PlanSubscription 
     {
         [Key]
         public Guid Id { get; set; } 

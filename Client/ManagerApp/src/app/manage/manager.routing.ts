@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
+import { StoreComponent } from './store/store.component';
 /* import { ManageUserComponent } from './user/user.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
@@ -20,10 +21,19 @@ import { ActiveingredientsComponent } from './store/activeingredients/activeingr
 const routes: Routes = [{
   path: 'manager', component: ManagerComponent,
   children: [
-    {
+   {
+      path: 'store',  
+      component: StoreComponent,
+      loadChildren: () => import('src/app/manage/store/store.module').then(m => m.StoreModule)
+    },{
+      path: 'protection',  
+      component: StoreComponent,
+      loadChildren: () => import('src/app/manage/protection/protection.module').then(m => m.ProtectionModule)
+    } 
+   /*  {
       path: 'store',
       loadChildren: './store/store.module#StoreModule'
-    }
+    } */
 
    /*  { path: 'dashboard', component: ManagerDashboardComponent },
     { path: 'analytics', component: AnalyticsComponent },

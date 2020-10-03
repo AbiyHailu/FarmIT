@@ -14,10 +14,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Usericon <span class="sr-only">(current)</span></a>
         </li>
-    
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+     
         <li *ngIf="!payload" class="nav-item" (click)="logIn()" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link text-dark" [routerLink]="['/']">Login</a>
         </li>

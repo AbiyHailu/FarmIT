@@ -17,7 +17,7 @@ namespace Concrete.AdminConcrete
 
         List<SubscriptionViewModel> ISubscription.GetSubscriptionList()
         {
-            var result = (from subscription in context.Subscriptions
+            var result = (from subscription in context.PlanSubscriptions
                           join plan in context.Plans on subscription.PlanId equals plan.Id
                           join company in context.Companys on subscription.CompanyId equals company.Id
                           select new SubscriptionViewModel
@@ -32,7 +32,7 @@ namespace Concrete.AdminConcrete
         } 
         public List<SubscriptionViewModel> GetSubscriptionbyCompanyId(Guid companyId)
         {
-            var result = (from subscription in context.Subscriptions
+            var result = (from subscription in context.PlanSubscriptions
                           where subscription.CompanyId == companyId
                           join plan in context.Plans on subscription.PlanId equals plan.Id
                           join company in context.Companys on subscription.CompanyId equals company.Id
@@ -48,16 +48,16 @@ namespace Concrete.AdminConcrete
             return result;
         }
       
-        public string InsertSubscription(Subscription subscription)
+        public string InsertSubscription(PlanSubscription subscription)
         {
-            context.Subscriptions.Add(subscription);
+            context.PlanSubscriptions.Add(subscription);
             context.SaveChangesAsync();
             return subscription.Id.ToString();
         }
 
         public SubscriptionViewModel GetSubscriptionbyId(Guid subscriptionId)
         {
-            var result = (from subscription in context.Subscriptions
+            var result = (from subscription in context.PlanSubscriptions
                           where subscription.Id == subscriptionId
                           join plan in context.Plans on subscription.PlanId equals plan.Id
                           join company in context.Companys on subscription.CompanyId equals company.Id
@@ -73,7 +73,7 @@ namespace Concrete.AdminConcrete
             return result;
         }
 
-        public bool UpdateSubscription(Subscription subscription)
+        public bool UpdateSubscription(PlanSubscription subscription)
         {
             context.Entry(subscription).Property(x => x.PlanId).IsModified = true;
             context.Entry(subscription).Property(x => x.SubscriptionDate).IsModified = true;
@@ -91,12 +91,12 @@ namespace Concrete.AdminConcrete
         } 
         public bool DeleteSubscription(Guid subscriptionId)
         {
-            var subscriptionToRemove = (from subscription in context.Subscriptions
+            var subscriptionToRemove = (from subscription in context.PlanSubscriptions
                                         where subscription.Id == subscriptionId
                                         select subscription).FirstOrDefault();
             if (subscriptionToRemove != null)
             {
-                context.Subscriptions.Remove(subscriptionToRemove);
+                context.PlanSubscriptions.Remove(subscriptionToRemove);
                 var result = context.SaveChanges();
 
                 if (result > 0)

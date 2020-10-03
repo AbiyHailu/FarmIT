@@ -62,7 +62,7 @@ namespace API.Controllers.AdminControllers
                
                 var companyId = User.FindFirstValue(ClaimTypes.Name);
 
-                var subcription = mapper.Map<Subscription>(subscriptionViewModel); 
+                var subcription = mapper.Map<PlanSubscription>(subscriptionViewModel); 
 
                 subscription.InsertSubscription(subcription);
 
@@ -91,7 +91,7 @@ namespace API.Controllers.AdminControllers
             {
                 var companyId = User.FindFirstValue(ClaimTypes.Name);
 
-                var subcription = mapper.Map<Subscription>(subscriptionViewModel);
+                var subcription = mapper.Map<PlanSubscription>(subscriptionViewModel);
 
                 subscription.UpdateSubscription(subcription);
 

@@ -140,13 +140,14 @@ namespace API
 
             app.UseSpa(spa =>
             { 
-              // spa.Options.SourcePath = "../Client/ClientApp";  
-                spa.Options.SourcePath = "../Client/ManagerApp"; 
-
+               //spa.Options.SourcePath = "../Client/ClientApp";  
+                spa.Options.SourcePath = "../Client/ManagerApp";
+                //Configure the timeout to 5 minutes to avoid "The Angular CLI process did not start listening for requests within the timeout period of 50 seconds." issue
+                spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
-                }
+                } 
             });
         }
     }

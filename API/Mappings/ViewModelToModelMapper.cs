@@ -10,7 +10,7 @@ namespace API.Mappings
     {
         public ViewModelToModelMapper()
         {
-            CreateMap<SubscriptionViewModel, Subscription>()
+            CreateMap<SubscriptionViewModel, PlanSubscription>()
              .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId))
              .ForMember(dest => dest.PlanId, opt => opt.MapFrom(src => src.PlanId))
              .ForMember(dest => dest.SubscriptionDate, opt => opt.MapFrom(src => src.SubscriptionDate))

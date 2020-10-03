@@ -18,8 +18,6 @@ import { MethodesService } from '../services/methods.service';
 export class ManagerComponent implements OnDestroy {
   subject: Subject<void> = new Subject();
   profile: any
-  company: any
-  role: any = null
   subscription = []
   toggler: any
 
@@ -30,7 +28,9 @@ export class ManagerComponent implements OnDestroy {
     private subscriptionService: SubscriptionService,
     private cm: MethodesService
   ) {
-    this.getProfile()
+    console.log(true)
+    this.getCompany()
+
     this.subscription = []
     this.sharedDataService.currentSideToggler
       .pipe(takeUntil(this.subject))
@@ -46,23 +46,29 @@ export class ManagerComponent implements OnDestroy {
           }
         }
       })
+  }
 
-    let data = this.cm.checkUser();
-    if (data) {
-      this.role = data['role'];
-    }
-
-    let companyId = this.cm.checkCompany()
-    if (companyId) {
-      this.getSubscription(companyId)
+  company: any
+  getCompany() {
+    this.company = this.cm.checkCompany()
+    console.log("this.company", this.company)
+    if (this.company) {
+      this.getProfile(this.company)
     }
   }
 
-  getProfile() {
-    this.profileService.getFarm()
+  getProfile(companyid: any) {
+    this.profileService.getFarmByCompanyiD(companyid)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
+        console.log("res", res)
         this.profile = res
+        if (this.profile.length > 0) {
+          this.getSubscription(this.company)
+        } else {
+          this.subscription.push({ plan: 'Profile' })
+          this.navigateTo('profile')
+        }
       })
   }
 
@@ -71,36 +77,20 @@ export class ManagerComponent implements OnDestroy {
     this.subscriptionService.getSubscriptionByCompnyId(companyId)
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        if (res.length > 0) {
-          if (!this.profile) {
-            this.subscription.push({ plan: 'Profile' })
-            this.navigateTo('profile')
-          } else {
-            if (this.role && this.role.toLowerCase() == 'manager') {
-              this.subscription.push({ plan: 'Dashboard' })
-              this.subscription.push({ plan: 'Analytics' })
-              this.subscription.push({ plan: 'Profile' })
-              this.subscription.push({ plan: 'Reports' })
-              this.subscription.push({ plan: 'Scheduler' })
-              this.subscription.push({ plan: 'Protection', items: ["Scout", "Measures", "Pest"] })
-              this.subscription.push({ plan: 'Store', items: ["Products", "Active Ingredients", "Inventory", "Issued", "Recieved"] })
-              this.subscription.push({ plan: 'Settings' })
-            }
-            /*  res.forEach(e => {
-               if (e.planName == 'Store') {
-                 this.subscription.push({ plan: e.planName, items: [] })
-               }
-               if (e.planName == 'Protection') {
-                 this.subscription.push({ plan: e.planName, items: ["Make Schedule", "Add all others", "Pests"] })
-               }
-               if (e.planName == 'Human Resource') {
-                 this.subscription.push({ plan: e.planName, items: ["Create Employee", "Deactivate"] })
-               }
-               if (e.planName == 'Scout') {
-                 this.subscription.push({ plan: e.planName })
-               }
-             }) */
-          }
+        console.log("ressub", res)
+        let role = this.cm.checkUser()['role']
+        if (role && role.toLowerCase() == 'manager') {
+          this.subscription.push({ plan: 'Dashboard' })
+          this.subscription.push({ plan: 'Analytics' })
+          this.subscription.push({ plan: 'Profile' })
+          this.subscription.push({ plan: 'Reports' })
+          this.subscription.push({ plan: 'Scheduler' }) 
+          res.forEach(e => {  
+            this.subscription.push(this.cm.preparePlnas(e.planName))
+          }) 
+          this.subscription.push({ plan: 'Settings' })
+        } else if (role && role.toLowerCase() == 'user') {
+          this.subscription.push({ plan: this.cm.checkUser()['permission'] })
         }
       })
   }
@@ -110,7 +100,7 @@ export class ManagerComponent implements OnDestroy {
     this.navigateTo(plans.toLowerCase())
   }
 
-  activeListIndex
+  activeListIndex: any
   activeList(i, plan, item) {
     this.activeListIndex = i
     this.navigateToChildElement(plan, item)
@@ -119,10 +109,10 @@ export class ManagerComponent implements OnDestroy {
   navigateTo(destination: string) {
     this.router.navigate(['manager/' + destination]);
   }
+
   navigateToChildElement(plan: string, item: string) {
     this.router.navigate(['manager/' + plan.toLowerCase() + '/' + item.toLowerCase()]);
   }
-
 
   ngOnDestroy(): void {
     this.subject.next();

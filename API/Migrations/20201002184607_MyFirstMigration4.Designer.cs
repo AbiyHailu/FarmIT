@@ -4,14 +4,16 @@ using Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    partial class FarmItContextModelSnapshot : ModelSnapshot
+    [Migration("20201002184607_MyFirstMigration4")]
+    partial class MyFirstMigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +86,7 @@ namespace API.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("PlanSubscriptions");
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("Models.ManagerModels.CompanyUserPermission", b =>

@@ -12,6 +12,6 @@ namespace Models.AdminModels
         public string PlanName { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public decimal Price { get; set; } 
-        public ICollection<Subscription> Subscription { get; set; }
+        public ICollection<PlanSubscription> Subscription { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(AdminContext))]
-    partial class FarmItContextModelSnapshot : ModelSnapshot
+    [Migration("20201002184025_MyFirstMigration")]
+    partial class MyFirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace API.Migrations
                     b.ToTable("Plans");
                 });
 
-            modelBuilder.Entity("Models.AdminModels.PlanSubscription", b =>
+            modelBuilder.Entity("Models.AdminModels.Subscription", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +86,7 @@ namespace API.Migrations
 
                     b.HasIndex("PlanId");
 
-                    b.ToTable("PlanSubscriptions");
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("Models.ManagerModels.CompanyUserPermission", b =>
@@ -239,7 +241,7 @@ namespace API.Migrations
                     b.ToTable("StoreBalances");
                 });
 
-            modelBuilder.Entity("Models.AdminModels.PlanSubscription", b =>
+            modelBuilder.Entity("Models.AdminModels.Subscription", b =>
                 {
                     b.HasOne("Models.AdminModels.Plan", "Plans")
                         .WithMany("Subscription")

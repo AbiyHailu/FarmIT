@@ -9,19 +9,25 @@ import { ErrorInterceptorService } from './services/errorInterceptorService';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { CrudComponent } from './crud/crud.component'; 
 import { ManagerModule as ManagerModule } from './manage/manager.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component'; 
+import { ManagerComponent } from './manage/manager.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     NavMenuComponent, 
-    CrudComponent
+    CrudComponent,
+    LoginComponent 
   ],
   imports: [
     CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule, 
-    ManagerModule
+    ManagerModule,
+    ReactiveFormsModule,
+    FormsModule 
   ],
   entryComponents: [
     CrudComponent

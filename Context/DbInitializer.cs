@@ -10,32 +10,24 @@ namespace Concrete
         public static void Initialize(AdminContext admincontext)
         {
             admincontext.Database.EnsureCreated();
-            if (!admincontext.Subscriptions.Any())
+
+            if (!admincontext.Companys.Where(e => e.UserType == "Manager").Any())
             {
-                var subscriptions = new Subscription[]
-                { 
-                    new Subscription { CompanyId = new Guid("53dd7524-3129-4a9e-4886-08d82c28e2a9"), PlanId = new Guid("8a2573db-a245-4b7c-8607-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 23) }, 
-                    new Subscription { CompanyId = new Guid("53dd7524-3129-4a9e-4886-08d82c28e2a9"), PlanId = new Guid("0ec4267c-2ed1-407e-8608-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 10) },
-                    new Subscription { CompanyId = new Guid("53dd7524-3129-4a9e-4886-08d82c28e2a9"), PlanId = new Guid("66ae36e9-d8ab-4092-8609-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 8 , 22) },
-                    new Subscription { CompanyId = new Guid("2c3a6385-ea4f-440f-4887-08d82c28e2a9"), PlanId = new Guid("dcc5b293-b2c0-4ced-860a-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 9 , 23) },
-                    new Subscription { CompanyId = new Guid("1e748b17-a383-4eaf-4888-08d82c28e2a9"), PlanId = new Guid("acd8cf02-38e5-49ff-860b-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 22) },
-                    new Subscription { CompanyId = new Guid("1e748b17-a383-4eaf-4888-08d82c28e2a9"), PlanId = new Guid("eea48db4-d3df-4673-860c-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 8 , 12) },
-                    new Subscription { CompanyId = new Guid("1e748b17-a383-4eaf-4888-08d82c28e2a9"), PlanId = new Guid("36c48f31-f56a-44a4-860d-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 11) },
-                    new Subscription { CompanyId = new Guid("18156313-33ea-40cb-4889-08d82c28e2a9"), PlanId = new Guid("8a2573db-a245-4b7c-8607-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 11) },
-                    new Subscription { CompanyId = new Guid("18156313-33ea-40cb-4889-08d82c28e2a9"), PlanId = new Guid("0ec4267c-2ed1-407e-8608-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 8 , 12) },
-                    new Subscription { CompanyId = new Guid("18156313-33ea-40cb-4889-08d82c28e2a9"), PlanId = new Guid("acd8cf02-38e5-49ff-860b-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 9 , 09) },
-                    new Subscription { CompanyId = new Guid("ac097b1e-6d7a-4461-488a-08d82c28e2a9"), PlanId = new Guid("8a2573db-a245-4b7c-8607-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 21) },
-                    new Subscription { CompanyId = new Guid("ac097b1e-6d7a-4461-488a-08d82c28e2a9"), PlanId = new Guid("dcc5b293-b2c0-4ced-860a-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 27) },
-                    new Subscription { CompanyId = new Guid("ac097b1e-6d7a-4461-488a-08d82c28e2a9"), PlanId = new Guid("acd8cf02-38e5-49ff-860b-08d82b696f71"), SubscriptionDate = new DateTime(), SubscriptionEndDate = new DateTime(2020, 7 , 23) },
+                var companys = new Company[]
+                {
+                     new Company{ Name="Flower1", UserType ="Manager" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"},
+                     new Company{ Name="Flower2", UserType ="Manager" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"},
+                     new Company{ Name="Flower3", UserType ="Manager" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"},
+                     new Company{ Name="Flower4", UserType ="Manager" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"}
                 };
 
-                foreach (Subscription s in subscriptions)
+                foreach (Company c in companys)
                 {
-                    admincontext.Subscriptions.Add(s);
+                    admincontext.Companys.Add(c);
                 }
-                admincontext.SaveChanges(); 
-            }
-
+                admincontext.SaveChanges();
+            } 
+            
             if (!admincontext.Plans.Any())
             {
                 var plans = new Plan[]
@@ -54,17 +46,30 @@ namespace Concrete
                     admincontext.Plans.Add(s);
                 }
                 admincontext.SaveChanges();
+            };
+
+            if (!admincontext.PlanSubscriptions.Any())
+            {
+                var subscriptions = new PlanSubscription[]
+                {
+                    new PlanSubscription { CompanyId = new Guid("c0bc9d2d-856e-4821-cc8b-08d867999975"), PlanId = new Guid("10d6f392-18f3-4e02-ca31-08d867999de9"), SubscriptionDate =  new DateTime(2020, 6 , 23) , SubscriptionEndDate = new DateTime(2020, 7 , 23) },
+                    new PlanSubscription { CompanyId = new Guid("c0bc9d2d-856e-4821-cc8b-08d867999975"), PlanId = new Guid("fcec75db-cbc5-4fc7-ca33-08d867999de9"), SubscriptionDate =  new DateTime(2020, 5 , 23) , SubscriptionEndDate = new DateTime(2020, 7 , 10) },
+                };
+
+                foreach (PlanSubscription s in subscriptions)
+                {
+                    admincontext.PlanSubscriptions.Add(s);
+                }
+                admincontext.SaveChanges();
             }
-            if (!admincontext.Companys.Where(e=>e.UserType =="Admin").Any())
+
+
+            if (!admincontext.Companys.Where(e => e.UserType == "Admin").Any())
             {
                 var companys = new Company[]
                 {
-                    //new Company{ Name="TestCompany1"},
-                    //new Company{ Name="TestCompany3"},
-                    //new Company{ Name="TestCompany3"},
-                    //new Company{ Name="TestCompany4"},
-                    //new Company{ Name="TestCompany5"},
-                    new Company{ Name="IT4Flower", UserType ="Admin" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"}
+
+                    new Company{ Name="IT4Flower1", UserType ="Admin" , Emailaddress="abiyo02@yahoo.com", Password="12345", Phone="123456"}
                 };
 
                 foreach (Company c in companys)
