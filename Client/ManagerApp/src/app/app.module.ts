@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'; 
-import { StoreModule} from './store/store.module' ;
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpInterceptorService } from './services/httpInterceptorService'; 
 import { ErrorInterceptorService } from './services/errorInterceptorService';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { CrudComponent } from './crud/crud.component';
+import { CrudComponent } from './crud/crud.component'; 
+import { ManagerModule as ManagerModule } from './manage/manager.module';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,11 @@ import { CrudComponent } from './crud/crud.component';
     CrudComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule, 
-    StoreModule
+    ManagerModule
   ],
   entryComponents: [
     CrudComponent
