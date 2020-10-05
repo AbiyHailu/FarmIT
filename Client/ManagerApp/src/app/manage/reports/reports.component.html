@@ -1,0 +1,64 @@
+<div class="main" id="main">
+  <div class="container-fluid">
+    <div class="row-fluid main-title border-bottom border-top">
+      Reports
+    </div>
+    <div class="row-fluid main-body">
+      <div class="col-lg-12 text-right sort-by">
+        <span class="btn btn-create"> Sort by :</span>
+        <button class="btn btn-success btn-create" (click)="sortReports('createdDate')">
+          Created Date
+        </button>
+        <button class="btn btn-success  btn-create" (click)="sortReports('priority')">
+          priority
+        </button>
+        <button class="btn btn-success  btn-create" (click)="sortReports('departmentName')">
+          Department
+        </button>
+        <button class="btn btn-success  btn-create" (click)="sortReports('markAsRead')">
+          Read
+        </button> <button class="btn btn-success  btn-create" (click)="sortReports('markAsRead')">
+          Unread
+        </button>
+      </div>
+      <div class="col-lg-12 main-accordion">
+        <div id="accordion">
+          <div *ngFor="let reports of catagorizedReports| keyvalue;  let i = index " class="card border-0">
+            <div class="card-header categorized-title" id="headingOne{{i}}" (click)="toggleAccordion(i )">
+              <h6 class="mb-0" *ngFor="let item of reports.value| keyvalue;"> 
+               {{sortTitle}}: {{item.key }}  
+              </h6>
+            </div>
+            <div id="collapseOne{{i}}" [ngClass]="{'show': activeIndex == i}" class="collapse"
+                 aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <ul  *ngFor="let item of reports.value| keyvalue;  let i = index "  >
+                  <li *ngFor="let items of item.value| keyvalue;  let i = index " class="list-group-item">
+                    <div class="row">
+                      <div class="col-lg-1">
+                        #{{i+1}}
+                      </div>
+                      <div class="col-lg-2">
+                        {{items.value.title}}
+                      </div>
+                      <div class="col-lg-2">
+                        {{items.value.priority}}
+                      </div> 
+                      <div class="col-lg-2">
+                        {{items.value.departmentName}}
+                      </div>
+                      <div class="col-lg-4"  >
+                        Mark as read: <input class="check-box" type="checkbox" [checked]="items.value.markasread" (change)="editMarkasRead(items)" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

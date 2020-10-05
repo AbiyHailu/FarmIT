@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators'; 
 import { MethodesService } from '../../../services/methods.service';
-import { CrudService } from '../../../services/crud.service';
-import { StoreService } from '../../../services/store.service';
+import { CrudService } from '../../../crud/crud.service';
+import { StoreService } from '../../store/store.service';
 
 @Component({
   selector: 'scout',

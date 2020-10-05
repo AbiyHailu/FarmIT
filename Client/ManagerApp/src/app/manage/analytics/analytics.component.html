@@ -1,0 +1,58 @@
+<div class="main" id="main">
+    <div class="container-fluid padd">
+      <div class="row-fluid main-title border-bottom">
+        Dashboard - Analytics
+      </div>
+      <div class="row-fluid" style="padding:1%">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h6>Scout Status </h6>
+              </div>
+              <div class="card-body">
+              <div class ="row">
+              <div class="col-lg-3"> 
+                GH:
+               <select #selectedGH>
+                <option disabled  selected value="">Select GH</option>
+                <option *ngFor="let gh of ghs " value="{{gh.id}}">{{gh.name}}</option>
+              </select>
+               Pest:
+               <select #selectedPest >
+                <option disabled  selected value="">Select Pest</option>
+                <option *ngFor="let pest of pests" value="{{pest.id}}">{{pest.pestName}}</option>
+              </select>
+              Time:
+              <select #selectedWeek> 
+               <option selected value="week">Week</option> 
+               <option value="month">2 Weeks</option>
+               <option value="month">3 Weeks</option>
+               <option value="month">Month</option>
+             </select>
+              <br/>
+              <br/>
+               <button class="btn btn-success btn-create btn-padding" (click)="prepareChardData(selectedGH.value,selectedPest.value, selectedWeek.value )" style="width: 100%;">
+                 Filter
+               </button> 
+              </div>
+              <div class="col-lg-9"> 
+                <div style="display: block;">
+                  <canvas baseChart width="400" height="400"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="scoutLabel"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                  </canvas>
+                </div>
+
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>  
+    </div>
+  </div>

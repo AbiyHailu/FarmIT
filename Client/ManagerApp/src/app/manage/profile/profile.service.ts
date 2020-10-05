@@ -5,6 +5,9 @@ import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
+    editGH(result: any) {
+        throw new Error('Method not implemented.');
+    }
 
     farm: Farm[] = []
     gh: GH[] = []

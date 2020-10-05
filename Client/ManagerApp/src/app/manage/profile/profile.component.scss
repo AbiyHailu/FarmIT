@@ -1,0 +1,57 @@
+body
+{ }
+.container-fluid {
+  background: rgb(248, 248, 248);
+  padding: 0%;
+}  
+
+.create-gh {
+  overflow-y: scroll;
+  overflow-x: hidden; 
+}
+.form-bottom{ 
+  margin-bottom: 40%;
+}
+
+.farm{
+ // min-width:550px !important;
+  min-height:400px  !important;;
+  background-color: green;
+}
+.greenhouses, .plots{ 
+  float: left;
+  width:70px !important;
+  height:100px  !important;
+  margin:1%;  
+}
+.greenhouses{
+  background-color: rgb(228, 248, 228);
+}
+.plots{
+ background-color: rgb(133, 85, 40);
+}
+
+.btn-padding{
+  margin-left: 1% !important;  
+} 
+.tabl-row{
+  padding-left: 2% !important;  
+  padding-right: 2% !important; 
+} 
+.status{ 
+  color: green;
+}
+.statusNot{ 
+  color: orange;
+}
+@media (max-width: 575.98px) {
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 991.98px) {
+}
+
+@media (max-width: 1199.98px) {
+}

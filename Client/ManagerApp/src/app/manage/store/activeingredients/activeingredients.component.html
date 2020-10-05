@@ -1,0 +1,33 @@
+<div class="main-table">
+    <button class="btn btn-success btn-create btn-nomargin "
+      (click)="createNewItem()">
+      <strong>{{title}}</strong>
+    </button>
+    <div class="row-fluid">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Active Ingredient Name</th>
+            <th scope="col">Env'tal Toxicity</th>
+            <th scope="col"> Terestrial Toxicity </th>
+            <th scope="col"> Hazard Level</th>
+            <th scope="col"> Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ai; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.iaName}} </td>
+            <td> {{item.environmentalToxicity}}</td>
+            <td> {{item.terestrialToxicity}}</td>
+            <td [ngStyle]="{'background-color': item.hazardLevel}"> {{item.hazardLevel}}</td>
+            <td>
+              <span class="span-manage" (click)="editAi(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="aiDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

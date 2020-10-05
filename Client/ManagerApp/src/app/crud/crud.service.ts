@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class CrudService {
-
+export class CrudService { 
   constructor(
   ) { }
 
@@ -65,6 +64,13 @@ export class CrudService {
     return [
       { Binding: 'name', Type: 'text', Label: "Enter Name of the plant" },
       { Binding: 'varity', Type: 'text', Label: "Enter Varity " }
+    ]
+  }
+
+  getAddPest(): any {
+    return [
+      { Binding: 'pestName', Type: 'text', Label: "Enter Name of the pest" },
+      { Binding: 'type', Type: 'text', Label: "Enter type of pest(e.g. Mite, insect, fungus etc..)" }
     ]
   }
 

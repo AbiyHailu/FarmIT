@@ -1,0 +1,31 @@
+<div class="main-table">
+    <button class="btn btn-success btn-create btn-nomargin "
+      (click)="createNewItem()">
+      <strong>{{title}}</strong>
+    </button>
+    <div class="row-fluid">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col"> Recieved Date</th>
+            <th scope="col"> Amount</th>
+            <th scope="col"> Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of recieved; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td> {{item.productName}} </td>
+            <td> {{item.dateRecieved}}</td>
+            <td> {{item.amount}}</td>
+            <td>
+              <span class="span-manage" (click)="editRecieved(item.value.id, item.value.companyId)">Edit</span> |
+              <span class="span-manage" (click)="recievedDetails(item.value.id, item.value.companyId)">Detail</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
