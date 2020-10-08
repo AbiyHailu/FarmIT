@@ -10,12 +10,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class CrudComponent implements OnInit, OnDestroy {
 
   @Input() public data: any;
-  @Input() public type: any; 
+  @Input() public type: any;  
+  @Input() public message: any;  //for planting error 
+  @Input() public disablebutton: boolean; 
   subscriptions: any
   constructor( 
     public activeModal: NgbActiveModal 
-  ) { 
-     
+  ) {  
   }
 
   dataForm:FormGroup
@@ -33,9 +34,18 @@ export class CrudComponent implements OnInit, OnDestroy {
     this.enablform=true
     return new FormGroup(formGroup);
   }
+
   public event: EventEmitter<any> = new EventEmitter();
   onChange(val:any){ 
     this.event.emit(val);
+    console.log(val)
+
+  }
+ 
+  onChangePlanting(val:any){ 
+
+    this.event.emit(val);
+    console.log(val) 
   }
 
   submitData(dataForm: any) {

@@ -34,8 +34,7 @@ export class ProductionAreaComponent {
     getGhs(companyid) {
         this.profileService.getGHByCompanyId(companyid)
             .pipe(takeUntil(this.subject))
-            .subscribe(res => {
-                if (res)
+            .subscribe(res => { 
                     this.ghs = res 
             })
     }

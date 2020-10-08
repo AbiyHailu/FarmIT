@@ -63,8 +63,8 @@ export class IssuedComponent {
       size: 'md',
       backdrop: 'static',
       keyboard: false
-    }); 
-
+    });  
+    
     this.modalRef.componentInstance.data = builderItems;
     this.modalRef.componentInstance.type = this.title;
     this.modalRef.result.then((result: Issued) => {

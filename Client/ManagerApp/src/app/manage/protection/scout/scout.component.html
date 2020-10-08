@@ -1,0 +1,57 @@
+<div class="main" id="main">
+    <div class="container-fluid">
+        <div class="row-fluid main-body ">
+            <div class="col-lg-12 text-center  col-padd">
+                <button class="btn  btn-equal-width border-right" [ngClass]="{'selected-text-color': selectedindex ==1}"
+                    (click)="getSelected('addscout')">
+                    Add Scout Data
+                </button>
+                <button class="btn  btn-equal-width  " [ngClass]="{'selected-text-color': selectedindex ==2}"
+                    (click)="getSelected('scoutlist')">
+                    Scout data
+                </button>
+            </div>
+        </div>
+        <div *ngIf="item == 0 " class="row-fluid main-body ">
+            <div *ngFor="let gh of ghs; let i = index" class="scout-gh text-center" (click)="addScoutData(gh)">
+                {{gh.name}}
+                <br />
+                Plus 
+                <br /> 
+                Add New Scout Data
+            </div>
+        </div>
+        <div *ngIf="item ==1 " class="row-fluid main-body">
+            <br />
+            <table class="table table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"> GreenHouse </th>
+                        <th scope="col"> Pest</th>
+                        <th scope="col"> Created Date</th>
+                        <th scope="col"> Row Start</th>
+                        <th scope="col"> Row End</th>
+                        <th scope="col"> Amount</th>
+                        <th class="text-center" scope="col"> Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of scouts; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td> {{item.ghName}} </td>
+                        <td> {{item.pestName}}</td>
+                        <td> {{item.createdDate}}</td>
+                        <td> {{item.rownumberStart}}</td>
+                        <td> {{item.rowNumberEnd}}</td>
+                        <td> {{item.amount}}</td>
+                        <td class="text-center">
+                            <span *ngIf="" class="span-manage" (click)="createAction(item)">Take Action</span> |
+                            <span class="span-manage" (click)="editSsoutData(item)">Edit</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

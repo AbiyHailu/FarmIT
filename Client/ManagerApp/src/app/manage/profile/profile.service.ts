@@ -5,9 +5,6 @@ import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-    editGH(result: any) {
-        throw new Error('Method not implemented.');
-    }
 
     farm: Farm[] = []
     gh: GH[] = []
@@ -61,6 +58,10 @@ export class ProfileService {
         )
     }
 
+    editGH(result: any) {
+        throw new Error('Method not implemented.');
+    }
+
     editFarmProfile(result: any) {
         throw new Error('Method not implemented.');
     }
@@ -69,21 +70,26 @@ export class ProfileService {
         return of(this.farm.filter(e => e.companyid == companyid))
     }
 
-    getGHs(): Observable<any[]> {
-        return of(this.gh)
+    getPlantingsById(companyId): Observable<any[]> { 
+        return of(this.ghPlants.filter(e => e.companyid == companyId))
     }
 
     getGHByCompanyId(companyId: string): Observable<GH[]> {
         return of(this.gh.filter(e => e.companyid == companyId))
-    }
+    } 
     
-    getPlants(): Observable<any[]> {
-        return of(this.plants)
-    }
-    getGHPlants(): Observable<any[]> {
-        return of(this.ghPlants)
+    getPlantsByCompanyId(companyId: string): Observable<any[]> {
+        return of(this.plants.filter(e => e.companyid == companyId))
     }
 
+    addPlant(result: any) { 
+        return of(this.plants.push(result))
+    }
+
+    editPlant(result: any) {
+        
+        throw new Error('Method not implemented.');
+    }
 }
 
 export class Farm {

@@ -79,7 +79,18 @@ export class CrudService {
       { Binding: 'plantName', Type: 'select', Label: "Select Plants", Disable: "", SelectList: [] },
       { Binding: 'ghName', Type: 'select', Label: "Select Greenhouse", Disable: "", SelectList: [] }, 
       { Binding: 'numberPlanted', Type: 'number', Label: "Number Planted" },
-      { Binding: 'numberPlanted', Type: 'number', Label: "heactar Planted" }, 
+      { Binding: 'haPlanted', Type: 'number', Label: "heactar Planted" }, 
+      { Binding: 'datePlanted', Type: 'textDate', Label: "Planting Date" }, 
+      { Binding: 'dateCleared', Type: 'textDate', Label: "Crearing Date" },
+    ]
+  }  
+  
+  getEditGHPlant(): any {
+    return [ 
+      { Binding: 'plantName', Type: 'text', Label: "Plant", Disable: "true" }, 
+      { Binding: 'ghName', Type: 'text', Label: "Greenhouse", Disable: "true" }, 
+      { Binding: 'numberPlanted', Type: 'number', Label: "Number Planted" },
+      { Binding: 'haPlanted', Type: 'number', Label: "heactar Planted" }, 
       { Binding: 'datePlanted', Type: 'textDate', Label: "Planting Date" }, 
       { Binding: 'dateCleared', Type: 'textDate', Label: "Crearing Date" },
     ]
@@ -136,6 +147,25 @@ export class CrudService {
       { Binding: 'pest', Type: 'selectEmit', Label: "Pests", SelectList: [ ] }, 
       { Binding: 'economic', Type: 'number', Label: "Economic threshold level" },
       { Binding: 'damage', Type: 'number', Label: "Damage threshold level" }
+    ]
+  } 
+
+  getGeneralMeasures(): any {
+    return [
+      { Binding: 'greenhouse', Type: 'text', Label: "", Disable: "true" },     
+      { Binding: 'action', Type: 'selectEmit', Label: "Select action", SelectList: [ ] },  
+      { Binding: 'actionDate', Type: 'textDate', Label: "Action Date" },
+      { Binding: 'isCompleted', Type: 'checkBox', Label: "Action is completed" }, 
+      { Binding: 'comment', Type: 'text', Label: "Add comment if required" }
+    ]
+  }
+
+  getScoutMeasures(): any {
+    return [ 
+      { Binding: 'action', Type: 'selectEmit', Label: "Select action", SelectList: [ "Spray Pesticide", "Clean"] },  
+      { Binding: 'actionDate', Type: 'textDate', Label: "Action Date" },
+      { Binding: 'isCompleted', Type: 'checkBox', Label: "Action is completed" }, 
+      { Binding: 'comment', Type: 'text', Label: "Add comment if required" }
     ]
   }
 }

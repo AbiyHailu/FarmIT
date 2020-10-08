@@ -31,7 +31,7 @@ export class FarmComponent {
     }
 
     farm: Farm
-    getFarms(companyid) {
+    getFarms(companyid: string) {
         this.profileService.getFarmByCompanyiD(companyid)
             .pipe(takeUntil(this.subject))
             .subscribe(res => {
@@ -42,7 +42,7 @@ export class FarmComponent {
 
     modalRef: any
     title = 'Edit Farm Profile'
-    editItem(item) {
+    editItem(item: any) {
         let builderItems = this.crudService.getAddFarm()
         builderItems = this.cm.assignEditValues(builderItems, item)
 
@@ -61,11 +61,11 @@ export class FarmComponent {
         })
     }
 
-    editFarm(item) {
+    editFarm(item: any) {
         console.log(item)
     }
 
-    farmDetails(item) {
+    farmDetails(item: any) {
         console.log(item)
     }
 

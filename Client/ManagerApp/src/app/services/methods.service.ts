@@ -109,7 +109,7 @@ export class MethodesService {
   }
 
   weightedAverage(rowStart: number, rowEnd: number, totalrow: number) {
-    let x = (((rowEnd - rowStart) * 100) / totalrow) / 100 
+    let x = (((rowEnd - rowStart) * 100) / totalrow) / 100
     return x
   }
 
@@ -117,7 +117,7 @@ export class MethodesService {
     let data = []
     dataArray.forEach(e => {
       data.push(e.weightAmount)
-    }) 
+    })
     return data
   }
 
@@ -141,7 +141,7 @@ export class MethodesService {
         if (last.length == 4)
           item = last[last.length - 1]
         index = store.findIndex(x => x === item);
-        plan = "store" 
+        plan = "store"
       } else if (str.includes("protection")) {
         let protection = ["scout", "measures", "pest"]
         let last = str.split("/");
@@ -150,7 +150,7 @@ export class MethodesService {
         index = protection.findIndex(x => x === item);
         plan = "protection"
       } else if (str.includes("profile")) {
-        let profile = ["Farm", "Greenhouse", "Plant" ,"Plantings"]
+        let profile = ["Farm", "Greenhouse", "Plant", "Plantings"]
         let last = str.split("/");
         if (last.length == 4)
           item = last[last.length - 1]
@@ -160,7 +160,7 @@ export class MethodesService {
     }
     return { index: index, plan: plan, item: item }
   }
-
+ 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

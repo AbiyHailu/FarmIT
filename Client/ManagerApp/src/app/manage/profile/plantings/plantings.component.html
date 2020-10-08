@@ -1,0 +1,37 @@
+<div class="main-table">
+     <button class="btn btn-success btn-create btn-nomargin "
+       (click)="createNewItem()">
+       <strong>{{title}}</strong>
+     </button>
+     <div class="row-fluid">
+       <table class="table table-sm">
+         <thead class="thead-dark">
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Plant Name</th>
+             <th scope="col">Greenhouse Name</th> 
+             <th scope="col">No. of Plants</th> 
+             <th scope="col">Ha. Planted </th>
+             <th scope="col">Date Planted</th> 
+             <th scope="col">Date Cleared/to be Cleared</th> 
+             <th scope="col">Manage</th> 
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of plantings; let i = index">
+             <th scope="row">{{i+1}}</th>
+             <td> {{item.plantName}} </td>
+             <td> {{item.ghName}}</td> 
+             <td> {{item.numberPlanted}}</td> 
+             <td> {{item.haPlanted}}</td> 
+             <td> {{item.datePlanted}}</td> 
+             <td> {{item.dateCleared}}</td> 
+             <td>
+               <span class="span-manage" (click)="editItem(item)">Edit</span> |
+               <span class="span-manage" (click)="ghDetails(item)">Detail</span>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+   </div>

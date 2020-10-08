@@ -4,13 +4,13 @@
             <h5>Farm Profile </h5>
         </div>
         <div class="col-lg-12">
-            <strong>Name:</strong> &nbsp; farm.name <br/> 
-            <strong>Total Size:</strong> &nbsp; farm.totalSize<br/> 
-            <strong>Country:</strong> &nbsp;farm.countary<br/> 
-            <strong>Area Name:</strong> &nbsp;farm.areaName<br/> 
-            <strong>latittude:</strong> &nbsp; farm.latittude<br/> 
-            <strong>longitude:</strong> &nbsp;farm.longitude
-        </div>
+            <strong>Name:</strong> &nbsp; {{farm.name }}<br/> 
+            <strong>Total Size:</strong> &nbsp; {{farm.totalSize}}<br/> 
+            <strong>Country:</strong> &nbsp;{{farm.country}}<br/> 
+            <strong>Area Name:</strong> &nbsp;{{farm.areaName}}<br/> 
+            <strong>latittude:</strong> &nbsp; {{farm.latittude}}<br/> 
+            <strong>longitude:</strong> &nbsp;{{farm.longitude}}
+        </div><br/>
         <div class="col-lg-12"> 
             <button class="btn btn-success btn-create btn-nomargin " (click)="editItem(farm)">
                 <strong>{{title}}</strong>
