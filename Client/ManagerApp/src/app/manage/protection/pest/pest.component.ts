@@ -55,8 +55,10 @@ export class PestComponent implements OnDestroy {
     this.modalRef.componentInstance.data = this.crudService.getAddPest() ;
     this.modalRef.componentInstance.type = this.title;
     this.modalRef.result.then((result: Pest) => {
-      if (result != null) 
+      if (result != null && this.company) {  
+         result.companyid = this.company
          this.pestService.addPest(result) 
+      }
     }) 
   }
   editPest(item){

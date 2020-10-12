@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.AdminModels;
 using Models.ManagerModels;
+using Models.Protection;
 using Models.Store;
 
 namespace Concrete
@@ -19,5 +20,7 @@ namespace Concrete
         public DbSet<StoreBalance> StoreBalances { get; set; }
         public DbSet<RecieveProduct> RecieveProducts { get; set; }
         public DbSet<IssueProduct> IssueProducts { get; set; }
+
+        public DbSet<Pest> Pests { get; set; }
     }
 }

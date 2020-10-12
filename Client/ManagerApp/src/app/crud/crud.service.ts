@@ -69,8 +69,10 @@ export class CrudService {
 
   getAddPest(): any {
     return [
-      { Binding: 'pestName', Type: 'text', Label: "Enter Name of the pest" },
-      { Binding: 'type', Type: 'text', Label: "Enter type of pest(e.g. Mite, insect, fungus etc..)" }
+      { Binding: 'name', Type: 'text', Label: "Enter Name of the pest" },
+      { Binding: 'Description', Type: 'text', Label: "Enter description of the pest" },
+      { Binding: 'Syptoms', Type: 'text', Label: "Enter Syptoms caused by of the pest" },
+      { Binding: 'Image', Type: 'text', Label: "Enter Image url" }
     ]
   }
 

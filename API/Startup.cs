@@ -3,7 +3,9 @@ using AutoMapper;
 using Concrete;
 using Concrete.AdminConcrete;
 using Concrete.ManagerConcrete;
+using Concrete.ManagerConcrete.ProtectionConcrete;
 using Interface.AdminInterface;
+using Interface.ProtectionInterface;
 using Interface.UserInterface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -63,6 +65,7 @@ namespace API
             services.AddTransient<IPlan, PlanConcrete>();
             services.AddTransient<ICompany, CompanyConcrete>();
             services.AddTransient<IUser, UserConcrete>();
+            services.AddTransient<IPest, PestConcrete>();
             services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
             {

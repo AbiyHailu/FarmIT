@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { merge, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MethodesService } from '../../../services/methods.service';
 import { CrudService } from '../../../crud/crud.service'; 
@@ -85,7 +85,7 @@ export class ScoutComponent {
     let builderItems = this.crudService.getAddScoutData();
     builderItems.filter(e => e.Binding == 'greenhouse')[0].Label = gh.name
     let pestNameList = []
-    this.pests.forEach(e => { pestNameList.push(e.pestName) }) 
+    this.pests.forEach(e => { pestNameList.push(e.name) }) 
     builderItems.filter(e => e.Binding == 'pest')[0].SelectList = pestNameList
 
     this.modalRef = this.modalService.open(CrudComponent, {
@@ -100,7 +100,7 @@ export class ScoutComponent {
     this.modalRef.result.then(result => {
       if (result != null) {
         result.ghId = gh.id
-        result.perstId = this.pests.find(e=>e.pestName ==result.pest).id
+        result.perstId = this.pests.find(e=>e.name ==result.pest).id
         console.log('result', result)
         this.scoutService.addScoutData(result)  
       } 
@@ -118,7 +118,7 @@ export class ScoutComponent {
     let builderItems = this.crudService.getAddScoutData();
     builderItems.filter(e => e.Binding == 'greenhouse')[0].Label = scout.ghName
     let pestNameList = []
-    this.pests.forEach(e => { pestNameList.push(e.pestName) }) 
+    this.pests.forEach(e => { pestNameList.push(e.name) }) 
     builderItems.filter(e => e.Binding == 'pest')[0].SelectList = pestNameList
 
     this.modalRef.componentInstance.data = this.cm.assignEditValues(builderItems, scout);
